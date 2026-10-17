@@ -196,8 +196,7 @@ An exception thrown by an event consumer's callback never reaches the
 producer: it is caught, logged at `SEVERE` ("Event consumer callback
 failed."), and dispatch continues with the other subscribers. This applies to
 both synchronous and asynchronous dispatch, and follows directly from the
-fire-and-forget contract (see [What Is an
-Event](managed-components.md#what-is-an-event)).
+fire-and-forget contract (see [What Is an Event](managed-components.md#what-is-an-event)).
 
 Consequences to keep in mind:
 
