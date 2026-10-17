@@ -75,8 +75,7 @@ argument. Each one is equivalent to implementing the interface in the second col
 
 Covalent recommends naming conventions for the elements it injects and calls. They
 are optional, unless structural rule verification is set to its strictest level;
-each kind can also be disabled individually. See [Verification
-Level](managed-components.md#verification-level).
+each kind can also be disabled individually. See [Verification Level](managed-components.md#verification-level).
 
 | Element | Convention | Example |
 |---------|------------|---------|

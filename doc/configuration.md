@@ -71,8 +71,7 @@ Configures the dispatch of events.
 | `setWorkerQueueCapacity` | `1024` | capacity of the dispatch queue; a notification that does not fit is dropped and logged |
 
 Worker count and queue capacity apply immediately to the running pool. See
-[Asynchronous Event Dispatch
-Configuration](managed-components.md#asynchronous-event-dispatch-configuration).
+[Asynchronous Event Dispatch Configuration](managed-components.md#asynchronous-event-dispatch-configuration).
 
 ## LifecycleParameters
 

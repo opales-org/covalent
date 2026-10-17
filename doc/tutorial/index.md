@@ -51,8 +51,7 @@ page gives the background, but you can also start here and read it later.
   ```
 
 - **The classpath, not the module path.** Covalent uses reflection and runs in the
-  unnamed module. See [Runtime Requirements and
-  Compatibility](../requirements.md#runtime-requirements-and-compatibility).
+  unnamed module. See [Runtime Requirements and Compatibility](../requirements.md#runtime-requirements-and-compatibility).
 
 # How To Read The Examples
 
@@ -64,8 +63,7 @@ file.
 
 Covalent requires component implementations to be `public` classes with a
 `public` no-argument constructor. The nested classes in the examples respect this
-rule. See [Instantiation Contract for Component
-Implementations](../requirements.md#instantiation-contract-for-component-implementations).
+rule. See [Instantiation Contract for Component Implementations](../requirements.md#instantiation-contract-for-component-implementations).
 
 The output shown after each program is what the program prints on the standard
 output. Covalent also logs a few `INFO` lines (container started, container

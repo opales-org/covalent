@@ -43,13 +43,11 @@ each is launched from a single entry point, `LauncherApplication`:
 mvn -f covalent-examples/pom.xml -am -DskipTests javafx:run
 ```
 
-With the Maven Wrapper (see [Building And Testing The
-Repository](../README.md#building-and-testing-the-repository) for it and for
+With the Maven Wrapper (see [Building And Testing The Repository](../README.md#building-and-testing-the-repository) for it and for
 the required JDK version), use `.\mvnw.cmd` on Windows and `./mvnw` elsewhere
 in place of `mvn`. Add `-Pjmx` to let a JMX tool connect to the JVM that runs
 the examples (`localhost:9010`, or the next free port; see
-[Connecting a JMX Tool to the
-Application](configuration.md#connecting-a-jmx-tool-to-the-application)).
+[Connecting a JMX Tool to the Application](configuration.md#connecting-a-jmx-tool-to-the-application)).
 
 This opens a small launcher window with one button per demo. Each demo runs
 in its own, independently started and stopped `CovalentContainer`, obtained
@@ -122,8 +120,7 @@ demonstrates - not which ones it merely could.
 A root composite deploys the whole application as a single top-level
 component containing every function as a sub-component, rather than several
 independent root components side by side - the alternative Rubik's Cube
-Solver demonstrates explicitly instead (see its architecture page's [Top-Level
-Composites](architecture/examples/cube-solver-demonstration/index.md#top-level-composites)
+Solver demonstrates explicitly instead (see its architecture page's [Top-Level Composites](architecture/examples/cube-solver-demonstration/index.md#top-level-composites)
 section).
 
 # Neural Network Trainer
@@ -186,8 +183,7 @@ Controller with no component identity, lifecycle or wiring of its own -
 the right tool when a piece of state needs to be owned and encapsulated,
 but never looked up or activated independently.
 
-"Freeze charts" is this demo's illustration of [manual subscription without
-a specific subscribe interface](managed-components.md#manual-subscription-without-a-specific-subscribe-interface):
+"Freeze charts" is this demo's illustration of [manual subscription without a specific subscribe interface](managed-components.md#manual-subscription-without-a-specific-subscribe-interface):
 `TrainingView` consumes `TrainingEvents`, which declares no
 `@EventsSubscribe` interface of its own, so it is free to subscribe to
 (and unsubscribe from) it manually through `GenericSubscribe` instead of
@@ -203,8 +199,7 @@ late-joining subscriber catches up on already-in-progress state through
 [event subscription delegation](managed-components.md#event-subscription-delegation)
 rather than missing whatever happened before it subscribed.
 
-The whole demo also deploys as a single [root
-composite](glossary.md#root-composite), `NeuralNetworkDemoImpl`: the
+The whole demo also deploys as a single [root composite](glossary.md#root-composite), `NeuralNetworkDemoImpl`: the
 launcher starts and stops it with one `deployComponents(...)`/`start()`
 call pair, and the container resolves every function's activation order
 from its field declarations - rather than the launcher constructing and
@@ -213,8 +208,7 @@ wiring five functions by hand.
 For the full component-level architecture - root dependencies, the shared
 interfaces between functions, a per-function MVIC decomposition with full
 interface method signatures, and how the HMI is assembled from every
-function's View - see [Neural Network Trainer -
-Architecture](architecture/examples/neural-network-demonstration/index.md).
+function's View - see [Neural Network Trainer - Architecture](architecture/examples/neural-network-demonstration/index.md).
 
 # Solar System Simulation
 
@@ -266,8 +260,7 @@ bottom.
 ## Covalent Capabilities In Solar System Simulation
 
 `OrbitalWatch` and `HazardAlert` both subscribe to the very same
-`CloseApproachEvents` interface, but in two contrasting ways (see [Event
-Filters](managed-components.md#event-filters)): `OrbitalWatch` subscribes
+`CloseApproachEvents` interface, but in two contrasting ways (see [Event Filters](managed-components.md#event-filters)): `OrbitalWatch` subscribes
 to every notification through ordinary, automatic autowiring, while
 `HazardAlert` subscribes manually with a filter that re-reads its own live
 thresholds on every notification - moving a slider changes what qualifies
@@ -284,8 +277,7 @@ calling an Interaction Controller directly (see
 `OrbitalSystem`, `SimulationRunner`, `OrbitalWatch`, `HazardAlert` - is its
 own [composite](managed-components.md#composition) `@Implementation`.
 
-The whole demo also deploys as a single [root
-composite](glossary.md#root-composite), `SolarSystemDemoImpl`: the launcher
+The whole demo also deploys as a single [root composite](glossary.md#root-composite), `SolarSystemDemoImpl`: the launcher
 starts and stops it with one `deployComponents(...)`/`start()` call pair,
 and the container resolves every function's activation order from its
 field declarations - rather than the launcher constructing and wiring six
@@ -294,8 +286,7 @@ functions by hand.
 For the full component-level architecture - root dependencies, the shared
 interfaces between functions, a per-function MVIC decomposition with full
 interface method signatures, and how the HMI is assembled from every
-function's View - see [Solar System Simulation -
-Architecture](architecture/examples/solar-system-demonstration/index.md).
+function's View - see [Solar System Simulation - Architecture](architecture/examples/solar-system-demonstration/index.md).
 
 # Ecosystem
 
@@ -344,17 +335,14 @@ One interface carries almost all of the cross-function work:
 independently by the three watchers inside `Watchers`, each with its own
 [filter](managed-components.md#event-filters) - the same broadcast stream
 partitioned three different ways. `RoleWatcher` combines its filter with
-[subscribing an object instead of the consumer
-component](managed-components.md#subscribing-an-object-instead-of-the-consumer-component):
+[subscribing an object instead of the consumer component](managed-components.md#subscribing-an-object-instead-of-the-consumer-component):
 two small delegate instances, one per role, so its own callback never
 branches on which role a notification belongs to.
 
-The chart's own events, `EcosystemStateEvents`, show [subscription with
-custom arguments](managed-components.md#custom-event-subscription): the
+The chart's own events, `EcosystemStateEvents`, show [subscription with custom arguments](managed-components.md#custom-event-subscription): the
 View subscribes manually, and each subscription carries the simulation time
 of the last state it has and a history depth, which the Model uses to
-replay the missed states ([event subscription
-delegation](managed-components.md#event-subscription-delegation)) when the
+replay the missed states ([event subscription delegation](managed-components.md#event-subscription-delegation)) when the
 display resumes from a pause.
 
 A raw component pair, `StatsExporter` and `StatsExportWidget`, mirrors the
@@ -367,18 +355,15 @@ As in the other demos, every control is routed through
 `ActionProviderServices`/`ActionConsumerServices` (see
 [ActionManager](hmi.md#actionmanager)), each function is its own
 [composite](managed-components.md#composition) `@Implementation`, and the
-whole demo deploys as a single [root
-composite](glossary.md#root-composite), `EcosystemDemoImpl`. It is also the
+whole demo deploys as a single [root composite](glossary.md#root-composite), `EcosystemDemoImpl`. It is also the
 one demo that decomposes recursively: the `Watchers` function is a composite
 of three watcher composites, each grouping its own four MVIC components, so
-the tree is three levels deep (see the architecture page's [Top-Level
-Composites](architecture/examples/ecosystem-demonstration/index.md#top-level-composites)).
+the tree is three levels deep (see the architecture page's [Top-Level Composites](architecture/examples/ecosystem-demonstration/index.md#top-level-composites)).
 
 For the full component-level architecture - root dependencies, the shared
 interfaces between functions, a per-function MVIC decomposition with full
 interface method signatures, the raw component pair, and how the HMI is
-assembled from every function's View - see [Ecosystem -
-Architecture](architecture/examples/ecosystem-demonstration/index.md).
+assembled from every function's View - see [Ecosystem - Architecture](architecture/examples/ecosystem-demonstration/index.md).
 
 # Rubik's Cube Solver
 
@@ -431,8 +416,7 @@ delegation pushes a real catch-up snapshot to a late subscriber.
 For the full component-level architecture - the no-root-composite
 deployment shape, the shared interfaces between functions, a per-function
 MVIC decomposition with full interface method signatures, and how the HMI
-is assembled from every function's View - see [Rubik's Cube Solver -
-Architecture](architecture/examples/cube-solver-demonstration/index.md).
+is assembled from every function's View - see [Rubik's Cube Solver - Architecture](architecture/examples/cube-solver-demonstration/index.md).
 
 <!-- doc-nav:bottom -->
 [Home](../README.md) | [Previous: Covalent HMI Guide](hmi.md) | [Next: Solar System Simulation - Architecture](architecture/examples/solar-system-demonstration/index.md)

@@ -186,8 +186,7 @@ type, the implementation, an item, or a nested services/parameters port - is
 always rejected, whatever the container's verification level:
 `registerComponent` throws `IllegalArgumentException` naming the offending
 class. This is a fixed contract, not part of the configurable structural and
-dynamic verification that governs managed components (see [Verification
-Level](managed-components.md#verification-level)): raw components skip that
+dynamic verification that governs managed components (see [Verification Level](managed-components.md#verification-level)): raw components skip that
 machinery entirely, and the one thing the raw components API refuses outright
 is smuggling a managed component through it.
 
@@ -345,8 +344,7 @@ this.rawComponentsServices.unprovideServices(
 ```
 
 Stopping services that are not provided is a dynamic rule violation, handled
-according to the dynamic verification level (see [Verification
-Level](managed-components.md#verification-level)): it is only traced by default and
+according to the dynamic verification level (see [Verification Level](managed-components.md#verification-level)): it is only traced by default and
 raises a `ValidationException` under the `strict` level. The same applies to
 stopping parameters that are not offered.
 
@@ -481,8 +479,7 @@ There are no naming conventions for raw subscribe and unsubscribe delegate
 methods.
 
 The events fired for a consumer while its subscribe delegate runs are kept and
-delivered afterwards, within a limit: see [Event Subscription
-Delegation](managed-components.md#event-subscription-delegation).
+delivered afterwards, within a limit: see [Event Subscription Delegation](managed-components.md#event-subscription-delegation).
 
 ### Stop Producing Events
 

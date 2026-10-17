@@ -141,14 +141,12 @@ this.useStateEventsSubscribe.subscribe(this, this.subscribedSince, this.subscrib
 ```
 
 `EcosystemModelImpl` implements the subscribe interface, so it is told
-about each subscription ([event subscription
-delegation](../../../managed-components.md#event-subscription-delegation)).
+about each subscription ([event subscription delegation](../../../managed-components.md#event-subscription-delegation)).
 It keeps a bounded history of the states it notified, and replays to the
 new subscriber those after the given time, at most the latest `historyDepth`
 of them: a long enough depth completes the curve at once, a short one
 leaves a visible jump across the older missed part. The arguments identify
-the subscription, so `unsubscribe` repeats them (see [Custom Event
-Subscription](../../../managed-components.md#custom-event-subscription)).
+the subscription, so `unsubscribe` repeats them (see [Custom Event Subscription](../../../managed-components.md#custom-event-subscription)).
 The pause involves no action: it only concerns this View, which handles it
 itself.
 
@@ -189,8 +187,7 @@ them here is purely a lifecycle convenience, never a routing concern.
 
 One Controller, two independent subscriptions to the same
 `PopulationEvents`, each combining a filter with
-[subscribing an object instead of the consumer
-component](../../../managed-components.md#subscribing-an-object-instead-of-the-consumer-component):
+[subscribing an object instead of the consumer component](../../../managed-components.md#subscribing-an-object-instead-of-the-consumer-component):
 
 ```java
 @Activation
@@ -387,11 +384,9 @@ what the demo does and which Covalent mechanisms it illustrates, and a
 "Using Ecosystem Demo" entry describing its controls - each opening a
 small, non-modal, read-only text window, wired directly rather than
 through `ActionConsumerServices`, exactly as in the other three demos
-(see [Neural Network Trainer -
-Architecture](../neural-network-demonstration/index.md#hmi-assembly)).
+(see [Neural Network Trainer - Architecture](../neural-network-demonstration/index.md#hmi-assembly)).
 Ecosystem has no "View" menu of its own - that addition is specific to
-Solar System Simulation's dark/light theme switch (see [Solar System
-Simulation - Architecture](../solar-system-demonstration/index.md#hmi-assembly)).
+Solar System Simulation's dark/light theme switch (see [Solar System Simulation - Architecture](../solar-system-demonstration/index.md#hmi-assembly)).
 
 <!-- doc-nav:bottom -->
 [Home](../../../../README.md) | [Previous: Neural Network Trainer - Architecture](../neural-network-demonstration/index.md) | [Next: Rubik's Cube Solver - Architecture](../cube-solver-demonstration/index.md)

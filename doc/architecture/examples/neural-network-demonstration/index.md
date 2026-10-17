@@ -14,12 +14,10 @@
   - [TrainingMonitor](#trainingmonitor)
 - [HMI Assembly](#hmi-assembly)
 
-This page is the architecture reference for the [Neural Network
-Trainer](../../../examples.md#neural-network-trainer) demo: every root
+This page is the architecture reference for the [Neural Network Trainer](../../../examples.md#neural-network-trainer) demo: every root
 component, how they depend on one another, the interfaces shared between
 them, the internal MVIC decomposition of each function, and how the HMI is
-assembled from all of it. It complements the demo's entry in the [Examples
-Guide](../../../examples.md#neural-network-trainer), which covers what the
+assembled from all of it. It complements the demo's entry in the [Examples Guide](../../../examples.md#neural-network-trainer), which covers what the
 demo does and how to use it - this page is about how it is built.
 
 # Top-Level Composites Dependency Diagram

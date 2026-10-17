@@ -32,8 +32,7 @@ public static final class HelloImpl implements Hello {
 The implementation can declare **lifecycle callbacks**. A method annotated with
 `@Activation` is called when the component is activated, and a method annotated
 with `@Removal` is called when the component is removed. There are also
-`@Initialization` and `@Passivation`; we will come back to them in [step
-5](05-lifecycle.md).
+`@Initialization` and `@Passivation`; we will come back to them in [step 5](05-lifecycle.md).
 
 ```java
 @Activation

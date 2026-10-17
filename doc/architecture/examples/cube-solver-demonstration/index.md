@@ -255,8 +255,7 @@ these parameters.
 static "Help" menu, with an "About Rubik's Cube Solver" entry summarizing
 what the demo does and which Covalent mechanisms it illustrates, and a
 "Using Rubik's Cube Solver" entry describing its controls - exactly as in
-the other three demos (see [Neural Network Trainer -
-Architecture](../neural-network-demonstration/index.md#hmi-assembly)).
+the other three demos (see [Neural Network Trainer - Architecture](../neural-network-demonstration/index.md#hmi-assembly)).
 This demo has no "View" menu of its own - that addition is specific to
 Solar System Simulation's dark/light theme switch.
 

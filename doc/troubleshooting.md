@@ -21,8 +21,7 @@ asynchronous work.
 
 ## Exception Reference
 
-Covalent raises four public exception types (see [Public
-API](public-api.md)). The type tells you which section below to
+Covalent raises four public exception types (see [Public API](public-api.md)). The type tells you which section below to
 read.
 
 | Exception | Thrown when | See |

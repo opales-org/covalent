@@ -99,8 +99,7 @@ public class MyComponentImpl implements MyComponentType {
 
 The implementation class must implement the component type interface. It
 must also be declared `public` with a `public` no-argument constructor: see
-[Instantiation Contract for Component
-Implementations](requirements.md#instantiation-contract-for-component-implementations) for
+[Instantiation Contract for Component Implementations](requirements.md#instantiation-contract-for-component-implementations) for
 the reason and the failure mode when this is not the case.
 
 An implementation class can extend a base class. The fields that declare ports,
@@ -759,8 +758,7 @@ decides, for one subscriber, whether a produced event should be delivered.
 > NOT delivered. This is the opposite convention from `Stream.filter`, where
 > `true` keeps the element. It matches `Collection.removeIf`, where `true` means
 > "remove this one" instead. The same convention applies identically to raw
-> event filters (see [Specify an Events
-> Filter](raw-components.md#specify-an-events-filter)).
+> event filters (see [Specify an Events Filter](raw-components.md#specify-an-events-filter)).
 
 A filter is declared as an interface nested inside the corresponding events
 interface, with the `@EventsFilter` annotation. Like a subscribe interface, it is
@@ -923,8 +921,7 @@ Only the annotated argument is cloned. In this case, Covalent does not even try
 to clone `notCloneableData`.
 
 `@Cloned` is a property of the events interface itself, independent of which
-component produces it: a raw event producer (see [Produce
-Events](raw-components.md#produce-events)) honors `@Cloned` exactly like a
+component produces it: a raw event producer (see [Produce Events](raw-components.md#produce-events)) honors `@Cloned` exactly like a
 managed producer, at all three levels above.
 
 ### Synchronous or Asynchronous Events

@@ -129,8 +129,7 @@ Two coffees cost 500 cents.
 
 In this program, the provider is deployed before its user, and the user calls the
 service during its own activation. Covalent also has mechanisms to reduce coupling
-to the startup order; see [Vertical and Horizontal Start
-Modes](../managed-components.md#vertical-and-horizontal-start-modes).
+to the startup order; see [Vertical and Horizontal Start Modes](../managed-components.md#vertical-and-horizontal-start-modes).
 
 ## What You Learned
 

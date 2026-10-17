@@ -199,8 +199,7 @@ container.getParameters().setSynchronousEvents(true);
 
 Synchronous dispatch is convenient for tests and debugging. In an application, keep the
 asynchronous default unless you have a reason not to. Event dispatch is
-configurable: see [Asynchronous Event Dispatch
-Configuration](../managed-components.md#asynchronous-event-dispatch-configuration).
+configurable: see [Asynchronous Event Dispatch Configuration](../managed-components.md#asynchronous-event-dispatch-configuration).
 
 ## What You Learned
 

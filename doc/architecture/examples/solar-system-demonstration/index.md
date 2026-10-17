@@ -15,12 +15,10 @@
   - [HazardAlert](#hazardalert)
 - [HMI Assembly](#hmi-assembly)
 
-This page is the architecture reference for the [Solar System
-Simulation](../../../examples.md#solar-system-simulation) demo: every root
+This page is the architecture reference for the [Solar System Simulation](../../../examples.md#solar-system-simulation) demo: every root
 component, how they depend on one another, the interfaces shared between
 them, the internal MVIC decomposition of each function, and how the HMI is
-assembled from all of it. It complements the demo's entry in the [Examples
-Guide](../../../examples.md#solar-system-simulation), which covers what the
+assembled from all of it. It complements the demo's entry in the [Examples Guide](../../../examples.md#solar-system-simulation), which covers what the
 demo does and how to use it - this page is about how it is built.
 
 # Top-Level Composites Dependency Diagram
@@ -166,8 +164,7 @@ the parameters, every root node already exists.
 static "Help" menu, with an "About Solar System Simulation" entry
 summarizing what the demo does and which Covalent mechanisms it
 illustrates, and a "Using Solar System Simulation" entry describing its
-controls - exactly as in the other three demos (see [Neural Network
-Trainer - Architecture](../neural-network-demonstration/index.md#hmi-assembly));
+controls - exactly as in the other three demos (see [Neural Network Trainer - Architecture](../neural-network-demonstration/index.md#hmi-assembly));
 and a "View" menu of two mutually exclusive `RadioMenuItem`s, swapping the
 whole scene's stylesheet between a dark theme (the default) and a light
 one - the one menu unique to this demo.

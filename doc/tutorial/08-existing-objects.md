@@ -145,8 +145,7 @@ Raw components can do the reverse and more: use services of managed components,
 offer and access parameters, produce and subscribe to events, follow the lifecycle
 callbacks, and be unregistered. This makes it possible to bring an existing application
 into Covalent one object at a time. Raw components have a runtime cost that managed
-components do not, which is documented in [Performance
-Characteristics](../raw-components.md#performance-characteristics).
+components do not, which is documented in [Performance Characteristics](../raw-components.md#performance-characteristics).
 
 Reference: [Raw Components Guide](../raw-components.md),
 [Managed and Raw Components](../foundations.md#managed-and-raw-components).

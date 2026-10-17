@@ -37,8 +37,7 @@ page that covers it in full.
 ## Which Java version does Covalent need?
 
 Java 21. It is the version Covalent is built and tested against, and the only one
-actually verified; later versions are expected to keep working. See [Java Version and
-Module Configuration](requirements.md#java-version-and-module-configuration).
+actually verified; later versions are expected to keep working. See [Java Version and Module Configuration](requirements.md#java-version-and-module-configuration).
 
 ## Does Covalent need JavaFX or a graphical interface?
 
@@ -54,8 +53,7 @@ available only when `covalent.extensions=component-viewer` is set, and opened on
 
 Not as a named module. Covalent uses reflection and dynamic proxies
 extensively, and it requires running in the unnamed module, on the
-classpath. See [Runtime Requirements and
-Compatibility](requirements.md#runtime-requirements-and-compatibility) for the
+classpath. See [Runtime Requirements and Compatibility](requirements.md#runtime-requirements-and-compatibility) for the
 full picture, including GraalVM native-image status.
 
 ## Can I use Covalent with Spring or Guice?
@@ -71,8 +69,7 @@ each one does and does not do.
 Covalent guarantees a stable container as long as the APIs documented in the guides are
 used as described. The ports of its own internal components remain reachable, for
 advanced uses, but using them is at your own risk: a container left inconsistent through
-them is outside the guarantee. See [Stability
-Guarantee](public-api.md#stability-guarantee).
+them is outside the guarantee. See [Stability Guarantee](public-api.md#stability-guarantee).
 
 ## What is the memory footprint and startup time?
 
@@ -82,8 +79,7 @@ your own application - the number of components and what their callbacks do -
 and `StartupReport` (returned by `start()`) reports the actual duration for
 your application: measure it directly rather than rely on a figure that would
 not reflect your own component count.
-See [Starting a Covalent
-Application](managed-components.md#starting-a-covalent-application).
+See [Starting a Covalent Application](managed-components.md#starting-a-covalent-application).
 
 # Using Covalent
 
@@ -97,8 +93,7 @@ racing to start or stop the same container cannot corrupt its state. See
 Your own component implementations are a different matter. A service call runs
 synchronously on the caller's thread, and an asynchronous event can be delivered
 on any worker thread, with several notifications able to run concurrently and no
-ordering guarantee between them (see [Threading
-Model](managed-components.md#threading-model)). If the same component instance
+ordering guarantee between them (see [Threading Model](managed-components.md#threading-model)). If the same component instance
 can be reached from more than one thread at once - a mix of service calls and
 asynchronous event deliveries is the common case - your implementation is
 responsible for its own thread-safety, exactly as any plain Java object would
@@ -116,8 +111,7 @@ producer sends nothing, while a passivated consumer keeps receiving events.
 
 Where a flow cannot tolerate any loss, do not carry it on asynchronous events: use a
 service call, whose result the caller checks, or synchronous events, which run on the
-producer's thread in the order it fired them. See [Asynchronous Event Dispatch
-Configuration](managed-components.md#asynchronous-event-dispatch-configuration),
+producer's thread in the order it fired them. See [Asynchronous Event Dispatch Configuration](managed-components.md#asynchronous-event-dispatch-configuration),
 [Threading Model](managed-components.md#threading-model) and
 [Lifecycle](managed-components.md#lifecycle).
 
@@ -133,10 +127,8 @@ links stay in place, fail with a clear message while the provider is absent, and
 reach the new provider as soon as it is there. An existing subscriber keeps
 receiving the events of a replaced producer, and the old instance's own event
 proxy fails with an `IllegalStateException` if it is used again. Use these, rather than
-`stop()` and `start()`, which are meant for the whole container. See [Restarting a
-Covalent Application](managed-components.md#restarting-a-covalent-application) and
-[Register an Existing Object as a Raw
-Component](raw-components.md#register-an-existing-object-as-a-raw-component). The supervisor shows the
+`stop()` and `start()`, which are meant for the whole container. See [Restarting a Covalent Application](managed-components.md#restarting-a-covalent-application) and
+[Register an Existing Object as a Raw Component](raw-components.md#register-an-existing-object-as-a-raw-component). The supervisor shows the
 components and their states, but has no control to deploy or replace one.
 
 ## Can I test Covalent components with JUnit?
@@ -170,8 +162,7 @@ The supervisor is optional: nothing of it runs unless you enable the extension, 
 needs JavaFX. Inside it, task tracking and the data flows are off by default. Task
 tracking made no measurable difference in our tests; the flows add a cost to each
 call that depends on the call rate, and keep some memory. The figures, with the
-conditions they were measured in, are in the [overhead
-measurements](supervision.md#appendix-overhead-measurements). Whether that cost is
+conditions they were measured in, are in the [overhead measurements](supervision.md#appendix-overhead-measurements). Whether that cost is
 acceptable depends on your application, so measure it with your own load.
 
 # Licensing

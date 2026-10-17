@@ -237,15 +237,12 @@ inspectable structure as it grows:
 Some current characteristics deserve attention before adopting it:
 
 - there is at most one instance of a given component type, and several
-  implementations of the same component type are not supported (see [Component
-  Type](managed-components.md#component-type));
+  implementations of the same component type are not supported (see [Component Type](managed-components.md#component-type));
 - Covalent targets Java 21 and runs on the classpath: running managed applications
   as named JPMS modules is not supported, and GraalVM native-image has not been
-  validated (see [Runtime Requirements and
-  Compatibility](requirements.md#runtime-requirements-and-compatibility));
+  validated (see [Runtime Requirements and Compatibility](requirements.md#runtime-requirements-and-compatibility));
 - it relies on reflection and dynamic proxies, which implies rules such as the
-  [instantiation
-  contract](requirements.md#instantiation-contract-for-component-implementations) for component
+  [instantiation contract](requirements.md#instantiation-contract-for-component-implementations) for component
   implementations;
 - its scope is the component model and its container, as described in [Covalent Main
   Features](#covalent-main-features).
@@ -344,8 +341,7 @@ method's name with `on` replaced by `filter`, matched automatically to that
 event (see [Event Filters](managed-components.md#event-filters)) - and
 lifecycle callbacks can optionally be recognized the same way
 (`initializeComponent`, `activateComponent`, `passivateComponent`,
-`removeComponent` - see [Callback Method by Naming
-Convention](managed-components.md#callback-method-by-naming-convention)),
+`removeComponent` - see [Callback Method by Naming Convention](managed-components.md#callback-method-by-naming-convention)),
 neither one needing an annotation.
 
 The validation model and raw components are deliberately complementary,
@@ -354,8 +350,7 @@ configurable structural and dynamic verification - annotations, naming
 conventions, port declarations, runtime operations, checked at a level you
 choose - while raw components skip that machinery entirely and are governed
 instead by a single fixed, always-on contract check that keeps the two worlds
-cleanly separated (see [Register an Existing Object as a Raw
-Component](raw-components.md#register-an-existing-object-as-a-raw-component)).
+cleanly separated (see [Register an Existing Object as a Raw Component](raw-components.md#register-an-existing-object-as-a-raw-component)).
 Neither model is asked to do the other's job.
 
 The container itself is extensively configurable, and so is nearly every

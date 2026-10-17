@@ -40,8 +40,7 @@ container selector, and follows it across its lifecycle: when the
 container is stopping or being disposed, the supervisor disconnects,
 empties its views and shows the container as `Stopped` or `Disposed`; once
 the container is started again, or a new container is created under the
-same name, it connects to it again on its own. See [Observing Managed
-Containers](managed-components.md#observing-managed-containers).
+same name, it connects to it again on its own. See [Observing Managed Containers](managed-components.md#observing-managed-containers).
 
 Its window is organized around a rail of functions, each covered below:
 Cockpit, Components, Sequences, Dependency Graph, Threads, Exclusions and
@@ -193,8 +192,7 @@ sub-folder per container, each view a `.cow` file (COvalent vieW) with a
 ![Views library: the saved views of a container, with a thumbnail](images/supervision_views_library_dark.png)
 
 Its own UI is built on [`covalent-hmi`](hmi.md)'s `ActionManager`, the same
-mechanism available to any application - see the [Covalent HMI
-Guide](hmi.md) for `HmiCore` and `ActionManager`.
+mechanism available to any application - see the [Covalent HMI Guide](hmi.md) for `HmiCore` and `ActionManager`.
 
 # Sequences
 
@@ -245,8 +243,7 @@ ports: a component depends on the components whose services it uses, whose
 events it consumes and whose parameters it accesses. It is computed
 each time it is opened, while the container is started, whatever the
 container parameters. Circular dependency checking only governs the
-verification made at start - see [Circular Dependency
-Detection](managed-components.md#circular-dependency-detection).
+verification made at start - see [Circular Dependency Detection](managed-components.md#circular-dependency-detection).
 
 Composition links join each composite to its children, drawn as UML
 compositions; a cycle that goes through a composite is one that goes
@@ -274,8 +271,7 @@ each scope keeps its own layout.
 The **Threads** entry of the rail shows what the observed container's worker
 pools are doing: the asynchronous events pool, and the async manager's general
 and dedicated pools. It samples them four times a second through
-`EventsWorkersServices` and `AsyncWorkersServices` (see [Observing the Worker
-Pools](configuration.md#observing-the-worker-pools)), and reads each of their
+`EventsWorkersServices` and `AsyncWorkersServices` (see [Observing the Worker Pools](configuration.md#observing-the-worker-pools)), and reads each of their
 threads' state, lock and CPU time from the JVM. Each thread shows as a lane of
 its states - runs, waits, blocked on a monitor, idle - on a time axis shared by
 every lane, under each pool's queue, occupancy, latencies and contention. The
@@ -437,8 +433,7 @@ Every setting is kept from one run to the next.
 
 `component-viewer` is itself an ordinary `CovalentExtension` - the same
 public SPI any application can implement to start its own optional runtime
-tooling alongside a Covalent container. See [Writing Your Own
-Extension](configuration.md#writing-your-own-extension) for the full
+tooling alongside a Covalent container. See [Writing Your Own Extension](configuration.md#writing-your-own-extension) for the full
 walkthrough.
 
 # Appendix: Overhead Measurements

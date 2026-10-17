@@ -51,8 +51,7 @@
 
 Short definitions of the terms used throughout the Covalent documentation, in
 alphabetical order. Each entry points to the page that explains it in detail.
-For the annotation that implements a given concept, see the [Annotations Cheat
-Sheet](annotations.md).
+For the annotation that implements a given concept, see the [Annotations Cheat Sheet](annotations.md).
 
 # A - C
 
@@ -66,8 +65,7 @@ available since initialization. It can happen several times, after a passivation
 ## Callback
 
 A method of a component implementation that the container calls on a lifecycle
-transition: initialization, activation, passivation or removal. See [Lifecycle
-Callbacks](managed-components.md#lifecycle-callbacks).
+transition: initialization, activation, passivation or removal. See [Lifecycle Callbacks](managed-components.md#lifecycle-callbacks).
 
 ## Component
 
@@ -96,8 +94,7 @@ See [Consuming Events](managed-components.md#consuming-events).
 
 The runtime that deploys components, connects their ports and drives their
 lifecycle. `Covalent.main` is the default container. The container is itself
-implemented with Covalent components. See [What Is a
-Container](foundations.md#what-is-a-container).
+implemented with Covalent components. See [What Is a Container](foundations.md#what-is-a-container).
 
 # D - I
 
@@ -105,8 +102,7 @@ Container](foundations.md#what-is-a-container).
 
 The mechanism that lets an events producer be notified when a consumer subscribes
 or unsubscribes, by implementing the subscribe interface of its events. The
-container still registers the consumer and dispatches the events. See [Event
-Subscription Delegation](managed-components.md#event-subscription-delegation).
+container still registers the consumer and dispatches the events. See [Event Subscription Delegation](managed-components.md#event-subscription-delegation).
 
 ## Deployment
 
@@ -132,8 +128,7 @@ An interface nested in an events interface, annotated with `@EventsFilter`, that
 decides for one subscription whether an event is delivered. A filter method
 returning `true` means the event is filtered out and not delivered - the
 opposite convention from `Stream.filter`, matching `Collection.removeIf`
-instead. Applies identically to managed and raw event filters. See [Event
-Filters](managed-components.md#event-filters).
+instead. Applies identically to managed and raw event filters. See [Event Filters](managed-components.md#event-filters).
 
 ## Extension
 
@@ -147,8 +142,7 @@ viewer itself.
 ## Horizontal Start Mode
 
 The startup mode in which all components reach a lifecycle state before the container
-moves to the next state. See [Vertical and Horizontal Start
-Modes](managed-components.md#vertical-and-horizontal-start-modes).
+moves to the next state. See [Vertical and Horizontal Start Modes](managed-components.md#vertical-and-horizontal-start-modes).
 
 ## Implementation
 
@@ -171,8 +165,7 @@ The lifecycle transition in which the classes of a component are instantiated. S
 A component of the container itself, marked with `@Internal`, as opposed to an
 application component. Internal components are active from the container's
 construction to its disposal, kept across `stop()`; `@Internal` is reserved to
-them and refused on application components. See [Starting a Covalent
-Application](managed-components.md#starting-a-covalent-application).
+them and refused on application components. See [Starting a Covalent Application](managed-components.md#starting-a-covalent-application).
 
 ## Item
 
@@ -232,16 +225,14 @@ For events, a component that fires them, through a `@ProducedEvents` field. See
 
 ## Provider
 
-For services, a component that implements a services interface. See [Providing
-Services](managed-components.md#providing-services).
+For services, a component that implements a services interface. See [Providing Services](managed-components.md#providing-services).
 
 # R - Z
 
 ## Raw Component
 
 An externally owned object registered in the container, whose ports are declared
-through `RawComponentsServices` instead of annotations. See [Covalent Raw Components
-Guide](raw-components.md).
+through `RawComponentsServices` instead of annotations. See [Covalent Raw Components Guide](raw-components.md).
 
 ## Removal
 
@@ -271,8 +262,7 @@ The verification rules that check the shape of components and their annotations.
 
 A substitute injected in place of a used port that is not published yet. It resolves
 the real port when it is first used. It does not make an unavailable port usable
-before its component is activated. See [Vertical and Horizontal Start
-Modes](managed-components.md#vertical-and-horizontal-start-modes).
+before its component is activated. See [Vertical and Horizontal Start Modes](managed-components.md#vertical-and-horizontal-start-modes).
 
 ## Undeployment
 
@@ -282,8 +272,7 @@ registry, leaving no trace of it in the container. See
 
 ## User (Services User)
 
-For services, a component that declares a `@UsedServices` field. See [Using
-Services](managed-components.md#using-services).
+For services, a component that declares a `@UsedServices` field. See [Using Services](managed-components.md#using-services).
 
 ## Verification Level
 
@@ -294,8 +283,7 @@ See [Verification Level](managed-components.md#verification-level).
 ## Vertical Start Mode
 
 The default startup mode, in which each component is fully started before the next
-one. See [Vertical and Horizontal Start
-Modes](managed-components.md#vertical-and-horizontal-start-modes).
+one. See [Vertical and Horizontal Start Modes](managed-components.md#vertical-and-horizontal-start-modes).
 
 <!-- doc-nav:bottom -->
 [Home](../README.md) | [Previous: Covalent Configuration Reference](configuration.md) | [Next: Covalent Troubleshooting](troubleshooting.md)

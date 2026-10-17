@@ -71,8 +71,7 @@ what each one covers.
 The goal is not to hide architecture behind magic, but to make component
 boundaries, ports, and lifecycle explicit enough for large applications to stay
 understandable as they grow. If you are weighing Covalent against Spring, Guice
-or OSGi, see [Compared To Other
-Approaches](doc/foundations.md#compared-to-other-approaches).
+or OSGi, see [Compared To Other Approaches](doc/foundations.md#compared-to-other-approaches).
 
 ## Getting Started
 
@@ -251,8 +250,7 @@ your own project:
 ```
 
 Covalent uses reflection and runs in the unnamed module: put it on the classpath,
-not the module path. See [Runtime Requirements and
-Compatibility](doc/requirements.md#runtime-requirements-and-compatibility).
+not the module path. See [Runtime Requirements and Compatibility](doc/requirements.md#runtime-requirements-and-compatibility).
 
 ### Building And Testing The Repository
 
