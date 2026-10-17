@@ -1,0 +1,18 @@
+{
+  "theme": "base",
+  "themeVariables": {
+    "primaryColor": "#eeeeff",
+    "primaryBorderColor": "#3333aa",
+    "primaryTextColor": "#1a1a2e",
+    "secondaryColor": "#eeeeff",
+    "tertiaryColor": "#eeeeff",
+    "lineColor": "#6b7599",
+    "specialStateColor": "#6b7599",
+    "innerEndBackground": "#3333aa",
+    "edgeLabelBackground": "#eeeeff",
+    "labelBackground": "#eeeeff",
+    "transitionLabelColor": "#1a1a2e",
+    "stateLabelColor": "#1a1a2e",
+    "textColor": "#1a1a2e"
+  }
+}

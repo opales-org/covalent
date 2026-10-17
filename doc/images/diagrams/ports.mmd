@@ -1,0 +1,6 @@
+%% Regenerate (Mermaid CLI 12): mmdc -c light.json -b transparent -i ports.mmd -o ports-light.svg
+%%                              mmdc -c dark.json  -b transparent -i ports.mmd -o ports-dark.svg
+graph LR
+    Application -->|uses OrderServices| Orders
+    Orders -->|produces OrderEvents| Kitchen
+    Kitchen -.->|subscribes, with a filter| Orders

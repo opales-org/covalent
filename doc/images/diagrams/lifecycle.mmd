@@ -1,0 +1,19 @@
+%% Regenerate (Mermaid CLI 12): mmdc -c light.json -b transparent -i lifecycle.mmd -o lifecycle-light.svg
+%%                              mmdc -c dark.json  -b transparent -i lifecycle.mmd -o lifecycle-dark.svg
+stateDiagram-v2
+    [*] --> deployed: deployment
+    deployed --> instantiated: instantiation
+    deployed --> failed: instantiation failure
+    instantiated --> initialized: initialization
+    instantiated --> failed: initialization failure
+    initialized --> activated: activation
+    initialized --> failed: activation failure
+    activated --> passivated: passivation
+    activated --> failed: passivation failure
+    passivated --> activated: activation
+    passivated --> failed: activation or removal failure
+    passivated --> removed: removal
+    failed --> deployed: reset
+    failed --> removed: removal (shutdown)
+    removed --> instantiated: instantiation
+    removed --> [*]: undeployment

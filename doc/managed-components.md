@@ -1213,25 +1213,8 @@ A managed component normally goes through seven lifecycle transitions:
 - **Undeployment**: the component instances are removed from the registry. No
   trace of the component remains in the container.
 
-```mermaid
-stateDiagram-v2
-    [*] --> deployed: deployment
-    deployed --> instantiated: instantiation
-    deployed --> failed: instantiation failure
-    instantiated --> initialized: initialization
-    instantiated --> failed: initialization failure
-    initialized --> activated: activation
-    initialized --> failed: activation failure
-    activated --> passivated: passivation
-    activated --> failed: passivation failure
-    passivated --> activated: activation
-    passivated --> failed: activation or removal failure
-    passivated --> removed: removal
-    failed --> deployed: reset
-    failed --> removed: removal (shutdown)
-    removed --> instantiated: instantiation
-    removed --> [*]: undeployment
-```
+![State diagram of a component's lifecycle: deployed, instantiated, initialized, activated, passivated and removed, with a failed state reachable from every state before removal and a reset back to deployed](images/diagrams/lifecycle-light.svg#gh-light-mode-only)
+![State diagram of a component's lifecycle: deployed, instantiated, initialized, activated, passivated and removed, with a failed state reachable from every state before removal and a reset back to deployed](images/diagrams/lifecycle-dark.svg#gh-dark-mode-only)
 
 The first six transitions have an associated lifecycle state: `deployed`,
 `instantiated`, `initialized`, `activated`, `passivated`, and `removed`. A

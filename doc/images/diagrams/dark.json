@@ -1,0 +1,21 @@
+{
+  "theme": "base",
+  "themeVariables": {
+    "darkMode": true,
+    "primaryColor": "#1c2040",
+    "primaryBorderColor": "#8890ff",
+    "primaryTextColor": "#d6dcea",
+    "secondaryColor": "#1c2040",
+    "tertiaryColor": "#1c2040",
+    "lineColor": "#8a94b8",
+    "specialStateColor": "#8a94b8",
+    "innerEndBackground": "#8890ff",
+    "edgeLabelBackground": "#161933",
+    "labelBackground": "#161933",
+    "transitionLabelColor": "#d6dcea",
+    "stateLabelColor": "#d6dcea",
+    "textColor": "#d6dcea",
+    "labelTextColor": "#d6dcea",
+    "transitionColor": "#8a94b8"
+  }
+}

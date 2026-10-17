@@ -14,3 +14,9 @@
     width: 740px;
   }
 }
+
+// Light and dark variants of the diagrams follow GitHub's naming convention.
+// This site only has a light theme, so the dark variants are hidden.
+img[src$="#gh-dark-mode-only"] {
+  display: none;
+}

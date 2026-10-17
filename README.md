@@ -189,15 +189,8 @@ starting from an even smaller first component.
 The components of the [example above](#getting-started) are connected through
 ports rather than through each other directly:
 
-```mermaid
-graph LR
-    Application -->|uses OrderServices| Orders
-    Orders -->|produces OrderEvents| Kitchen
-    Kitchen -.->|subscribes, with a filter| Orders
-
-    classDef component fill:#eef,stroke:#33a,stroke-width:1px;
-    class Application,Orders,Kitchen component;
-```
+![Diagram: Application uses OrderServices on Orders, Orders produces OrderEvents for Kitchen, and Kitchen subscribes to Orders with a filter](doc/images/diagrams/ports-light.svg#gh-light-mode-only)
+![Diagram: Application uses OrderServices on Orders, Orders produces OrderEvents for Kitchen, and Kitchen subscribes to Orders with a filter](doc/images/diagrams/ports-dark.svg#gh-dark-mode-only)
 
 `Application` only knows the `OrderServices` interface, never the `Orders`
 component's implementation; `Orders` only knows that some interfaces exist to
