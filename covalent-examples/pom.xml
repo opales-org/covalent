@@ -1,0 +1,99 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.opales</groupId>
+		<artifactId>covalent-parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>covalent-examples</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Covalent Examples</name>
+	<description>Runnable examples and demos for Covalent.</description>
+
+	<properties>
+		<!-- Overridable on the command line (-Dexamples.mainClass=...) to run a
+		     different main class through this module's javafx-maven-plugin
+		     configuration without editing this file. -->
+		<examples.mainClass>org.opales.covalent.examples.launcher.LauncherApplication</examples.mainClass>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.opales</groupId>
+			<artifactId>covalent-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opales</groupId>
+			<artifactId>covalent-hmi</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.opales</groupId>
+			<artifactId>covalent-supervision</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.openjfx</groupId>
+				<artifactId>javafx-maven-plugin</artifactId>
+				<configuration>
+					<mainClass>${examples.mainClass}</mainClass>
+					<options>
+						<option>-Dcovalent.extensions=component-viewer</option>
+					</options>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+				<configuration>
+					<!-- Demo code: every comment present must be well formed, but missing ones are not reported. -->
+					<doclint>all,-missing</doclint>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+	<profiles>
+		<!-- Lets a JMX tool (JConsole, the supervisor) connect to the JVM that javafx:run starts (-Pjmx):
+		     "Remote process", localhost:9010. Covalent opens the connector itself (system property
+		     covalent.jmx.port): if the port is taken, for example by another example already running,
+		     it takes the next free one and logs it, so several examples can run at the same time. No
+		     authentication nor SSL, this machine only, which is why it is not on by default. Another
+		     starting port: -Dexamples.jmxPort=9020. -->
+		<profile>
+			<id>jmx</id>
+			<properties>
+				<examples.jmxPort>9010</examples.jmxPort>
+			</properties>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.openjfx</groupId>
+						<artifactId>javafx-maven-plugin</artifactId>
+						<configuration>
+							<options combine.children="append">
+								<option>-Dcovalent.jmx.port=${examples.jmxPort}</option>
+							</options>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+	</profiles>
+</project>

@@ -1,0 +1,2 @@
+org.opales.covalent.container.tests.unit.extensions.TestRecordingExtension
+org.opales.covalent.container.tests.unit.extensions.TestFailingExtension

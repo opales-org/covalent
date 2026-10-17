@@ -1,0 +1,38 @@
+title: Covalent
+description: A lightweight Java component model and runtime container.
+url: https://opales.org
+baseurl: /covalent
+theme: jekyll-theme-minimal
+show_downloads: false
+
+plugins:
+  - jekyll-relative-links
+  - jekyll-optional-front-matter
+  - jekyll-readme-index
+  - jekyll-titles-from-headings
+  - jekyll-default-layout
+
+relative_links:
+  enabled: true
+  collections: false
+
+optional_front_matter:
+  remove_originals: true
+
+readme_index:
+  remove_originals: true
+
+titles_from_headings:
+  enabled: true
+  strip_title: true
+  collections: false
+
+exclude:
+  - covalent-core
+  - covalent-examples
+  - covalent-hmi
+  - covalent-supervision
+  - covalent-tests
+  - pom.xml
+  - mvnw
+  - mvnw.cmd

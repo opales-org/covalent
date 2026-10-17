@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 opales.org and Covalent contributors.
+  SPDX-License-Identifier: MPL-2.0
+-->
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Covalent Supervisor Help</title>
+<link rel="stylesheet" href="help.css">
+<script>
+  (function () {
+    var theme = new URLSearchParams(window.location.search).get("theme");
+    document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+  })();
+</script>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Supervisor Help</div>
+  <input id="search" type="search" placeholder="Search the help…" aria-label="Search the help">
+  <a href="#overview">Overview</a>
+  <a href="#connecting">Observing a container</a>
+  <a href="#cockpit">Cockpit</a>
+  <a href="#components">Components</a>
+  <a href="#views">Views library</a>
+  <a href="#sequences">Sequences</a>
+  <a href="#graph">Dependency graph</a>
+  <a href="#threads">Threads</a>
+  <a href="#exclusions">Exclusions</a>
+  <a href="#stereotypes">Stereotypes</a>
+  <a href="#settings">Settings</a>
+  <a href="#shortcuts">Keyboard and mouse</a>
+  <a href="#glossary">Glossary</a>
+</nav>
+<main>  <p id="no-result" class="empty">No topic matches this search.</p>  <section id="overview">
+  <h1>Covalent Supervisor</h1>
+  <p class="lead">See a running Covalent application from the inside: its components, how they are wired, what they exchange, and how they move through their lifecycle.</p>
+  <p>The supervisor observes one managed container at a time. Its window is organized around the rail on the left:</p>
+  <ul>
+    <li><strong>Cockpit</strong>: live figures of the container, and a console to drive its components' lifecycle.</li>
+    <li><strong>Components</strong>: the component diagram, with live activity on its wires.</li>
+    <li><strong>Sequences</strong>: recordings of the calls and events exchanged between components.</li>
+    <li><strong>Graph</strong>: the dependency graph and its cycles.</li>
+    <li><strong>Threads</strong>: shows what the worker pools and their threads are doing.</li>
+    <li><strong>Exclusions</strong>: the components the supervisor leaves out.</li>
+    <li><strong>Stereotypes</strong>: the stereotype shown for each component, from the end of its name. It has no button on the rail: it is a tab of Settings.</li>
+    <li><strong>Settings</strong>: preferences and colors.</li>
+    <li><strong>Help</strong>: this help, the keyboard shortcuts, and the About box.</li>
+  </ul>
+  <p>Each function can show several tabs at once, for instance two component diagrams side by side in tabs. The header holds the container selector, the <strong>Flows</strong> switch, the <strong>Record</strong> button and the light and dark theme switch. The status bar shows where you are and the zoom of the visible diagram: drag the slider or use its <strong>&minus;</strong> and <strong>+</strong> buttons, which go by steps, to zoom around the middle of the view (or the selected component); double-click the percentage to go back to 100&nbsp;%. The mouse wheel zooms around the pointer.</p>
+</section>  <section id="connecting">
+  <h2>Observing a container</h2>
+  <p>Pick the container to observe in the selector at the top of the window, then click <strong>Connect</strong>. The selector lists the managed containers of the application. Only managed containers can be observed.</p>
+  <p>The supervisor follows the observed container across its lifecycle. When the container is stopping or being disposed, the supervisor disconnects, empties its views and shows the container as <em>Stopped</em> or <em>Disposed</em>. When the container is started again, or a new container is created under the same name, it connects again on its own.</p>
+  <h3>Data flows</h3>
+  <p>The <strong>Flows</strong> switch turns on the observation of the calls, events and parameter reads exchanged in the container: the live activity on the diagram wires, the rates of the cockpit and the recordings all come from these flows. They cost a little on the observed application, so they are off unless you turn them on, or ask for them in <a href="#settings">Settings</a> when connecting. Turning the flows off stops a recording in progress.</p>
+</section>  <section id="cockpit">
+  <h2>Cockpit</h2>
+  <p>The cockpit summarizes the observed container. It has two tabs: <strong>Overview</strong> and <strong>Console</strong>. The badge next to its title tells whether the supervisor is connected.</p>
+  <h3>Overview</h3>
+  <ul>
+    <li><strong>Components</strong>: how many components the container holds, managed and raw, and how many are composites.</li>
+    <li><strong>Wiring</strong>: the links between components, by kind: services, events and parameters.</li>
+    <li><strong>Service calls</strong> and <strong>Event notifications</strong>: current rates, with their recent trend.</li>
+    <li><strong>Failures</strong>: the failures over the last five minutes.</li>
+    <li><strong>Throughput</strong>: messages per second over the chosen window (15 s, 1 min, 5 min or 15 min), per kind of message.</li>
+    <li><strong>Lifecycle</strong>: how many components are in each lifecycle state, and the recent state transitions.</li>
+    <li><strong>Top-level composites</strong>: one card per composite, with the state of its components and its message rate. Open a card to see the composite in the component diagram.</li>
+    <li><strong>Threads</strong>: what the worker pools are doing: the share of busy workers over the last minute while task tracking is on, the threads otherwise, and saturated pools, rejected tasks or a deadlock. Click it to open Threads.</li>
+    <li><strong>Hottest ports</strong>: the busiest ports, with their owner, rate and 95th percentile duration.</li>
+  </ul>
+  <p>Rates need the data flows: with flows off, they stay at zero.</p>
+  <h3>Console</h3>
+  <p>The console drives the lifecycle of the observed components: activate, passivate, restart, remove, undeploy and so on, component by component or for the whole container (<strong>Activate all</strong>, <strong>Passivate all</strong>, <strong>Remove all</strong>). Only the commands that make sense in a component's current state are offered. A component whose transition failed shows the <em>failed</em> state, and only <strong>Reset</strong> (or <strong>Reset all</strong>) is offered for it: reset cleans up its composite and brings it back to deployed, without starting it.</p>
+  <p>Each slice is a composite and shows its direct children. A child composite is shown as a channel with one dot per component it holds, a switch that applies to all of them, and <strong>›</strong> to enter it. A slice holding composites stands out as a stack of cards: click it to enter it, and its children become the slices. The breadcrumb above the slices, or <strong>Up one level</strong>, goes back up. The <strong>Standalone</strong> slice gathers the components outside any composite of the level shown. The container panel at the bottom is the same at every level.</p>
+  <p>These commands act on a running application, so the console starts disarmed: click <strong>Arm</strong> to show the container's commands. A line shows the time left: they disarm on their own after 60 seconds, or at once with <strong>Disarm</strong>. Commands with lasting effects, such as removing or undeploying, ask for confirmation. Covalent's own internal components are shown but cannot be driven: the container manages them.</p>
+</section>  <section id="components">
+  <h2>Components</h2>
+  <p>The component diagram shows the components of the observed container as cards, and the links between their ports. <strong>New diagram</strong> opens another diagram in a new tab.</p>
+  <h3>Reading the diagram</h3>
+  <ul>
+    <li>Each card shows a component, its lifecycle state badge, and its ports around its edges.</li>
+    <li>Ports and links are colored by kind: <span class="swatch service"></span>services, <span class="swatch event"></span>events and <span class="swatch parameter"></span>parameters. A provided service, a produced event or an offered parameter is drawn differently from a used service, a consumed event or an accessed parameter. The <strong>port color legend</strong> button lists them.</li>
+    <li>A composite holds other components. Double-click it, or use <strong>Enter composite</strong> in its menu, to see its inside. The breadcrumb above the diagram shows the current level: click a level to go back up, or use <strong>Up one level</strong>.</li>
+    <li>A port whose link leaves the level shown carries a small navigation badge: it jumps straight to the component at the other end, without losing the current drill-down.</li>
+    <li>With data flows on, the wires light up as calls and events go through them, and turn to the failure color when a call fails.</li>
+  </ul>
+  <h3>The component tree and the details panel</h3>
+  <p>The tree on the left lists every component by composite, with a search field. Selecting a component, in the tree or in the diagram, shows its details on the right: its state and its ports, with buttons to show its dependencies, hide it, or record a sequence of its activity. Both side panels can be folded.</p>
+  <h3>Toolbox</h3>
+  <table>
+    <tr><th>Group</th><th>Tools</th></tr>
+    <tr><td>Formatting</td><td>Link style (straight, corner, round), recenter, lay out again (discards manual moves), port color legend, port names, relation names, and the switches that show or hide service, event and parameter links.</td></tr>
+    <tr><td>Structure</td><td>Hide all components, show all components, hide the selected components, show or hide the dependencies of the selected components.</td></tr>
+    <tr><td>Diagram</td><td>Snapshot (saves an image of the diagram in the snapshot folder and copies it to the clipboard), new diagram, save view, views library.</td></tr>
+  </table>
+  <h3>Selecting and moving</h3>
+  <ul>
+    <li>Click a card to select it, <kbd>Ctrl</kbd>+click to add it to the selection or remove it.</li>
+    <li><kbd>Shift</kbd>+drag selects the cards in an area, <kbd>Ctrl</kbd>+drag adds them to the selection.</li>
+    <li>Drag a card to move it, drag the background to pan, and use the mouse wheel to zoom.</li>
+    <li>Right-click for a menu. A card: hide it, show or hide its dependencies, enter a composite. A link: highlight it, go to its source or its target, record a sequence between the two components, hide it. A port: highlight, go to a component linked to it. The background: show all components, recenter.</li>
+  </ul>
+  <p>The selection drives the <strong>Record</strong> button of the header: see <a href="#sequences">Sequences</a>.</p>
+</section>  <section id="views">
+  <h2>Views library</h2>
+  <p>A component diagram view (the level shown, the hidden components, the positions, the selection and the zoom) can be kept in the views library.</p>
+  <ul>
+    <li><strong>Save view…</strong> (<kbd>Ctrl</kbd>+<kbd>S</kbd>) names the view, with an optional description, for the observed container. A name is unique for its container: saving under an existing name replaces that view after a warning. In a tab opened from a view, or already saved, <kbd>Ctrl</kbd>+<kbd>S</kbd> replaces that view directly.</li>
+    <li><strong>Views library…</strong> (<kbd>Ctrl</kbd>+<kbd>O</kbd>) lists the views of the observed container, or of every container, with a thumbnail, most recent first or by name. A view always opens in a new tab named after it.</li>
+    <li>A view whose components are no longer all in the container is flagged. It opens without them, after a warning that names them.</li>
+    <li>Views can be renamed, deleted, exported to a file to share them, and imported from one.</li>
+  </ul>
+  <p>Components and Sequences tabs can be renamed: double-click a tab's title, or use <strong>Rename</strong> in its menu. The title of a components tab is the name proposed when saving it. Renaming a tab opened from a view detaches it from that view: saving it then proposes a new view instead of replacing the old one.</p>
+  <p>Views are stored in the views folder set in <a href="#settings">Settings</a>, one sub-folder per container, each view in a <code>.cow</code> file with a <code>.png</code> thumbnail beside it.</p>
+</section>  <section id="sequences">
+  <h2>Sequences</h2>
+  <p>A sequence diagram records the messages exchanged between components while it runs: service calls and their returns, event notifications, parameter reads and the actions one component triggers on another.</p>
+  <h3>Recording</h3>
+  <p>Recordings are made of the data flows, so the <strong>Flows</strong> switch must be on. Then, from a component diagram:</p>
+  <ul>
+    <li>select one or more components and click <strong>Record</strong> in the header;</li>
+    <li>or click <strong>Record this component</strong> in the details panel;</li>
+    <li>or right-click a link and choose to record a sequence between its two components.</li>
+  </ul>
+  <p>Threads records too: see <a href="#threads">Threads</a>.</p>
+  <p>The recording opens in a Sequences tab and goes on until you click <strong>Stop</strong>, or <strong>Record</strong> again from any panel: one recording runs at a time, whoever started it, and the other ways to start one are grayed meanwhile. The scope shows which components it covers.</p>
+  <h3>Reading a sequence</h3>
+  <ul>
+    <li><strong>Live drawing</strong> draws the messages as they arrive. When off, the diagram stays as it is while the recording goes on, and catches up when turned back on or when the recording stops.</li>
+    <li><strong>Follow live</strong> keeps the latest message in view. It turns off when you scroll back or jump to a moment on the timeline.</li>
+    <li>The kind switches show or hide services, events, parameters and actions.</li>
+    <li>Click a message to see its details: its two ends, its interface and method, its thread, its arguments, its result or failure, its wait in the queue for an asynchronous event, and its duration with the durations of the last calls of the same method and their 95th percentile. <strong>Show in diagram</strong> opens the component diagram where the two components are linked. The details panel folds down to a strip, like the side panels of Components.</li>
+    <li><strong>Save the log</strong>, the arrow beside the snapshot in the band, saves every recorded message, filtered or not, as text, CSV (one row per message) or JSON Lines (one object per line); the file's extension picks the format, the one of the Settings is offered first.</li>
+    <li>The folder button, beside it, opens the logs folder. With <strong>Write each sequence recording to disk as it goes</strong> on in <a href="#settings">Settings</a>, every message is also written, as it is recorded, to a file of that folder named after the scope and the start time, which the folder button's tooltip names; the file ends when the recording stops. Unlike a log saved at the end, it keeps everything recorded even if the process dies. In JSON Lines, the file can be read at any moment.</li>
+  </ul>
+  <h3>Timeline</h3>
+  <p>Under the diagram, the timeline covers the whole recording, cut into time slices. It shows how many messages happened in each slice (the volume), and how long the slowest invocation started in each slice took, on a logarithmic scale (the duration). The span shown in the diagram is outlined. Click or drag on the timeline to bring the diagram to that moment. How volume and duration are drawn together is chosen in <a href="#settings">Settings</a>.</p>
+  <div class="note">A duration is measured from the start to the end of an invocation. For an asynchronous event, the time it waited in the delivery queue before its consumer was notified is shown apart, as <strong>Waited in queue</strong> in the message details.</div>
+</section>  <section id="graph">
+  <h2>Dependency graph</h2>
+  <p>The dependency graph shows which component depends on which, through its ports: a component depends on the components whose services it uses, whose events it consumes and whose parameters it accesses. It is computed each time the graph is opened, while the container is started, whatever the container parameters. Circular dependency checking only governs the verification made at start.</p>
+  <ul>
+    <li><strong>Component tree</strong>, on the left, scopes a large graph; the panel folds down to a strip like the side panels of Components. A click on a composite shows it and all its descendants down to the leaf components, with the dependencies between them; a click on a leaf centers it. The triangle opens or closes a composite without scoping. The breadcrumb above the graph goes back up, to the whole graph. Cycles, statistics and the status bar follow the scope; the status bar counts the dependencies with the outside it hides.</li>
+    <li><strong>Outside neighbors</strong>, a toggle in the Structure group, adds to a scoped graph the components outside it that one of its components depends on, or that depend on one of them, toned down, with those dependencies.</li>
+    <li><strong>Composition links</strong> join each composite to its children, drawn as UML compositions: a solid line with a filled diamond on the composite's side. A switch in the toolbox shows or hides them.</li>
+    <li><strong>Cycles detected</strong> lists the circular dependencies. Each cycle has its own color on its components, its composition links and the dependencies that make it. Select a cycle to highlight its components.</li>
+    <li><strong>Statistics</strong>: the number of components, dependencies, cycles and isolated components. A component linked by composition is not isolated. The panel on the right, with the cycles and the statistics, folds down to a strip like the component tree.</li>
+  </ul>
+  <h3>How cycles take composition into account</h3>
+  <p>A composite is started only once all of its children are. Depending on a component held by a composite therefore means waiting for that whole composite. A cycle may go through composites: in a step <code>X → Y</code>, either X composes Y, or X depends on Y or on one of its descendants. For example, with A composing A1 and A2, B composing B1 and B2, A1 depending on B2 and B1 depending on A2, the cycle is <code>A → A1 → B → B1 → A</code>: neither A nor B can be started first. A child using a port of its own composite is not a cycle.</p>
+  <p>Click a component to highlight what it depends on and what depends on it; a click on the background clears the highlight and the selected cycle.</p>
+  <p>Right-click a component or a link for its menu: highlight, hide, show or hide dependencies, go to the source or the target of a link.</p>
+</section>  <section id="threads">
+  <h2>Threads</h2>
+  <p>Threads shows what the observed container's worker pools are doing: the pool delivering asynchronous events (only when events are asynchronous), the async manager's shared general pool, and its dedicated pools, one per queue key. Calls and synchronous events run on the caller's thread, outside these pools: while the <a href="#connecting">data flows</a> are on, the threads of the application that run the components' calls - such as a simulation thread or the JavaFX application thread - show too, under <strong>Calling threads</strong>; for them, a task is a call of a component, and Covalent's own components' calls are left out. The pools are sampled four times a second; the last quarter of an hour is kept, of which the range selector shows the last 15 s, minute, 5 or 15 minutes.</p>
+  <h3>Task tracking</h3>
+  <p>The JVM tells whether a thread runs, waits or is blocked; only the pool knows whether it is in a task. <strong>Task tracking</strong> asks the pools to tell which task each worker runs, and how long tasks wait in the queue and run. It is off until you turn it on, in the panel's header or from the cockpit's Threads tile; its cost is too small to measure (see below). It stays on until you turn it off or leave the container; <a href="#settings">Settings</a> can turn it on when connecting. While it is off, a waiting thread and an idle one cannot be told apart: both show striped, as <em>waits or idle</em>, and occupancy only counts running and blocked threads.</p>
+  <h3>What task tracking and data flows give</h3>
+  <p>With neither option on, Threads shows what a general-purpose JVM tool such as VisualVM shows: the state of each thread over time (running, waiting, blocked on a monitor) and deadlocks. On top of that it knows the container's worker pools: their workers, queues, rejected tasks and contention, and it can resize them live. What it cannot tell is whether a waiting pool thread is idle or holds a task.</p>
+  <p><strong>Task tracking</strong> asks the pools which task each worker runs and how long tasks wait and run. It is what makes Threads really useful, and it is worth turning on whenever you work with it: it tells a waiting thread from an idle one, names the task on each lane, measures occupancy as a share of time rather than as an instant sample, gives waiting and running times and the load per component, and reports long tasks. It is off until you turn it on, in the panel's header or from the cockpit's Threads tile, or with the option of <a href="#settings">Settings</a> that does it at each connection.</p>
+  <p><strong>Data flows</strong> observe the calls of the whole container. In Threads, they show under <strong>Calling threads</strong> the application's own threads that run component calls (a simulation thread, the JavaFX thread), with their call rate, report their long calls, and make it possible to record a sequence from a thread.</p>
+  <table>
+    <tr><th>Threads feature</th><th>Without either option</th><th>Task tracking</th><th>Data flows</th></tr>
+    <tr><td>Thread states from the JVM (running, blocked on a monitor) and the lock held</td><td>yes</td><td></td><td></td></tr>
+    <tr><td>Queues, rejected tasks, pool contention, deadlocks, live tuning</td><td>yes</td><td></td><td></td></tr>
+    <tr><td>Pool occupancy</td><td>instant sample, jumping between 0 and 100 %</td><td>share of the time spent in tasks</td><td></td></tr>
+    <tr><td>Telling a waiting thread from an idle one</td><td>no: shown as <em>waits or idle</em></td><td>yes</td><td></td></tr>
+    <tr><td>Name of the task a thread runs</td><td>no</td><td>yes</td><td></td></tr>
+    <tr><td>Short tasks (green bar)</td><td>no</td><td>yes</td><td></td></tr>
+    <tr><td>Tasks per second, 95th percentile of waiting and running times</td><td>no</td><td>yes</td><td></td></tr>
+    <tr><td>Group by component</td><td>no</td><td>yes</td><td></td></tr>
+    <tr><td>Long task reports</td><td>blocking on a monitor only</td><td>tasks of the pools' workers</td><td>calls of the calling threads</td></tr>
+    <tr><td>Calling threads, with their call rate</td><td><em>data flows off</em></td><td></td><td>yes</td></tr>
+    <tr><td>Record button</td><td>grayed out</td><td></td><td>yes</td></tr>
+    <tr><td>Components known for a pool worker when recording</td><td>no</td><td>yes</td><td>yes</td></tr>
+    <tr><td>Cockpit Threads tile</td><td>threads, pools, saturated pools, rejections, deadlock, and a link to turn tracking on</td><td>adds the busy percentage over the last minute</td><td></td></tr>
+    <tr><td>Scope</td><td></td><td>the container's worker pools</td><td>the whole container (also the diagrams' live activity, the cockpit's rates and the recordings)</td></tr>
+  </table>
+  <p><strong>Costs.</strong> Task tracking costs almost nothing: in our tests it made no measurable difference to the time or the garbage of a task, and the memory it keeps is negligible. Data flows cost much more, because every call between components produces instrumentation events that the supervisor then processes. With the supervisor connected, that is about 7 % of one CPU core at 1,000 calls per second, 15 to 30 % at 5,000 and 40 % at 20,000. Each call also creates about 5 kilobytes of short-lived objects that the garbage collector must clean up (about 50 megabytes per second at 10,000 calls per second); the memory they keep permanently is small: about half a megabyte in our test container, and it did not grow with the number of calls. A container at rest is not affected. Turn the flows off when you do not need them, especially on code that makes many calls. Recording a sequence adds to this cost, because the arguments of each call are printed and the messages are kept.</p>
+  <h3>Thread states</h3>
+  <ul>
+    <li><strong>Runs</strong> (green): in a task, using CPU, or waiting on blocking I/O, which the JVM also reports as running. The selected thread's CPU time tells them apart.</li>
+    <li><strong>Waits</strong> (amber): in a task, waiting: a sleep, a future, a condition, a <code>java.util.concurrent</code> lock. It holds its worker without using CPU.</li>
+    <li><strong>Blocked (monitor)</strong> (red): blocked on a <code>synchronized</code> monitor. The thread holding it is shown.</li>
+    <li><strong>Idle</strong> (gray): no task.</li>
+  </ul>
+  <p>For sizing: a pool saturated with green threads is CPU-bound, and more threads do not help once the cores are busy; saturated with amber, it waits on something else, and more workers help, or the wait can be fixed; red is lock contention, a matter of code, not of size.</p>
+  <h3>Pools</h3>
+  <p>Each pool sits in a compartment of its own, its figures in aligned columns: its workers, its queue, its occupancy (the share of busy workers), and while tasks are tracked the 95th percentile of how long tasks waited and ran over the range shown (hover for the median). While tasks are tracked, occupancy counts the time the workers spent in tasks between two samples, however short the tasks, and the pool shows the tasks it completes per second. Its contention badge sums up the last minute, as the tiles do: <strong>Saturated</strong> when it rejected tasks within the minute - "calmer now" says when its last seconds are quieter - or, over the last five seconds, when nearly all its workers stayed busy while tasks queued most of the time; <strong>Under strain</strong> when most of them stayed busy, or when tasks queued most of the time; <strong>Fluid</strong> otherwise. Pools and threads use the same three colors, but they do not say the same thing: a pool can be saturated with green threads only, and a fluid pool can hold a blocked thread.</p>
+  <p><strong>Tuning a pool live</strong>: click the workers or queue figure of the events pool or of the general pool. Workers go one at a time, from 1 to 64; the queue capacity by halves or doubles, from 16 to 65536. Each change applies at once and lasts until the container restarts, its configuration then applying again: the way to try a size before setting it there. A changed figure is outlined, with a dot, and its tooltip and <strong>reset</strong> give its value when the supervisor connected. The general pool's queue capacity also applies to the dedicated pools. A dedicated pool keeps its single worker, which keeps its tasks in order.</p>
+  <h3>Reading the panel</h3>
+  <ul>
+    <li><strong>Tiles</strong>: the threads, the average and peak occupancy, the queued tasks and the rejections over the range shown.</li>
+    <li><strong>Occupancy</strong>: the share of busy workers per kind of pool over time; hover for the values at a moment. With task tracking off, each sample only says whether a worker is busy at that instant, so the curve jumps between 0 and 100 %; on, it gives the share of time spent in tasks.</li>
+    <li><strong>Pool health</strong>: one sentence on the most pressed pool, colored by its contention, such as "Async Services pool overwhelmed: 372 tasks rejected in the last minute"; then each pool's occupancy over the minute, its contention and why, on one line - its rejections within the minute, its stuck threads, calmer now; hover it for the whole line - with <strong>Tune…</strong> to resize it; the recent events; and, folded, <strong>Threads now</strong>: how many threads are in each state now - a saturated pool's threads all run, so this says what they do, not how pressed the pools are. The recent events are: rejections, a pool saturating then fluid again (one entry each, however it wavers in between), resized pools and changed queue capacities, blocked threads, long tasks, deadlocks.</li>
+    <li><strong>Container threads</strong>: one lane per thread, all on the same time axis, so that what happens at the same moment lines up. Hover a lane to read every lane at that moment; under each thread's name, a dot of its state and what it does. A pill at the lane's right end says what it works on: its current task's name while one lasts - an async task submitted without a queue key, which has none, shows the component that submitted it; otherwise the component it worked for most over the last five seconds, with that share of its time, however short its tasks; otherwise, outlined, the last component it worked for and how long ago. Tasks too short to be caught by a sample - typically event deliveries, a few microseconds each - show as a green bar rising from the bottom of an idle lane, as high as the share of the interval they took, and the thread reads <em>short tasks</em> with how busy it was. <strong>Group by</strong> gathers the lanes by pool, or, while tasks are tracked, shows the load per <strong>component</strong>: a pool's worker takes any task, so a thread belongs to no component; instead, one row per component - the one that submitted an async task, or the consumer of an event - shows, for each kind of pool it worked in, the share of that pool's workers that worked for it at each moment, however short its tasks: one line per kind, in the occupancy chart's colors, up to the dashed line of 100 % - a component that keeps every worker of a pool busy reaches it. Under its name, its average share of each kind; its tooltip gives the peaks. The rows keep their order while time passes. Hover a row to read its shares at that moment. Tasks of no known component, such as one submitted before tracking was on, go to <em>other tasks</em>.</li>
+    <li><strong>Selected thread</strong>: click a lane to see its state, current task, lock, CPU use, its occupancy over five minutes and what it did lately. Its <strong>call stack</strong> lists the methods of the application's components it is running, innermost first, read from its stack every second; Covalent's own components are left out. <strong>Java stack</strong> shows every frame.</li>
+    <li><strong>Recording a sequence</strong>: <strong>Record</strong>, in the header, records what the selection gives. With a thread selected, it records the last component the thread worked for. Click its lane at a moment to record instead the components it worked for then; the moment is outlined, and a second click lets it go. A calling thread's components are all known, however short its calls; a pool's worker's are known only when a sample caught its task, with task tracking on.</li>
+  </ul>
+  <p><strong>Pause</strong> freezes what is shown while sampling goes on: a slider above the lanes then moves back in time over the last quarter of an hour. <strong>Resume</strong> comes back to now. <strong>Copy report</strong> copies the pools and their threads as text, for a bug report. A deadlock among the pools' threads shows as a red banner. Two buttons go with it: <strong>Copy deadlock report</strong> copies, for each deadlocked thread, its state, the lock it waits for, the locks it holds and its stack; <strong>Interrupt threads</strong>, after a confirmation, interrupts them. That frees the threads waiting interruptibly, not those blocked on a <code>synchronized</code> monitor, which only a restart of the container frees. A task running longer than the threshold chosen in <a href="#settings">Settings</a> (10 seconds by default) is reported in the recent events.</p>
+</section>  <section id="exclusions">
+  <h2>Exclusions</h2>
+  <p>Excluded components appear neither in the diagrams nor in the recordings. Excluding a composite excludes everything it contains.</p>
+  <ul>
+    <li>The <strong>Built-in</strong> exclusion is the supervisor's own interface component. It is always excluded and cannot be removed.</li>
+    <li>Add a component by its fully qualified name, then <strong>Exclude</strong>. Remove it with the bin icon of its row.</li>
+    <li><strong>Exclude internal components</strong> hides Covalent's own components, marked <code>@Internal</code>. Turn it off to see them.</li>
+  </ul>
+  <p>The exclusions are kept from one run to the next. A component excluded while observing another application is kept too, and applies again whenever that application is observed.</p>
+</section>  <section id="stereotypes">
+  <h2>Stereotypes</h2>
+  <p>A stereotype is the short label written in a component's card and in the sequence diagrams, such as <em>Repository</em> or <em>Composite</em>. A component takes the stereotype matching the end of its name, and the longest matching ending wins. With no match, the supervisor falls back on what the metamodel says: Composite, Component, Raw, Interface or Internal.</p>
+  <p>The Stereotypes function has no button on the rail: it is the <strong>Stereotypes</strong> tab of <a href="#settings">Settings</a>, also opened with <strong>Component stereotypes…</strong> in the General tab.</p>
+  <ul>
+    <li><strong>Built-in</strong> stereotypes come with the supervisor and are locked. Tick <strong>Allow removing the built-in stereotypes</strong> to remove them as well; a removed built-in stereotype stays removed from one run to the next. <strong>Restore the initial list</strong> brings back the built-in stereotypes and removes the ones you added, as at installation.</li>
+    <li>To add one, give a name ending, made of letters, digits, <code>_</code> and <code>$</code>, and the stereotype to show, which has a length limit. An ending that already has a stereotype is refused. Remove an added stereotype with the button of its row. The stereotypes you add are kept from one run to the next.</li>
+    <li>The filter field narrows the list.</li>
+    <li><strong>Try a component name</strong> shows which stereotype a name gets, which ending won, and which other endings also match.</li>
+  </ul>
+</section>  <section id="settings">
+  <h2>Settings</h2>
+  <p>Settings has three tabs. <strong>General</strong> groups the preferences in cards: Data flows, Threads, Components, Language and Diagram. <strong>Colors</strong> sets the colors of the diagrams. <strong>Stereotypes</strong> holds the <a href="#stereotypes">stereotype table</a>.</p>
+  <ul>
+    <li><strong>Data flows on when connecting to a container</strong>: turns the flows on at each connection.</li>
+    <li><strong>Task tracking on when connecting to a container</strong>: turns on the task tracking of <a href="#threads">Threads</a> at each connection.</li>
+    <li><strong>Report a task running longer than</strong>: the threshold of the long task reports of Threads.</li>
+    <li><strong>Exclusion Policy…</strong> and <strong>Component stereotypes…</strong>: open the <a href="#exclusions">Exclusions</a> function and the <a href="#stereotypes">Stereotypes</a> tab.</li>
+    <li><strong>Recalculate diagram layout when hiding components</strong>: lays the diagram out again when components are hidden, instead of leaving gaps.</li>
+    <li><strong>New sequence diagrams start with live drawing on</strong>.</li>
+    <li><strong>Sequence timeline</strong>: volume or duration with a switch, volume bars with a duration line, or duration bars with a volume density band.</li>
+    <li><strong>Write each sequence recording to disk as it goes</strong>: keeps a live log of every new recording, which survives a crash; <strong>Log format</strong>: the format of the sequence logs.</li>
+    <li><strong>Snapshot folder</strong>, <strong>Views folder</strong> and <strong>Logs folder</strong>: where snapshots, saved views and live sequence logs go.</li>
+    <li><strong>Supervisor language</strong>: the system language, English or French, applied at the next start.</li>
+    <li><strong>Colors</strong>: the colors of the diagrams, per theme, with a live preview. Hovering a color shows where it is used. <strong>Restore default colors</strong> brings back the default colors of the current theme, after a confirmation; the other theme keeps its own.</li>
+  </ul>
+  <p>The light and dark themes switch from the header, at any time. All settings are kept from one run to the next.</p>
+</section>  <section id="shortcuts">
+  <h2>Keyboard and mouse</h2>
+  <table>
+    <tr><th>Shortcut</th><th>Action</th></tr>
+    <tr><td><kbd>F1</kbd></td><td>Opens this help on the function shown.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Saves the component diagram view.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td>Opens the views library.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Closes the current dialog.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>F12</kbd></td><td>In any window of the observed application, shows the supervisor in front of the other windows. Another combination can be chosen with the <code>covalent.supervision.shortcut</code> system property.</td></tr>
+    <tr><td>Double-click a tab title</td><td>Renames the tab.</td></tr>
+    <tr><td>Double-click a composite</td><td>Enters the composite.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+click</td><td>Adds a card or a lifeline to the selection, or removes it.</td></tr>
+    <tr><td><kbd>Shift</kbd>+drag</td><td>Selects the cards in an area.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+drag</td><td>Adds the cards in an area to the selection.</td></tr>
+    <tr><td>Drag the background</td><td>Pans the diagram.</td></tr>
+    <tr><td>Mouse wheel</td><td>Zooms the component diagram and the dependency graph. Scrolls the sequence diagram, where <kbd>Ctrl</kbd>+wheel zooms and <kbd>Shift</kbd>+wheel scrolls sideways.</td></tr>
+  </table>
+  <p>On macOS, use <kbd>Cmd</kbd> instead of <kbd>Ctrl</kbd> for <kbd>Ctrl</kbd>+S and <kbd>Ctrl</kbd>+O. Mouse gestures keep <kbd>Ctrl</kbd>.</p>
+</section>  <section id="glossary">
+  <h2>Glossary</h2>
+  <table>
+    <tr><th>Term</th><th>Meaning</th></tr>
+    <tr><td>Container</td><td>Hosts the components of an application, wires them and drives their lifecycle.</td></tr>
+    <tr><td>Managed container</td><td>A container known by name to Covalent; the supervisor observes managed containers.</td></tr>
+    <tr><td>Component</td><td>A unit of the application, with its ports and a lifecycle managed by the container.</td></tr>
+    <tr><td>Composite</td><td>A component made of other components, its children.</td></tr>
+    <tr><td>Raw component</td><td>An object registered directly in the container, wired without the managed lifecycle.</td></tr>
+    <tr><td>Internal component</td><td>One of Covalent's own components, marked <code>@Internal</code>.</td></tr>
+    <tr><td>Stereotype</td><td>The short label shown on a component, deduced from the end of its name or, failing that, from the metamodel.</td></tr>
+    <tr><td>Port</td><td>A component's connection point: a provided or used service, a produced or consumed event, an offered or accessed parameter.</td></tr>
+    <tr><td>Lifecycle states</td><td>deployed, instantiated, initialized, activated, passivated, removed, and failed when a transition fails.</td></tr>
+    <tr><td>Data flows</td><td>The calls, events and parameter reads observed live in the container.</td></tr>
+    <tr><td>View</td><td>A saved state of a component diagram, kept in the views library.</td></tr>
+  </table>
+</section>  </main>
+</div>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main section"));
+    var links = Array.prototype.slice.call(document.querySelectorAll("nav a"));
+    var originals = sections.map(function (section) { return section.innerHTML; });
+    var noResult = document.getElementById("no-result");
+    var main = document.querySelector("main");
+
+    function markCurrent(id) {
+      links.forEach(function (link) {
+        link.classList.toggle("current", link.getAttribute("href") === "#" + id);
+      });
+    }
+
+    window.showSection = function (id) {
+      var target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView();
+        markCurrent(id);
+      }
+    };
+
+    main.addEventListener("scroll", function () {
+      var current = sections[0];
+      sections.forEach(function (section) {
+        if (!section.classList.contains("hidden") && section.offsetTop - main.scrollTop <= 80) {
+          current = section;
+        }
+      });
+      markCurrent(current.id);
+    });
+
+    function highlight(node, query) {
+      var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+      var texts = [];
+      while (walker.nextNode()) {
+        texts.push(walker.currentNode);
+      }
+      texts.forEach(function (text) {
+        var value = text.nodeValue;
+        var index = value.toLowerCase().indexOf(query);
+        if (index < 0) {
+          return;
+        }
+        var fragment = document.createDocumentFragment();
+        var start = 0;
+        while (index >= 0) {
+          fragment.appendChild(document.createTextNode(value.substring(start, index)));
+          var mark = document.createElement("mark");
+          mark.textContent = value.substring(index, index + query.length);
+          fragment.appendChild(mark);
+          start = index + query.length;
+          index = value.toLowerCase().indexOf(query, start);
+        }
+        fragment.appendChild(document.createTextNode(value.substring(start)));
+        text.parentNode.replaceChild(fragment, text);
+      });
+    }
+
+    document.getElementById("search").addEventListener("input", function (event) {
+      var query = event.target.value.trim().toLowerCase();
+      var shown = 0;
+      sections.forEach(function (section, index) {
+        section.innerHTML = originals[index];
+        var matches = query === "" || section.textContent.toLowerCase().indexOf(query) >= 0;
+        section.classList.toggle("hidden", !matches);
+        links[index].classList.toggle("hidden", !matches);
+        if (matches) {
+          shown++;
+          if (query !== "") {
+            highlight(section, query);
+          }
+        }
+      });
+      noResult.classList.toggle("shown", shown === 0);
+      main.scrollTop = 0;
+    });
+
+    var initial = window.location.hash ? window.location.hash.substring(1) : "overview";
+    window.showSection(initial);
+  })();
+</script>
+</body>
+</html>

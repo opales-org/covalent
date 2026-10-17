@@ -1,0 +1,345 @@
+/*
+ * Copyright (c) 2026 opales.org and Covalent contributors.
+ * SPDX-License-Identifier: MPL-2.0
+ *
+ * Light theme: color tokens consumed by supervision.css, plus the Modena
+ * base colors every standard control derives from.
+ */
+.root {
+	-sv-bg: #d9dfe7;
+	-sv-surface: #edf0f4;
+	-sv-surface-2: #e8ecf1;
+	-sv-surface-3: #e1e6ed;
+	-sv-line: #cdd4de;
+	-sv-line-2: #b4bdca;
+	-sv-ink: #121a26;
+	-sv-ink-2: #2c3544;
+	-sv-muted: #4a5567;
+	-sv-accent: #1e5a78;
+	-sv-accent-soft: #d2e1e9;
+	/* A pool setting changed from its default. */
+	-sv-changed: #b45309;
+	-sv-accent-ink: #ffffff;
+	-sv-canvas: #e9edf2;
+	-sv-bad: #b91c1c;
+	-sv-accent-line: #1e5a7873;
+	-sv-ok: #0e9f6e;
+	-sv-bad-soft: #f5dada;
+	-sv-ok-soft: #d2e9dd;
+	-sv-waits-soft: #f1e0c2;
+	-sv-ok-ink: #065f46;
+	-sv-waits-ink: #8a3d07;
+	-sv-compartment: #e3e7ed;
+	-sv-compartment-line: #cbd2dc;
+	-sv-bad-soft-hover: #efc5c5;
+	-sv-bad-soft-press: #e9b0b0;
+	-sv-shadow: rgba(15, 23, 32, 0.18);
+
+	/* Console: the page's own ground, graphite readouts kept as instruments,
+	   light sage switches. */
+	-sv-console-canvas: -sv-bg;
+	-sv-console-readout-bg: #1b2330;
+	-sv-console-readout-border: #0f151e;
+	-sv-console-switch-off: #c9d0da;
+	-sv-console-switch-edge: #98a3b3;
+	-sv-console-switch-edge-on: #5b8a73;
+	-sv-console-switch-on: #a9c7b7;
+	-sv-console-switch-knob: #ffffff;
+	-sv-console-switch-knob-on: #ffffff;
+	-sv-console-switch-off-press: #bcc4cf;
+	-sv-console-switch-on-press: #98b9a7;
+
+	/* Primary-button interaction states - see supervision.css .sv-primary-button.
+	   Hover stays in the accent family (darker) instead of the generic gray
+	   hover every other button gets; pressed goes a shade darker so a click
+	   on a primary button finally looks different from resting. */
+	-sv-accent-hover: #174a63;
+	-sv-press: #113a4f;
+	-sv-press-ink: #ffffff;
+
+	-sv-seq-call: #2563eb;
+	-sv-seq-call-line: #60a5fa;
+	-sv-seq-call-ink: #1d4ed8;
+	-sv-seq-return: #64748b;
+	-sv-seq-return-line: #cbd5e1;
+	-sv-seq-return-ink: #475569;
+	-sv-seq-lifeline: #94a3b8;
+	-sv-seq-actor-header: #eef4fb;
+	-sv-seq-actor-border: #0f1720;
+	-sv-seq-selection: #1e5a78;
+	/* The focused component of the dependency graph. */
+	-sv-focus: #1e3a8a;
+	-sv-focus-soft: #1e3a8a29;
+	-sv-kind-service: #2563eb;
+	-sv-kind-event: #ea580c;
+	-sv-kind-parameter: #6d28d9;
+	-sv-threads-waits: #d97706;
+	-sv-threads-long: #c084fc;
+	-sv-threads-pill: #2c3544;
+	-sv-threads-pill-ink: #ffffff;
+	-sv-threads-pill-edge: #94a0b0;
+	-sv-kind-action: #0f766e;
+
+	-fx-base: #e4e8ee;
+	-fx-background: -sv-bg;
+	-fx-control-inner-background: -sv-surface;
+	-fx-control-inner-background-alt: -sv-surface-2;
+	-fx-accent: -sv-accent;
+	-fx-focus-color: -sv-accent;
+	-fx-faint-focus-color: #1e5a7822;
+	-fx-selection-bar: -sv-accent-soft;
+	-fx-selection-bar-non-focused: -sv-surface-3;
+	-fx-selection-bar-text: -sv-ink;
+}
+
+/* --- Cockpit console, light theme ---
+   A daylight desk: slices on the theme's own depth steps, the graphite
+   readouts of the dark theme kept as instruments, deep solid tones for
+   states and meters, outlined neutral commands, red only for the
+   destructive ones, and light sage switches with a fine edge. No pastel
+   washes. */
+
+.sv-console {
+	-fx-background-color: -sv-bg;
+}
+
+.sv-console-strip {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+	-fx-border-width: 1;
+	-fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 12, 0, 0, 3);
+}
+/* The state is shown by the colored stripe at the top of the slice, not by a wash. */
+.sv-console-strip-title {
+	-fx-font-size: 13.5px;
+}
+.sv-console-count {
+	-fx-background-color: -sv-surface-3;
+	-fx-text-fill: -sv-muted;
+}
+
+.sv-console-strip-accent { -fx-background-color: #94a0b0; }
+.sv-console-strip-activated .sv-console-strip-accent { -fx-background-color: -sv-ok; }
+.sv-console-strip-failed .sv-console-strip-accent { -fx-background-color: #c81e1e; }
+.sv-console-strip-passivated .sv-console-strip-accent { -fx-background-color: #2563eb; }
+.sv-console-strip-initialized .sv-console-strip-accent,
+.sv-console-strip-instantiated .sv-console-strip-accent { -fx-background-color: #d97706; }
+
+/* State readouts: the graphite LCD of the base theme, kept as an instrument. */
+.sv-console-display {
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+	-fx-effect: innershadow(gaussian, rgba(0, 0, 0, 0.35), 6, 0, 0, 1);
+}
+
+/* Activity meter: solid steps. */
+.sv-console-vu-bar {
+	-fx-background-color: -sv-line;
+	-fx-background-radius: 2;
+}
+.sv-console-vu-bar.sv-console-vu-lit {
+	-fx-background-color: -sv-ok;
+}
+.sv-console-vu-bar.sv-console-vu-hot.sv-console-vu-lit {
+	-fx-background-color: #d97706;
+}
+
+/* Channels: crisp LEDs, no glow. */
+.sv-console-channels {
+	-fx-border-color: -sv-line transparent transparent transparent;
+}
+.sv-console-led {
+	-fx-background-color: #94a0b0;
+}
+.sv-console-led-activated { -fx-background-color: -sv-ok; }
+.sv-console-led-failed { -fx-background-color: #c81e1e; }
+.sv-console-led-passivated { -fx-background-color: #2563eb; }
+.sv-console-led-initialized, .sv-console-led-instantiated { -fx-background-color: #d97706; }
+.sv-console-channel-name {
+	-fx-text-fill: -sv-ink;
+}
+
+/* Slice buttons: outlined and neutral; red only for the destructive ones. */
+.button.sv-console-pad {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: #94a0b0;
+	-fx-text-fill: -sv-ink;
+}
+.button.sv-console-cmd {
+	-fx-background-color: transparent;
+	-fx-border-color: -sv-line-2;
+	-fx-text-fill: -sv-ink-2;
+	-fx-background-radius: 10;
+	-fx-border-radius: 10;
+	-fx-padding: 3 8 3 8;
+}
+.button.sv-console-cmd-danger {
+	-fx-background-color: transparent;
+	-fx-border-color: #d99a9a;
+	-fx-text-fill: -sv-bad;
+}
+
+/* Container panel: the master section, set apart by the safety band. */
+.sv-console-container {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent;
+	-fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.08), 16, 0, 0, -4);
+}
+.sv-console-hazard {
+	-fx-min-height: 6;
+	-fx-pref-height: 6;
+	-fx-background-color: linear-gradient(from 0px 0px to 14px 14px, repeat, #d97706 0%, #d97706 50%, #f2c46d 50%, #f2c46d 100%);
+	-fx-opacity: 1;
+}
+.sv-console-eyebrow {
+	-fx-text-fill: -sv-muted;
+}
+.sv-console-safety.sv-console-armed {
+	-fx-border-color: #d99a9a;
+	-fx-background-color: rgba(185, 28, 28, 0.05);
+}
+.sv-console-arm-state.sv-console-armed {
+	-fx-text-fill: -sv-bad;
+}
+.sv-console-countdown {
+	-fx-background-color: -sv-line;
+}
+.sv-console-countdown-fill {
+	-fx-background-color: -sv-bad;
+}
+/* Arm: red and white stripes, a graphite label on a white patch. */
+.toggle-button.sv-console-arm {
+	-fx-background-color: linear-gradient(from 0px 0px to 14px 14px, repeat, #c81e1e 0%, #c81e1e 50%, #ffffff 50%, #ffffff 100%);
+	-fx-border-color: #b91c1c;
+}
+.toggle-button.sv-console-arm:hover {
+	-fx-border-color: #7f1d1d;
+}
+.sv-console-arm-label {
+	-fx-text-fill: -sv-ink;
+	-fx-background-color: rgba(255, 255, 255, 0.92);
+}
+/* Disarm: solid graphite, lighter under the pointer, darker while pressed. */
+.toggle-button.sv-console-arm:selected {
+	-fx-background-color: #2c3544;
+	-fx-border-color: #121a26;
+}
+.toggle-button.sv-console-arm:selected .sv-console-arm-label,
+.toggle-button.sv-console-arm:selected:hover .sv-console-arm-label,
+.toggle-button.sv-console-arm:selected:pressed .sv-console-arm-label {
+	-fx-background-color: transparent;
+	-fx-text-fill: #ffffff;
+}
+.toggle-button.sv-console-arm:selected:hover {
+	-fx-background-color: #3d4859;
+	-fx-border-color: #121a26;
+}
+.toggle-button.sv-console-arm:selected:pressed {
+	-fx-background-color: #121a26;
+	-fx-border-color: #121a26;
+}
+/* Container commands: solid petrol, as the theme's primary buttons; remove all in solid red,
+   apart after a thin line. */
+.button.sv-console-big {
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent-hover;
+	-fx-text-fill: #ffffff;
+}
+.button.sv-console-big:hover {
+	-fx-background-color: -sv-accent-hover;
+	-fx-border-color: -sv-press;
+	-fx-text-fill: #ffffff;
+}
+.button.sv-console-big:pressed {
+	-fx-background-color: -sv-press;
+	-fx-border-color: -sv-press;
+	-fx-text-fill: #ffffff;
+}
+.button.sv-console-big.sv-console-danger {
+	-fx-background-color: #b91c1c;
+	-fx-border-color: #7f1d1d;
+	-fx-text-fill: #ffffff;
+}
+.button.sv-console-big.sv-console-danger:hover {
+	-fx-background-color: #991b1b;
+	-fx-border-color: #7f1d1d;
+	-fx-text-fill: #ffffff;
+}
+.button.sv-console-big.sv-console-danger:pressed {
+	-fx-background-color: #7f1d1d;
+	-fx-border-color: #7f1d1d;
+	-fx-text-fill: #ffffff;
+}
+.sv-console-command-gap {
+	-fx-background-color: -sv-line-2;
+}
+
+/* Console levels, light theme: a slice holding composites stands on a
+   slightly deeper ground with a stack of cards behind it; under the pointer
+   its outline takes the accent and its "Enter" badge fills. */
+.button.sv-console-crumb {
+	-fx-text-fill: -sv-accent;
+}
+.button.sv-console-crumb:hover {
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-crumbs, .button.sv-console-up {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+}
+.button.sv-console-up {
+	-fx-border-color: -sv-line-2;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-console-strip.sv-console-navigable {
+	-fx-background-color: -sv-surface-2;
+	-fx-effect: dropshadow(gaussian, rgba(15, 23, 42, 0.14), 16, 0, 0, 6);
+}
+.sv-console-strip.sv-console-navigable:hover {
+	-fx-border-color: -sv-accent;
+	-fx-effect: dropshadow(gaussian, rgba(30, 90, 120, 0.35), 12, 0.2, 0, 0);
+}
+.sv-console-strip-card {
+	-fx-background-color: -sv-surface-3;
+	-fx-border-color: -sv-line-2;
+}
+.sv-console-strip-card-2 {
+	-fx-background-color: -sv-compartment;
+}
+.sv-console-enter {
+	-fx-text-fill: -sv-accent;
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+}
+.sv-console-navigable:hover .sv-console-enter {
+	-fx-text-fill: #ffffff;
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent;
+}
+.sv-console-composite {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+}
+.sv-console-composite:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+}
+.sv-console-composite-icon {
+	-fx-stroke: -sv-accent;
+}
+.sv-console-composite-name {
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-composite-count {
+	-fx-text-fill: -sv-muted;
+}
+.button.sv-console-go {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-text-fill: -sv-accent;
+}
+.sv-console-composite:hover .button.sv-console-go {
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent;
+	-fx-text-fill: #ffffff;
+}

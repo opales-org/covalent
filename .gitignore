@@ -1,0 +1,28 @@
+/bin
+target/
+
+# IDE and editor files
+.idea/
+*.iml
+.classpath
+.project
+.settings/
+.factorypath
+.apt_generated/
+.metadata/
+nbproject/
+nbbuild/
+nbdist/
+.vscode/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Editor backup and swap files
+*.swp
+*~
+
+# Logs and JVM crash files
+*.log
+hs_err_pid*

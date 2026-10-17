@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<!--
+  Copyright (c) 2026 opales.org and Covalent contributors.
+  SPDX-License-Identifier: MPL-2.0
+-->
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<title>Aide du superviseur Covalent</title>
+<link rel="stylesheet" href="help.css">
+<script>
+  (function () {
+    var theme = new URLSearchParams(window.location.search).get("theme");
+    document.documentElement.setAttribute("data-theme", theme === "dark" ? "dark" : "light");
+  })();
+</script>
+</head>
+<body>
+<div class="layout">
+<nav>
+  <div class="brand">Aide du superviseur</div>
+  <input id="search" type="search" placeholder="Rechercher dans l'aide…" aria-label="Rechercher dans l'aide">
+  <a href="#overview">Présentation</a>
+  <a href="#connecting">Observer un conteneur</a>
+  <a href="#cockpit">Cockpit</a>
+  <a href="#components">Composants</a>
+  <a href="#views">Bibliothèque de vues</a>
+  <a href="#sequences">Séquences</a>
+  <a href="#graph">Graphe des dépendances</a>
+  <a href="#threads">Threads</a>
+  <a href="#exclusions">Exclusions</a>
+  <a href="#stereotypes">Stéréotypes</a>
+  <a href="#settings">Réglages</a>
+  <a href="#shortcuts">Clavier et souris</a>
+  <a href="#glossary">Glossaire</a>
+</nav>
+<main>  <p id="no-result" class="empty">Aucune rubrique ne correspond à cette recherche.</p>  <section id="overview">
+  <h1>Superviseur Covalent</h1>
+  <p class="lead">Voyez une application Covalent en cours d'exécution de l'intérieur : ses composants, la façon dont ils sont reliés, ce qu'ils échangent et leur progression dans leur cycle de vie.</p>
+  <p>Le superviseur observe un conteneur managé à la fois. Sa fenêtre s'organise autour du rail de gauche :</p>
+  <ul>
+    <li><strong>Cockpit</strong> : les chiffres du conteneur en direct, et une console pour piloter le cycle de vie de ses composants.</li>
+    <li><strong>Composants</strong> : le diagramme de composants, avec l'activité en direct sur ses liens.</li>
+    <li><strong>Séquences</strong> : les enregistrements des appels et des événements échangés entre composants.</li>
+    <li><strong>Graphe</strong> : le graphe des dépendances et ses cycles.</li>
+    <li><strong>Threads</strong> : montre ce que font les pools de workers et leurs threads.</li>
+    <li><strong>Exclusions</strong> : les composants que le superviseur laisse de côté.</li>
+    <li><strong>Stéréotypes</strong> : le stéréotype affiché pour chaque composant, d'après la fin de son nom. Il n'a pas de bouton sur le rail : c'est un onglet des Réglages.</li>
+    <li><strong>Réglages</strong> : les préférences et les couleurs.</li>
+    <li><strong>Aide</strong> : cette aide, les raccourcis clavier et la boîte À propos.</li>
+  </ul>
+  <p>Chaque fonction peut afficher plusieurs onglets à la fois, par exemple deux diagrammes de composants côte à côte dans des onglets. L'en-tête contient le sélecteur de conteneur, l'interrupteur <strong>Flux</strong>, le bouton <strong>Enregistrer</strong> et le sélecteur de thème clair ou sombre. La barre d'état indique où vous êtes et le zoom du diagramme affiché : faites glisser le curseur ou utilisez ses boutons <strong>&minus;</strong> et <strong>+</strong>, qui vont par paliers, pour zoomer autour du milieu de la vue (ou du composant sélectionné) ; double-cliquez sur le pourcentage pour revenir à 100&nbsp;%. La molette zoome autour du pointeur.</p>
+</section>  <section id="connecting">
+  <h2>Observer un conteneur</h2>
+  <p>Choisissez le conteneur à observer dans le sélecteur en haut de la fenêtre, puis cliquez sur <strong>Connecter</strong>. Le sélecteur liste les conteneurs managés de l'application. Seuls les conteneurs managés peuvent être observés.</p>
+  <p>Le superviseur suit le conteneur observé tout au long de son cycle de vie. Quand le conteneur s'arrête ou est libéré, le superviseur se déconnecte, vide ses vues et affiche le conteneur comme <em>Arrêté</em> ou <em>Libéré</em>. Quand le conteneur redémarre, ou qu'un nouveau conteneur est créé sous le même nom, il se reconnecte de lui-même.</p>
+  <h3>Flux de données</h3>
+  <p>L'interrupteur <strong>Flux</strong> active l'observation des appels, des événements et des lectures de paramètres échangés dans le conteneur : l'activité en direct sur les liens du diagramme, les débits du cockpit et les enregistrements proviennent tous de ces flux. Ils coûtent un peu à l'application observée : ils restent donc désactivés tant que vous ne les activez pas, ou que vous ne les demandez pas à la connexion dans les <a href="#settings">Réglages</a>. Désactiver les flux arrête un enregistrement en cours.</p>
+</section>  <section id="cockpit">
+  <h2>Cockpit</h2>
+  <p>Le cockpit résume le conteneur observé. Il a deux onglets : <strong>Vue d'ensemble</strong> et <strong>Console</strong>. Le badge à côté de son titre indique si le superviseur est connecté.</p>
+  <h3>Vue d'ensemble</h3>
+  <ul>
+    <li><strong>Composants</strong> : combien de composants le conteneur contient, managés et raw, et combien sont des composites.</li>
+    <li><strong>Câblage</strong> : les liens entre composants, par nature : services, événements et paramètres.</li>
+    <li><strong>Appels de services</strong> et <strong>Notifications d'événements</strong> : les débits actuels, avec leur tendance récente.</li>
+    <li><strong>Échecs</strong> : les échecs des cinq dernières minutes.</li>
+    <li><strong>Débit</strong> : les messages par seconde sur la fenêtre choisie (15 s, 1 min, 5 min ou 15 min), par nature de message.</li>
+    <li><strong>Cycle de vie</strong> : combien de composants sont dans chaque état du cycle de vie, et les transitions d'état récentes.</li>
+    <li><strong>Composites de premier niveau</strong> : une carte par composite, avec l'état de ses composants et son débit de messages. Ouvrez une carte pour voir le composite dans le diagramme de composants.</li>
+    <li><strong>Threads</strong> : ce que font les pools de workers : la part de workers occupés sur la dernière minute quand le suivi des tâches est activé, les threads sinon, et les pools saturés, les tâches rejetées ou un interblocage. Cliquez dessus pour ouvrir Threads.</li>
+    <li><strong>Ports les plus actifs</strong> : les ports les plus sollicités, avec leur propriétaire, leur débit et leur durée au 95e centile.</li>
+  </ul>
+  <p>Les débits nécessitent les flux de données : flux désactivés, ils restent à zéro.</p>
+  <h3>Console</h3>
+  <p>La console pilote le cycle de vie des composants observés : activer, passiver, redémarrer, retirer, désinstaller, etc., composant par composant ou pour tout le conteneur (<strong>Tout activer</strong>, <strong>Tout passiver</strong>, <strong>Tout retirer</strong>). Seules les commandes qui ont un sens dans l'état actuel d'un composant sont proposées. Un composant dont une transition a échoué est dans l'état <em>en échec</em>, et seule la commande <strong>Réinitialiser</strong> (ou <strong>Tout réinitialiser</strong>) lui est proposée : elle nettoie son composite et le ramène à l'état déployé, sans le démarrer.</p>
+  <p>Chaque tranche est un composite et affiche ses enfants directs. Un composite enfant apparaît comme un canal avec un point par composant qu'il contient, un interrupteur qui s'applique à tous, et <strong>›</strong> pour y entrer. Une tranche qui contient des composites se distingue par une pile de cartes : cliquez dessus pour y entrer, et ses enfants deviennent les tranches. Le fil d'Ariane au-dessus des tranches, ou <strong>Remonter d'un niveau</strong>, permet de remonter. La tranche <strong>Autonomes</strong> rassemble les composants hors de tout composite du niveau affiché. Le panneau du conteneur, en bas, est le même à tous les niveaux.</p>
+  <p>Ces commandes agissent sur une application en cours d'exécution : la console démarre donc désarmée. Cliquez sur <strong>Armer</strong> pour afficher les commandes du conteneur. Une ligne montre le temps restant : elles se désarment d'elles-mêmes au bout de 60 secondes, ou aussitôt avec <strong>Désarmer</strong>. Les commandes aux effets durables, comme retirer ou désinstaller, demandent une confirmation. Les composants internes de Covalent sont affichés mais ne peuvent pas être pilotés : le conteneur les gère.</p>
+</section>  <section id="components">
+  <h2>Composants</h2>
+  <p>Le diagramme de composants montre les composants du conteneur observé sous forme de cartes, et les liens entre leurs ports. <strong>Nouveau diagramme</strong> ouvre un autre diagramme dans un nouvel onglet.</p>
+  <h3>Lire le diagramme</h3>
+  <ul>
+    <li>Chaque carte montre un composant, le badge de son état dans le cycle de vie, et ses ports sur ses bords.</li>
+    <li>Les ports et les liens sont colorés par nature : <span class="swatch service"></span>services, <span class="swatch event"></span>événements et <span class="swatch parameter"></span>paramètres. Un service fourni, un événement produit ou un paramètre offert est dessiné autrement qu'un service utilisé, un événement consommé ou un paramètre accédé. Le bouton <strong>Légende des couleurs de ports</strong> les liste.</li>
+    <li>Un composite contient d'autres composants. Double-cliquez dessus, ou utilisez <strong>Entrer dans le composite</strong> dans son menu, pour voir son intérieur. Le fil d'Ariane au-dessus du diagramme indique le niveau actuel : cliquez sur un niveau pour y remonter, ou utilisez <strong>Remonter d'un niveau</strong>.</li>
+    <li>Flux de données activés, les liens s'allument au passage des appels et des événements, et prennent la couleur d'échec quand un appel échoue.</li>
+  </ul>
+  <h3>L'arbre des composants et le panneau de détails</h3>
+  <p>L'arbre de gauche liste tous les composants par composite, avec un champ de recherche. Sélectionner un composant, dans l'arbre ou dans le diagramme, affiche ses détails à droite : son état et ses ports, avec des boutons pour afficher ses dépendances, le masquer ou enregistrer une séquence de son activité. Les deux panneaux latéraux peuvent être repliés.</p>
+  <h3>Boîte à outils</h3>
+  <table>
+    <tr><th>Groupe</th><th>Outils</th></tr>
+    <tr><td>Mise en forme</td><td>Style des liens (droit, coudé, arrondi), recentrer, refaire la disposition (annule les déplacements manuels), légende des couleurs de ports, noms des ports, noms des relations, et les interrupteurs qui affichent ou masquent les liens de services, d'événements et de paramètres.</td></tr>
+    <tr><td>Structure</td><td>Masquer tous les composants, afficher tous les composants, masquer les composants sélectionnés, afficher ou masquer les dépendances des composants sélectionnés.</td></tr>
+    <tr><td>Diagramme</td><td>Capture (enregistre une image du diagramme dans le dossier des captures et la copie dans le presse-papiers), nouveau diagramme, enregistrer la vue, bibliothèque de vues.</td></tr>
+  </table>
+  <h3>Sélectionner et déplacer</h3>
+  <ul>
+    <li>Cliquez sur une carte pour la sélectionner, <kbd>Ctrl</kbd>+clic pour l'ajouter à la sélection ou l'en retirer.</li>
+    <li><kbd>Maj</kbd>+glisser sélectionne les cartes d'une zone, <kbd>Ctrl</kbd>+glisser les ajoute à la sélection.</li>
+    <li>Faites glisser une carte pour la déplacer, faites glisser le fond pour vous déplacer dans le diagramme, et utilisez la molette pour zoomer.</li>
+    <li>Clic droit pour un menu. Une carte : la masquer, afficher ou masquer ses dépendances, entrer dans un composite. Un lien : le mettre en évidence, aller à sa source ou à sa cible, enregistrer une séquence entre les deux composants, le masquer. Un port : mettre en évidence, aller à un composant qui lui est lié. Le fond : afficher tous les composants, recentrer.</li>
+  </ul>
+  <p>La sélection détermine ce qu'enregistre le bouton <strong>Enregistrer</strong> de l'en-tête : voir <a href="#sequences">Séquences</a>.</p>
+</section>  <section id="views">
+  <h2>Bibliothèque de vues</h2>
+  <p>Une vue d'un diagramme de composants (le niveau affiché, les composants masqués, les positions, la sélection et le zoom) peut être conservée dans la bibliothèque de vues.</p>
+  <ul>
+    <li><strong>Enregistrer la vue…</strong> (<kbd>Ctrl</kbd>+<kbd>S</kbd>) nomme la vue, avec une description facultative, pour le conteneur observé. Un nom est unique pour son conteneur : enregistrer sous un nom existant remplace cette vue, après un avertissement. Dans un onglet ouvert depuis une vue, ou déjà enregistré, <kbd>Ctrl</kbd>+<kbd>S</kbd> remplace directement cette vue.</li>
+    <li><strong>Bibliothèque de vues…</strong> (<kbd>Ctrl</kbd>+<kbd>O</kbd>) liste les vues du conteneur observé, ou de tous les conteneurs, avec une miniature, les plus récentes d'abord ou par nom. Une vue s'ouvre toujours dans un nouvel onglet qui porte son nom.</li>
+    <li>Une vue dont les composants ne sont plus tous dans le conteneur est signalée. Elle s'ouvre sans eux, après un avertissement qui les nomme.</li>
+    <li>Les vues peuvent être renommées, supprimées, exportées dans un fichier pour les partager, et importées depuis un fichier.</li>
+  </ul>
+  <p>Les onglets Composants et Séquences peuvent être renommés : double-cliquez sur le titre d'un onglet, ou utilisez <strong>Renommer</strong> dans son menu. Le titre d'un onglet de composants est le nom proposé à son enregistrement. Renommer un onglet ouvert depuis une vue le détache de cette vue : l'enregistrer propose alors une nouvelle vue au lieu de remplacer l'ancienne.</p>
+  <p>Les vues sont stockées dans le dossier des vues choisi dans les <a href="#settings">Réglages</a>, un sous-dossier par conteneur, chaque vue dans un fichier <code>.cow</code> accompagné d'une miniature <code>.png</code>.</p>
+</section>  <section id="sequences">
+  <h2>Séquences</h2>
+  <p>Un diagramme de séquence enregistre les messages échangés entre composants pendant qu'il tourne : les appels de services et leurs retours, les notifications d'événements, les lectures de paramètres et les actions qu'un composant déclenche sur un autre.</p>
+  <h3>Enregistrer</h3>
+  <p>Les enregistrements sont faits à partir des flux de données : l'interrupteur <strong>Flux</strong> doit donc être activé. Ensuite, depuis un diagramme de composants :</p>
+  <ul>
+    <li>sélectionnez un ou plusieurs composants et cliquez sur <strong>Enregistrer</strong> dans l'en-tête ;</li>
+    <li>ou cliquez sur <strong>Enregistrer ce composant</strong> dans le panneau de détails ;</li>
+    <li>ou faites un clic droit sur un lien et choisissez d'enregistrer une séquence entre ses deux composants.</li>
+  </ul>
+  <p>Threads enregistre aussi : voir <a href="#threads">Threads</a>.</p>
+  <p>L'enregistrement s'ouvre dans un onglet Séquences et continue jusqu'à ce que vous cliquiez sur <strong>Arrêter</strong>, ou de nouveau sur <strong>Enregistrer</strong> depuis n'importe quel panneau : un seul enregistrement tourne à la fois, quel que soit celui qui l'a lancé, et les autres moyens d'en lancer un sont grisés pendant ce temps. La portée indique les composants qu'il couvre.</p>
+  <h3>Lire une séquence</h3>
+  <ul>
+    <li><strong>Dessin en direct</strong> dessine les messages à mesure qu'ils arrivent. Désactivé, le diagramme reste en l'état pendant que l'enregistrement continue, et rattrape son retard quand il est réactivé ou quand l'enregistrement s'arrête.</li>
+    <li><strong>Suivre en direct</strong> garde le dernier message visible. Il se désactive quand vous revenez en arrière ou sautez à un moment de la chronologie.</li>
+    <li>Les interrupteurs de nature affichent ou masquent les services, les événements, les paramètres et les actions.</li>
+    <li>Cliquez sur un message pour voir ses détails : ses deux extrémités, son interface et sa méthode, son thread, ses arguments, son résultat ou son échec, son attente dans la file pour un événement asynchrone, et sa durée avec les durées des derniers appels de la même méthode et leur 95e centile. <strong>Afficher dans le diagramme</strong> ouvre le diagramme de composants où les deux composants sont liés. Le panneau de détails se replie en une bande, comme les panneaux latéraux de Composants.</li>
+    <li><strong>Enregistrer le journal</strong>, la flèche à côté de la capture dans le bandeau, enregistre tous les messages enregistrés, filtrés ou non, en texte, en CSV (une ligne par message) ou en JSON Lines (un objet par ligne) ; l'extension du fichier choisit le format, celui des Réglages est proposé en premier.</li>
+    <li>Le bouton dossier, à côté, ouvre le dossier des journaux. Avec <strong>Écrire chaque enregistrement de séquence sur disque au fil de l'eau</strong> activé dans les <a href="#settings">Réglages</a>, chaque message est aussi écrit, dès qu'il est enregistré, dans un fichier de ce dossier nommé d'après le périmètre et l'heure de début, que l'infobulle du bouton dossier indique ; le fichier se termine quand l'enregistrement s'arrête. Contrairement à un journal enregistré à la fin, il garde tout ce qui a été enregistré même si le processus meurt. En JSON Lines, le fichier est lisible à tout moment.</li>
+  </ul>
+  <h3>Chronologie</h3>
+  <p>Sous le diagramme, la chronologie couvre tout l'enregistrement, découpé en tranches de temps. Elle montre combien de messages ont eu lieu dans chaque tranche (le volume), et combien de temps a pris l'invocation la plus lente commencée dans chaque tranche, sur une échelle logarithmique (la durée). L'intervalle affiché dans le diagramme est encadré. Cliquez ou faites glisser sur la chronologie pour amener le diagramme à ce moment. La façon de dessiner ensemble volume et durée se choisit dans les <a href="#settings">Réglages</a>.</p>
+  <div class="note">Une durée se mesure du début à la fin d'une invocation. Pour un événement asynchrone, le temps passé à attendre dans la file de distribution avant que son consommateur soit notifié est affiché à part, sous <strong>Attente en file</strong> dans les détails du message.</div>
+</section>  <section id="graph">
+  <h2>Graphe des dépendances</h2>
+  <p>Le graphe des dépendances montre quel composant dépend de quel autre, par ses ports : un composant dépend des composants dont il utilise les services, dont il consomme les événements et dont il accède aux paramètres. Il est calculé à chaque ouverture du graphe, tant que le conteneur est démarré, quels que soient ses paramètres. La vérification des dépendances circulaires ne gouverne que la vérification faite au démarrage.</p>
+  <ul>
+    <li><strong>Arbre des composants</strong>, à gauche, restreint un grand graphe ; le panneau se replie en une bande, comme les panneaux latéraux de Composants. Un clic sur un composite montre ce composite et tous ses descendants jusqu'aux composants feuilles, avec les dépendances entre eux ; un clic sur une feuille la centre. Le triangle ouvre ou ferme un composite sans restreindre le graphe. Le fil d'Ariane au-dessus du graphe permet de remonter, jusqu'au graphe entier. Les cycles, les statistiques et la barre d'état suivent le périmètre ; la barre d'état compte les dépendances avec l'extérieur qu'elle masque.</li>
+    <li><strong>Voisins extérieurs</strong>, une bascule du groupe Structure, ajoute au graphe restreint les composants hors du périmètre dont l'un de ses composants dépend, ou qui dépendent de l'un d'eux, en ton atténué, avec ces dépendances.</li>
+    <li><strong>Liens de composition</strong> relient chaque composite à ses enfants, dessinés comme des compositions UML : un trait plein avec un losange plein du côté du composite. Un interrupteur de la boîte à outils les affiche ou les masque.</li>
+    <li><strong>Cycles détectés</strong> liste les dépendances circulaires. Chaque cycle a sa propre couleur sur ses composants, ses liens de composition et les dépendances qui le forment. Sélectionnez un cycle pour mettre ses composants en évidence.</li>
+    <li><strong>Statistiques</strong> : le nombre de composants, de dépendances, de cycles et de composants isolés. Un composant lié par composition n'est pas isolé. Le panneau de droite, avec les cycles et les statistiques, se replie en une bande comme l'arbre des composants.</li>
+  </ul>
+  <h3>Comment les cycles tiennent compte de la composition</h3>
+  <p>Un composite ne démarre qu'une fois tous ses enfants démarrés. Dépendre d'un composant contenu dans un composite revient donc à attendre tout ce composite. Un cycle peut passer par des composites : dans une étape <code>X → Y</code>, soit X compose Y, soit X dépend de Y ou de l'un de ses descendants. Par exemple, avec A composant A1 et A2, B composant B1 et B2, A1 dépendant de B2 et B1 dépendant de A2, le cycle est <code>A → A1 → B → B1 → A</code> : ni A ni B ne peut démarrer en premier. Un enfant qui utilise un port de son propre composite ne forme pas un cycle.</p>
+  <p>Cliquez sur un composant pour mettre en évidence ce dont il dépend et ce qui dépend de lui ; un clic sur le fond efface cette mise en évidence et le cycle sélectionné.</p>
+  <p>Clic droit sur un composant ou un lien pour son menu : mettre en évidence, masquer, afficher ou masquer les dépendances, aller à la source ou à la cible d'un lien.</p>
+</section>  <section id="threads">
+  <h2>Threads</h2>
+  <p>Threads montre ce que font les pools de workers du conteneur observé : le pool qui distribue les événements asynchrones (seulement quand les événements sont asynchrones), le pool général partagé du gestionnaire async, et ses pools dédiés, un par clé de file. Les appels et les événements synchrones s'exécutent sur le thread de l'appelant, hors de ces pools : tant que les <a href="#connecting">flux de données</a> sont activés, les threads de l'application qui exécutent les appels des composants - comme un thread de simulation ou le thread d'application JavaFX - apparaissent aussi, sous <strong>Threads appelants</strong> ; pour eux, une tâche est un appel d'un composant, et les appels des composants propres à Covalent sont laissés de côté. Les pools sont échantillonnés quatre fois par seconde ; le dernier quart d'heure est conservé, dont le sélecteur de période affiche les 15 dernières secondes, la dernière minute, ou les 5 ou 15 dernières minutes.</p>
+  <h3>Suivi des tâches</h3>
+  <p>La JVM indique si un thread s'exécute, attend ou est bloqué ; seul le pool sait s'il est dans une tâche. <strong>Suivi des tâches</strong> demande aux pools d'indiquer quelle tâche exécute chaque worker, et combien de temps les tâches attendent dans la file et s'exécutent. Il reste désactivé tant que vous ne l'activez pas, dans l'en-tête du panneau ou depuis la tuile Threads du cockpit ; son coût est trop faible pour être mesuré (voir plus bas). Il reste activé jusqu'à ce que vous le désactiviez ou quittiez le conteneur ; les <a href="#settings">Réglages</a> permettent de l'activer à la connexion. Tant qu'il est désactivé, un thread en attente et un thread inactif ne se distinguent pas : tous deux apparaissent hachurés, comme <em>en attente ou inactif</em>, et l'occupation ne compte que les threads en cours et bloqués.</p>
+  <h3>Ce qu'apportent le suivi des tâches et les flux de données</h3>
+  <p>Sans aucune des deux options, Threads montre ce que montre un outil JVM généraliste comme VisualVM : l'état de chaque thread au fil du temps (s'exécute, attend, bloqué sur un moniteur) et les interblocages. Il connaît en plus les pools de workers du conteneur : leurs workers, leurs files, les tâches rejetées et la contention, et il peut les redimensionner à chaud. Il ne peut pas dire si un thread de pool qui attend est inactif ou tient une tâche.</p>
+  <p>Le <strong>suivi des tâches</strong> demande aux pools quelle tâche exécute chaque worker et combien de temps les tâches attendent et s'exécutent. C'est lui qui rend Threads vraiment utile, et il vaut mieux l'activer dès qu'on travaille avec : il distingue un thread qui attend d'un thread inactif, nomme la tâche de chaque lane, mesure l'occupation en part de temps plutôt qu'en échantillon instantané, donne les temps d'attente et d'exécution et la charge par composant, et signale les tâches longues. Il reste désactivé tant que vous ne l'activez pas, dans l'en-tête du panneau ou depuis la tuile Threads du cockpit, ou avec l'option des <a href="#settings">Réglages</a> qui l'active à chaque connexion.</p>
+  <p>Les <strong>flux de données</strong> observent les appels de tout le conteneur. Dans Threads, ils font apparaître sous <strong>Threads appelants</strong> les threads de l'application qui exécutent des appels de composants (un thread de simulation, le thread JavaFX), avec leur débit d'appels, signalent leurs appels longs et permettent d'enregistrer une séquence depuis un thread.</p>
+  <table>
+    <tr><th>Fonction de Threads</th><th>Sans aucune option</th><th>Suivi des tâches</th><th>Flux de données</th></tr>
+    <tr><td>États des threads selon la JVM (s'exécute, bloqué sur un moniteur) et verrou détenu</td><td>oui</td><td></td><td></td></tr>
+    <tr><td>Files, tâches rejetées, contention des pools, interblocages, réglage à chaud</td><td>oui</td><td></td><td></td></tr>
+    <tr><td>Occupation d'un pool</td><td>échantillon instantané, qui saute entre 0 et 100 %</td><td>part du temps passé en tâche</td><td></td></tr>
+    <tr><td>Distinguer un thread qui attend d'un thread inactif</td><td>non : affiché <em>en attente ou inactif</em></td><td>oui</td><td></td></tr>
+    <tr><td>Nom de la tâche qu'exécute un thread</td><td>non</td><td>oui</td><td></td></tr>
+    <tr><td>Tâches courtes (barre verte)</td><td>non</td><td>oui</td><td></td></tr>
+    <tr><td>Tâches par seconde, 95e centile des temps d'attente et d'exécution</td><td>non</td><td>oui</td><td></td></tr>
+    <tr><td>Regroupement par composant</td><td>non</td><td>oui</td><td></td></tr>
+    <tr><td>Signalement des tâches longues</td><td>blocage sur un moniteur seulement</td><td>tâches des workers des pools</td><td>appels des threads appelants</td></tr>
+    <tr><td>Threads appelants, avec leur débit d'appels</td><td><em>flux désactivés</em></td><td></td><td>oui</td></tr>
+    <tr><td>Bouton Enregistrer</td><td>grisé</td><td></td><td>oui</td></tr>
+    <tr><td>Composants connus d'un worker de pool pour l'enregistrement</td><td>non</td><td>oui</td><td>oui</td></tr>
+    <tr><td>Tuile Threads du cockpit</td><td>threads, pools, pools saturés, rejets, interblocage, et un lien pour activer le suivi</td><td>ajoute le pourcentage d'occupation sur la dernière minute</td><td></td></tr>
+    <tr><td>Portée</td><td></td><td>les pools de workers du conteneur</td><td>tout le conteneur (aussi l'activité en direct des diagrammes, les débits du cockpit et les enregistrements)</td></tr>
+  </table>
+  <p><strong>Coûts.</strong> Le suivi des tâches ne coûte presque rien : dans nos essais, il n'a eu aucun effet mesurable sur le temps ou les déchets d'une tâche, et la mémoire qu'il garde est négligeable. Les flux de données coûtent beaucoup plus, parce que chaque appel entre composants produit des événements d'instrumentation que le superviseur traite ensuite. Avec le superviseur connecté, cela représente environ 7 % d'un cœur de processeur à 1 000 appels par seconde, 15 à 30 % à 5 000 et 40 % à 20 000. Chaque appel crée aussi environ 5 kilo-octets d'objets éphémères que le ramasse-miettes doit nettoyer (environ 50 Mo par seconde à 10 000 appels par seconde) ; la mémoire qu'ils gardent en permanence est faible : environ un demi-mégaoctet dans notre conteneur de test, sans croissance avec le nombre d'appels. Un conteneur au repos n'est pas affecté. Désactivez les flux quand vous n'en avez pas besoin, surtout sur du code qui fait beaucoup d'appels. L'enregistrement d'une séquence s'ajoute à ce coût, car les arguments de chaque appel sont imprimés et les messages conservés.</p>
+  <h3>États des threads</h3>
+  <ul>
+    <li><strong>En cours</strong> (vert) : dans une tâche, utilise le CPU, ou attend sur des E/S bloquantes, que la JVM signale aussi comme en cours. Le temps CPU du thread sélectionné permet de les distinguer.</li>
+    <li><strong>En attente</strong> (ambre) : dans une tâche, en attente : un sleep, un future, une condition, un verrou <code>java.util.concurrent</code>. Il occupe son worker sans utiliser de CPU.</li>
+    <li><strong>Bloqué (moniteur)</strong> (rouge) : bloqué sur un moniteur <code>synchronized</code>. Le thread qui le détient est affiché.</li>
+    <li><strong>Inactif</strong> (gris) : aucune tâche.</li>
+  </ul>
+  <p>Pour le dimensionnement : un pool saturé de threads verts est limité par le CPU, et plus de threads n'aident pas une fois les cœurs occupés ; saturé de threads ambre, il attend autre chose, et plus de workers aident, ou l'attente peut être corrigée ; le rouge est de la contention sur des verrous, une affaire de code, pas de taille.</p>
+  <h3>Pools</h3>
+  <p>Chaque pool est dans son propre compartiment, ses chiffres en colonnes alignées : ses workers, sa file, son occupation (la part de workers occupés) et, quand les tâches sont suivies, le 95e centile du temps d'attente et d'exécution des tâches sur la période affichée (survolez pour la médiane). Quand les tâches sont suivies, l'occupation compte le temps passé par les workers dans des tâches entre deux échantillons, aussi courtes soient-elles, et le pool affiche les tâches qu'il termine par seconde. Son badge de contention résume la dernière minute, comme les tuiles : <strong>Saturé</strong> quand il a rejeté des tâches dans la minute - « plus calme maintenant » indique que ses dernières secondes sont plus calmes - ou, sur les cinq dernières secondes, quand presque tous ses workers sont restés occupés alors que des tâches attendaient la plupart du temps ; <strong>Sous tension</strong> quand la plupart d'entre eux sont restés occupés, ou quand des tâches attendaient la plupart du temps ; <strong>Fluide</strong> sinon. Pools et threads utilisent les trois mêmes couleurs, mais elles ne disent pas la même chose : un pool peut être saturé avec uniquement des threads verts, et un pool fluide peut contenir un thread bloqué.</p>
+  <p><strong>Régler un pool à chaud</strong> : cliquez sur le chiffre des workers ou de la file du pool des événements ou du pool général. Les workers varient un par un, de 1 à 64 ; la capacité de la file par moitiés ou doublements, de 16 à 65536. Chaque changement s'applique tout de suite et dure jusqu'au redémarrage du conteneur, dont la configuration s'applique alors de nouveau : c'est le moyen d'essayer une taille avant de la fixer dans la configuration. Un chiffre modifié est encadré, avec un point, et son infobulle et <strong>rétablir</strong> donnent sa valeur à la connexion du superviseur. La capacité de la file du pool général s'applique aussi aux pools dédiés. Un pool dédié garde son unique worker, qui garde l'ordre de ses tâches.</p>
+  <h3>Lire le panneau</h3>
+  <ul>
+    <li><strong>Tuiles</strong> : les threads, l'occupation moyenne et maximale, les tâches en attente et les rejets sur la période affichée.</li>
+    <li><strong>Occupation</strong> : la part de workers occupés par type de pool au fil du temps ; survolez pour les valeurs à un moment donné. Suivi des tâches désactivé, chaque échantillon dit seulement si un worker est occupé à cet instant, si bien que la courbe saute entre 0 et 100 % ; activé, il donne la part du temps passée dans des tâches.</li>
+    <li><strong>Santé des pools</strong> : une phrase sur le pool le plus sous pression, colorée selon sa contention, comme « Pool des services async débordé : 372 tâches rejetées dans la dernière minute, sa file pleine » ; puis le taux d'occupation de chaque pool sur la minute, sa contention et sa raison, sur une ligne - ses rejets dans la minute, ses threads bloqués, plus calme maintenant ; survolez-la pour la lire en entier - avec <strong>Régler…</strong> pour le redimensionner ; les événements récents ; et, replié, <strong>Threads en ce moment</strong> : combien de threads sont dans chaque état en ce moment - les threads d'un pool saturé sont tous en cours, cela dit donc ce qu'ils font, pas la pression sur les pools. Les événements récents sont : les rejets, un pool qui sature puis redevient fluide (une entrée pour chacun, quelles que soient ses hésitations entre les deux), les pools redimensionnés et les capacités de file modifiées, les threads bloqués, les tâches longues, les interblocages.</li>
+    <li><strong>Threads du conteneur</strong> : une lane par thread, toutes sur le même axe de temps, pour que ce qui se passe au même moment soit aligné. Survolez une lane pour lire toutes les lanes à ce moment ; sous le nom de chaque thread, un point de son état et ce qu'il fait. Une pastille au bout de la lane dit sur quoi il travaille : le nom de sa tâche en cours tant qu'elle dure - une tâche async soumise sans clé de file, qui n'en a pas, affiche le composant qui l'a soumise ; sinon le composant pour lequel il a le plus travaillé sur les cinq dernières secondes, avec cette part de son temps, aussi courtes que soient ses tâches ; sinon, en contour, le dernier composant pour lequel il a travaillé et depuis combien de temps. Les tâches trop courtes pour être saisies par un échantillon - typiquement les distributions d'événements, de quelques microsecondes chacune - apparaissent comme une barre verte montant du bas d'une lane inactive, aussi haute que la part de l'intervalle qu'elles ont prise, et le thread indique <em>tâches courtes</em> avec son taux d'occupation. <strong>Grouper par</strong> regroupe les lanes par pool ou, quand les tâches sont suivies, montre la charge par <strong>composant</strong> : un worker d'un pool prend n'importe quelle tâche, un thread n'appartient donc à aucun composant ; à la place, une ligne par composant - celui qui a soumis une tâche async, ou le consommateur d'un événement - montre, pour chaque type de pool où il a travaillé, la part des workers de ce pool qui travaillaient pour lui à chaque instant, aussi courtes que soient ses tâches : une courbe par type, aux couleurs du graphique d'occupation, jusqu'à la ligne pointillée de 100 % - un composant qui occupe tous les workers d'un pool l'atteint. Sous son nom, sa part moyenne de chaque type ; son infobulle donne les pics. Les lignes gardent leur ordre au fil du temps. Survolez une ligne pour lire ses parts à ce moment. Les tâches d'aucun composant connu, comme une tâche soumise avant l'activation du suivi, vont dans <em>autres tâches</em>.</li>
+    <li><strong>Thread sélectionné</strong> : cliquez sur une lane pour voir son état, sa tâche en cours, son verrou, son usage du CPU, son occupation sur cinq minutes et ce qu'il a fait récemment. Sa <strong>pile d'appels</strong> liste les méthodes des composants de l'application qu'il exécute, la plus interne d'abord, lues sur sa pile chaque seconde ; les composants propres à Covalent sont laissés de côté. <strong>Pile Java</strong> affiche toutes les frames.</li>
+    <li><strong>Enregistrer une séquence</strong> : <strong>Enregistrer</strong>, dans l'en-tête, enregistre ce que donne la sélection. Avec un thread sélectionné, il enregistre le dernier composant pour lequel le thread a travaillé. Cliquez sur sa lane à un moment donné pour enregistrer plutôt les composants pour lesquels il travaillait alors ; le moment est encadré, et un second clic le relâche. Les composants d'un thread appelant sont tous connus, aussi courts que soient ses appels ; ceux d'un worker de pool ne le sont que lorsqu'un échantillon a saisi sa tâche, avec le suivi des tâches activé.</li>
+  </ul>
+  <p><strong>Pause</strong> fige l'affichage pendant que l'échantillonnage continue : un curseur au-dessus des lanes permet alors de remonter le temps sur le dernier quart d'heure. <strong>Reprendre</strong> revient au moment présent. <strong>Copier le rapport</strong> copie les pools et leurs threads sous forme de texte, pour un rapport de bug. Un interblocage entre les threads des pools apparaît comme un bandeau rouge. Deux boutons l'accompagnent : <strong>Copier le rapport d'interblocage</strong> copie, pour chaque thread en interblocage, son état, le verrou qu'il attend, ceux qu'il détient et sa pile ; <strong>Interrompre les threads</strong>, après confirmation, les interrompt. Cela libère les threads qui attendent de façon interruptible, pas ceux bloqués sur un moniteur <code>synchronized</code>, que seul un redémarrage du conteneur libère. Une tâche qui s'exécute plus longtemps que le seuil choisi dans les <a href="#settings">Réglages</a> (10 secondes par défaut) est signalée dans les événements récents.</p>
+</section>  <section id="exclusions">
+  <h2>Exclusions</h2>
+  <p>Les composants exclus n'apparaissent ni dans les diagrammes ni dans les enregistrements. Exclure un composite exclut tout ce qu'il contient.</p>
+  <ul>
+    <li>L'exclusion <strong>Intégrée</strong> est le composant de l'interface du superviseur lui-même. Elle est toujours exclue et ne peut pas être retirée.</li>
+    <li>Ajoutez un composant par son nom pleinement qualifié, puis <strong>Exclure</strong>. Retirez-le avec l'icône de corbeille de sa ligne.</li>
+    <li><strong>Exclure les composants internes</strong> masque les composants propres à Covalent, marqués <code>@Internal</code>. Désactivez-le pour les voir.</li>
+  </ul>
+  <p>Les exclusions sont conservées d'une exécution à l'autre. Un composant exclu pendant l'observation d'une autre application est conservé lui aussi, et s'applique de nouveau chaque fois que cette application est observée.</p>
+</section>  <section id="stereotypes">
+  <h2>Stéréotypes</h2>
+  <p>Un stéréotype est l'étiquette courte écrite dans le cartouche d'un composant et dans les diagrammes de séquence, comme <em>Repository</em> ou <em>Composite</em>. Un composant prend le stéréotype associé à la fin de son nom, et la fin la plus longue l'emporte. Sans correspondance, le superviseur retombe sur ce que dit le métamodèle : Composite, Component, Raw, Interface ou Internal.</p>
+  <p>La fonction Stéréotypes n'a pas de bouton sur le rail : c'est l'onglet <strong>Stéréotypes</strong> des <a href="#settings">Réglages</a>, ouvert aussi par <strong>Stéréotypes des composants…</strong> dans l'onglet Général.</p>
+  <ul>
+    <li>Les stéréotypes <strong>intégrés</strong> sont fournis avec le superviseur et verrouillés. Cochez <strong>Autoriser le retrait des stéréotypes intégrés</strong> pour pouvoir les retirer aussi ; un stéréotype intégré retiré le reste d'une exécution à l'autre. <strong>Restaurer la liste initiale</strong> remet les stéréotypes intégrés et retire ceux que vous avez ajoutés, comme à l'installation.</li>
+    <li>Pour en ajouter un, donnez une fin de nom, faite de lettres, de chiffres, de <code>_</code> et de <code>$</code>, et le stéréotype à afficher, dont la longueur est limitée. Une fin de nom qui a déjà un stéréotype est refusée. Retirez un stéréotype ajouté avec le bouton de sa ligne. Les stéréotypes que vous ajoutez sont conservés d'une exécution à l'autre.</li>
+    <li>Le champ de filtre restreint la liste.</li>
+    <li><strong>Essayer un nom de composant</strong> montre quel stéréotype reçoit un nom, quelle fin a gagné, et quelles autres fins correspondent aussi.</li>
+  </ul>
+</section>  <section id="settings">
+  <h2>Réglages</h2>
+  <p>Les Réglages ont trois onglets. <strong>Général</strong> regroupe les préférences en cartes : Flux de données, Threads, Composants, Langue et Diagrammes. <strong>Couleurs</strong> règle les couleurs des diagrammes. <strong>Stéréotypes</strong> contient la <a href="#stereotypes">table des stéréotypes</a>.</p>
+  <ul>
+    <li><strong>Flux de données activés à la connexion à un conteneur</strong> : active les flux à chaque connexion.</li>
+    <li><strong>Suivi des tâches activé à la connexion à un conteneur</strong> : active le suivi des tâches de <a href="#threads">Threads</a> à chaque connexion.</li>
+    <li><strong>Signaler une tâche qui s'exécute plus longtemps que</strong> : le seuil des signalements de tâches longues de Threads.</li>
+    <li><strong>Politique d'exclusion…</strong> et <strong>Stéréotypes des composants…</strong> : ouvrent la fonction <a href="#exclusions">Exclusions</a> et l'onglet <a href="#stereotypes">Stéréotypes</a>.</li>
+    <li><strong>Recalculer la disposition du diagramme en masquant des composants</strong> : refait la disposition du diagramme quand des composants sont masqués, au lieu de laisser des trous.</li>
+    <li><strong>Les nouveaux diagrammes de séquence démarrent avec le dessin en direct activé</strong>.</li>
+    <li><strong>Chronologie des séquences</strong> : volume ou durée avec un interrupteur, barres de volume avec une ligne de durée, ou barres de durée avec une bande de densité du volume.</li>
+    <li><strong>Écrire chaque enregistrement de séquence sur disque au fil de l'eau</strong> : tient un journal en direct de chaque nouvel enregistrement, qui survit à un plantage ; <strong>Format du journal</strong> : le format des journaux de séquence.</li>
+    <li><strong>Dossier des captures</strong>, <strong>Dossier des vues</strong> et <strong>Dossier des journaux</strong> : où vont les captures, les vues enregistrées et les journaux de séquence en direct.</li>
+    <li><strong>Langue du superviseur</strong> : la langue du système, l'anglais ou le français, appliquée au prochain démarrage.</li>
+    <li><strong>Couleurs</strong> : les couleurs des diagrammes, par thème, avec un aperçu en direct. Survoler une couleur montre où elle est utilisée. <strong>Rétablir les couleurs par défaut</strong> remet les couleurs par défaut du thème courant, après confirmation ; l'autre thème garde les siennes.</li>
+  </ul>
+  <p>Les thèmes clair et sombre se changent depuis l'en-tête, à tout moment. Tous les réglages sont conservés d'une exécution à l'autre.</p>
+</section>  <section id="shortcuts">
+  <h2>Clavier et souris</h2>
+  <table>
+    <tr><th>Raccourci</th><th>Action</th></tr>
+    <tr><td><kbd>F1</kbd></td><td>Ouvre cette aide sur la fonction affichée.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>S</kbd></td><td>Enregistre la vue du diagramme de composants.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>O</kbd></td><td>Ouvre la bibliothèque de vues.</td></tr>
+    <tr><td><kbd>Échap</kbd></td><td>Ferme la boîte de dialogue en cours.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Maj</kbd>+<kbd>F12</kbd></td><td>Dans toute fenêtre de l'application observée, affiche le superviseur au premier plan. Une autre combinaison se choisit avec la propriété système <code>covalent.supervision.shortcut</code>.</td></tr>
+    <tr><td>Double-clic sur le titre d'un onglet</td><td>Renomme l'onglet.</td></tr>
+    <tr><td>Double-clic sur un composite</td><td>Entre dans le composite.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+clic</td><td>Ajoute une carte ou une ligne de vie à la sélection, ou l'en retire.</td></tr>
+    <tr><td><kbd>Maj</kbd>+glisser</td><td>Sélectionne les cartes d'une zone.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+glisser</td><td>Ajoute les cartes d'une zone à la sélection.</td></tr>
+    <tr><td>Glisser le fond</td><td>Déplace la vue du diagramme.</td></tr>
+    <tr><td>Molette de la souris</td><td>Zoome le diagramme de composants et le graphe des dépendances. Fait défiler le diagramme de séquence, où <kbd>Ctrl</kbd>+molette zoome et <kbd>Maj</kbd>+molette fait défiler horizontalement.</td></tr>
+  </table>
+  <p>Sous macOS, utilisez <kbd>Cmd</kbd> à la place de <kbd>Ctrl</kbd> pour <kbd>Ctrl</kbd>+S et <kbd>Ctrl</kbd>+O. Les gestes à la souris gardent <kbd>Ctrl</kbd>.</p>
+</section>  <section id="glossary">
+  <h2>Glossaire</h2>
+  <table>
+    <tr><th>Terme</th><th>Signification</th></tr>
+    <tr><td>Conteneur</td><td>Héberge les composants d'une application, les relie et pilote leur cycle de vie.</td></tr>
+    <tr><td>Conteneur managé</td><td>Un conteneur connu de Covalent par son nom ; le superviseur observe les conteneurs managés.</td></tr>
+    <tr><td>Composant</td><td>Une unité de l'application, avec ses ports et un cycle de vie géré par le conteneur.</td></tr>
+    <tr><td>Composite</td><td>Un composant fait d'autres composants, ses enfants.</td></tr>
+    <tr><td>Composant raw</td><td>Un objet enregistré directement dans le conteneur, relié sans le cycle de vie managé.</td></tr>
+    <tr><td>Composant interne</td><td>Un des composants propres à Covalent, marqué <code>@Internal</code>.</td></tr>
+    <tr><td>Stéréotype</td><td>L'étiquette courte affichée sur un composant, déduite de la fin de son nom ou, à défaut, du métamodèle.</td></tr>
+    <tr><td>Port</td><td>Un point de connexion d'un composant : un service fourni ou utilisé, un événement produit ou consommé, un paramètre offert ou accédé.</td></tr>
+    <tr><td>États du cycle de vie</td><td>déployé, instancié, initialisé, activé, passivé, retiré, et en échec quand une transition échoue.</td></tr>
+    <tr><td>Flux de données</td><td>Les appels, les événements et les lectures de paramètres observés en direct dans le conteneur.</td></tr>
+    <tr><td>Vue</td><td>Un état enregistré d'un diagramme de composants, conservé dans la bibliothèque de vues.</td></tr>
+  </table>
+</section>  </main>
+</div>
+<script>
+  (function () {
+    var sections = Array.prototype.slice.call(document.querySelectorAll("main section"));
+    var links = Array.prototype.slice.call(document.querySelectorAll("nav a"));
+    var originals = sections.map(function (section) { return section.innerHTML; });
+    var noResult = document.getElementById("no-result");
+    var main = document.querySelector("main");
+
+    function markCurrent(id) {
+      links.forEach(function (link) {
+        link.classList.toggle("current", link.getAttribute("href") === "#" + id);
+      });
+    }
+
+    window.showSection = function (id) {
+      var target = document.getElementById(id);
+      if (target) {
+        target.scrollIntoView();
+        markCurrent(id);
+      }
+    };
+
+    main.addEventListener("scroll", function () {
+      var current = sections[0];
+      sections.forEach(function (section) {
+        if (!section.classList.contains("hidden") && section.offsetTop - main.scrollTop <= 80) {
+          current = section;
+        }
+      });
+      markCurrent(current.id);
+    });
+
+    function highlight(node, query) {
+      var walker = document.createTreeWalker(node, NodeFilter.SHOW_TEXT, null);
+      var texts = [];
+      while (walker.nextNode()) {
+        texts.push(walker.currentNode);
+      }
+      texts.forEach(function (text) {
+        var value = text.nodeValue;
+        var index = value.toLowerCase().indexOf(query);
+        if (index < 0) {
+          return;
+        }
+        var fragment = document.createDocumentFragment();
+        var start = 0;
+        while (index >= 0) {
+          fragment.appendChild(document.createTextNode(value.substring(start, index)));
+          var mark = document.createElement("mark");
+          mark.textContent = value.substring(index, index + query.length);
+          fragment.appendChild(mark);
+          start = index + query.length;
+          index = value.toLowerCase().indexOf(query, start);
+        }
+        fragment.appendChild(document.createTextNode(value.substring(start)));
+        text.parentNode.replaceChild(fragment, text);
+      });
+    }
+
+    document.getElementById("search").addEventListener("input", function (event) {
+      var query = event.target.value.trim().toLowerCase();
+      var shown = 0;
+      sections.forEach(function (section, index) {
+        section.innerHTML = originals[index];
+        var matches = query === "" || section.textContent.toLowerCase().indexOf(query) >= 0;
+        section.classList.toggle("hidden", !matches);
+        links[index].classList.toggle("hidden", !matches);
+        if (matches) {
+          shown++;
+          if (query !== "") {
+            highlight(section, query);
+          }
+        }
+      });
+      noResult.classList.toggle("shown", shown === 0);
+      main.scrollTop = 0;
+    });
+
+    var initial = window.location.hash ? window.location.hash.substring(1) : "overview";
+    window.showSection(initial);
+  })();
+</script>
+</body>
+</html>

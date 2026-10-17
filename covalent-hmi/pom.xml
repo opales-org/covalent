@@ -1,0 +1,42 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<groupId>org.opales</groupId>
+		<artifactId>covalent-parent</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>covalent-hmi</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Covalent HMI</name>
+	<description>JavaFX HMI runtime integration for Covalent: HmiCore and the ActionManager action framework.</description>
+
+	<dependencies>
+		<dependency>
+			<groupId>org.opales</groupId>
+			<artifactId>covalent-core</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.openjfx</groupId>
+			<artifactId>javafx-controls</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-javadoc-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

@@ -1,0 +1,94 @@
+/*
+ * Copyright (c) 2026 opales.org and Covalent contributors.
+ * SPDX-License-Identifier: MPL-2.0
+ *
+ * Dark theme: color tokens consumed by supervision.css, plus the Modena
+ * base colors every standard control derives from.
+ */
+.root {
+	-sv-bg: #0b0f16;
+	-sv-surface: #111722;
+	-sv-surface-2: #161e2b;
+	-sv-surface-3: #1d2636;
+	-sv-line: #212b3b;
+	-sv-line-2: #2f3b51;
+	-sv-ink: #d5dbe7;
+	-sv-ink-2: #b3bdcd;
+	-sv-muted: #8591a6;
+	-sv-accent: #818cf8;
+	-sv-accent-soft: #1f2150;
+	/* A pool setting changed from its default. */
+	-sv-changed: #818cf8;
+	-sv-accent-ink: #0c0d2c;
+	-sv-canvas: #0d121b;
+	-sv-bad: #f05252;
+	-sv-accent-line: #818cf873;
+	-sv-ok: #34d399;
+	-sv-bad-soft: #3a1a1f;
+	-sv-ok-soft: #0f2a22;
+	-sv-waits-soft: #33260f;
+	-sv-ok-ink: #34d399;
+	-sv-waits-ink: #fbbf24;
+	-sv-compartment: #0d121b;
+	-sv-compartment-line: #1f2836;
+	-sv-bad-soft-hover: #422430;
+	-sv-bad-soft-press: #612c33;
+	-sv-shadow: rgba(0, 0, 0, 0.6);
+
+	/* Dark theme already reads as one depth, so the console keeps the page's
+	   own canvas and its original near-black readout - see supervision-light.css
+	   for why light theme defines these two differently. */
+	-sv-console-canvas: -sv-bg;
+	-sv-console-readout-bg: #05080d;
+	-sv-console-readout-border: #1b2433;
+	-sv-console-switch-off: #05080d;
+	-sv-console-switch-on: #06261d;
+	-sv-console-switch-edge: #2a3445;
+	-sv-console-switch-edge-on: #13684f;
+	-sv-console-switch-knob: linear-gradient(to bottom, #e8edf4, #a9b3c3);
+	-sv-console-switch-knob-on: linear-gradient(to bottom, #e8edf4, #a9b3c3);
+	-sv-console-switch-off-press: #0b1018;
+	-sv-console-switch-on-press: #0a3226;
+
+	/* Primary-button interaction states - see supervision-light.css for why
+	   these exist; same idea, lighter hover instead of darker since the
+	   accent is already bright against this theme's dark surfaces. */
+	-sv-accent-hover: #a5b4fc;
+	-sv-press: #6366f1;
+	-sv-press-ink: #ffffff;
+
+	-sv-seq-call: #7fb0ff;
+	-sv-seq-call-line: #3b82f6;
+	-sv-seq-call-ink: #bcd4ff;
+	-sv-seq-return: #8591a6;
+	-sv-seq-return-line: #2f3b51;
+	-sv-seq-return-ink: #b3bdcd;
+	-sv-seq-lifeline: #3d4a60;
+	-sv-seq-actor-header: #1d2636;
+	-sv-seq-actor-border: #d5dde8;
+	-sv-seq-selection: #818cf8;
+	/* The focused component of the dependency graph. */
+	-sv-focus: #818cf8;
+	-sv-focus-soft: #818cf829;
+	-sv-kind-service: #7fb0ff;
+	-sv-kind-event: #fb923c;
+	-sv-kind-parameter: #a78bfa;
+	-sv-threads-waits: #fbbf24;
+	-sv-threads-long: #d8a8fc;
+	-sv-threads-pill: #4a5872;
+	-sv-threads-pill-ink: #e1e6ef;
+	-sv-threads-pill-edge: #5d6575;
+	-sv-kind-action: #2dd4bf;
+
+	-fx-base: #1d2636;
+	-fx-background: -sv-bg;
+	-fx-control-inner-background: -sv-surface-2;
+	-fx-control-inner-background-alt: #19212f;
+	-fx-accent: #6366f1;
+	-fx-focus-color: -sv-accent;
+	-fx-faint-focus-color: #818cf822;
+	-fx-selection-bar: -sv-accent-soft;
+	-fx-selection-bar-non-focused: -sv-surface-3;
+	-fx-selection-bar-text: -sv-ink;
+}
+

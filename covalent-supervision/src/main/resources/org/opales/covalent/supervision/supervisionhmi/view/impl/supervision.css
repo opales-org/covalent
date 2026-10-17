@@ -1,0 +1,3142 @@
+/*
+ * Copyright (c) 2026 opales.org and Covalent contributors.
+ * SPDX-License-Identifier: MPL-2.0
+ *
+ * Theme-independent supervision styling. Every color comes from the -sv-*
+ * tokens defined by the active theme stylesheet (supervision-light.css or
+ * supervision-dark.css), loaded after this one.
+ */
+
+.root {
+	-fx-font-family: "IBM Plex Sans";
+	-fx-font-size: 13px;
+	-fx-text-base-color: -sv-ink;
+	-fx-text-background-color: -sv-ink;
+	-fx-text-inner-color: -sv-ink;
+	-fx-mark-color: -sv-ink-2;
+	-fx-mark-highlight-color: transparent;
+}
+
+/* ---------- Menus ---------- */
+
+.menu-bar {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-padding: 2 6;
+}
+.menu-bar > .container > .menu-button {
+	-fx-background-color: transparent;
+	-fx-background-insets: 0;
+	-fx-background-radius: 6;
+	-fx-padding: 4 10;
+}
+.menu-bar > .container > .menu-button > .label {
+	-fx-text-fill: -sv-ink-2;
+}
+.menu-bar > .container > .menu-button:hover,
+.menu-bar > .container > .menu-button:showing {
+	-fx-background-color: -sv-surface-3;
+}
+.context-menu {
+	-fx-background-color: -sv-line-2, -sv-surface;
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 9, 8;
+	-fx-padding: 4;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 18, 0, 0, 6);
+}
+.menu-item {
+	-fx-background-radius: 6;
+	-fx-padding: 6 12;
+}
+.menu-item > .label {
+	-fx-text-fill: -sv-ink;
+}
+.menu-item:focused {
+	-fx-background-color: -sv-accent-soft;
+}
+.menu-item:focused > .label {
+	-fx-text-fill: -sv-ink;
+}
+.radio-menu-item:checked > .left-container > .radio,
+.check-menu-item:checked > .left-container > .check {
+	-fx-background-color: -sv-accent;
+}
+
+/* ---------- Tabs ---------- */
+
+.tab-pane > .tab-header-area {
+	-fx-padding: 6 8 0 8;
+}
+.tab-pane > .tab-header-area > .tab-header-background {
+	-fx-background-color: -sv-surface, -sv-line;
+	-fx-background-insets: 0, 0 0 -1 0;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab {
+	-fx-background-color: transparent;
+	-fx-background-radius: 8 8 0 0;
+	-fx-padding: 5 14;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:hover {
+	-fx-background-color: -sv-surface-3;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected {
+	-fx-background-color: -sv-accent, -sv-bg;
+	-fx-background-insets: 0, 2 0 0 0;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab > .tab-container > .tab-label {
+	-fx-text-fill: -sv-muted;
+	-fx-font-weight: bold;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .tab-label {
+	-fx-text-fill: -sv-ink;
+}
+.tab-pane > .tab-header-area > .headers-region > .tab:selected > .tab-container > .focus-indicator {
+	-fx-border-color: transparent;
+}
+.tab-pane > .tab-content-area {
+	-fx-background-color: -sv-bg;
+}
+
+/* ---------- Buttons and toggles ---------- */
+
+.button, .toggle-button, .menu-button, .split-menu-button, .color-picker, .combo-box-base {
+	-fx-background-color: -sv-line-2, -sv-surface-2;
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 8, 7;
+	-fx-padding: 5 12;
+	-fx-text-fill: -sv-ink;
+}
+/* One hover language for every button: accent tint, accent outline, accent text. */
+.button:hover, .toggle-button:hover, .menu-button:hover, .color-picker:hover, .combo-box-base:hover {
+	-fx-background-color: -sv-accent-line, -sv-accent-soft;
+	-fx-text-fill: -sv-accent;
+}
+.toggle-button:selected {
+	-fx-background-color: -sv-accent, -sv-accent-soft;
+}
+/* The focus ring shows for keyboard navigation only, not after a mouse click. */
+.button:focus-visible, .toggle-button:focus-visible, .color-picker:focus-visible, .combo-box-base:focus-visible {
+	-fx-background-color: -sv-accent, -sv-surface-2;
+}
+.toggle-button:selected:focus-visible {
+	-fx-background-color: -sv-accent, -sv-accent-soft;
+}
+/* While pressed, a button inverts: accent background, light text and icon. */
+.button:pressed, .toggle-button:pressed {
+	-fx-background-color: -sv-accent, -sv-accent;
+	-fx-text-fill: -sv-surface;
+}
+.button:disabled, .toggle-button:disabled, .slider:disabled {
+	-fx-opacity: 0.45;
+}
+.combo-box > .list-cell {
+	-fx-background-color: transparent;
+	-fx-text-fill: -sv-ink;
+	-fx-padding: 0 4;
+}
+.combo-box-base > .arrow-button {
+	-fx-background-color: transparent;
+}
+.combo-box-base > .arrow-button > .arrow {
+	-fx-background-color: -sv-muted;
+}
+.combo-box-popup > .list-view {
+	-fx-background-color: -sv-line-2, -sv-surface;
+	-fx-background-insets: 0, 1;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 18, 0, 0, 6);
+}
+
+.check-box > .box, .radio-button > .radio {
+	-fx-background-color: -sv-line-2, -sv-surface;
+	-fx-background-insets: 0, 1;
+}
+.check-box > .box {
+	-fx-background-radius: 4, 3;
+}
+.check-box:selected > .box, .radio-button:selected > .radio {
+	-fx-background-color: -sv-accent, -sv-accent;
+}
+.check-box:selected > .box > .mark, .radio-button:selected > .radio > .dot {
+	-fx-background-color: -sv-accent-ink;
+}
+
+.hyperlink {
+	-fx-text-fill: -sv-accent;
+	-fx-border-color: transparent;
+	-fx-padding: 2 4;
+}
+.hyperlink:visited {
+	-fx-text-fill: -sv-accent;
+}
+
+/* ---------- Inputs ---------- */
+
+.text-field, .text-area {
+	-fx-background-color: -sv-line-2, -sv-surface-2;
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 8, 7;
+	-fx-text-fill: -sv-ink;
+	-fx-prompt-text-fill: -sv-muted;
+	-fx-highlight-fill: -sv-accent-soft;
+	-fx-highlight-text-fill: -sv-ink;
+}
+.text-field:focused, .text-area:focused {
+	-fx-background-color: -sv-accent, -sv-surface-2;
+}
+.text-area > .scroll-pane > .viewport > .content {
+	-fx-background-color: -sv-surface-2;
+}
+
+.slider > .track {
+	-fx-background-color: -sv-line-2;
+	-fx-background-radius: 3;
+	-fx-padding: 2;
+}
+.slider > .thumb {
+	-fx-background-color: -sv-accent, -sv-surface;
+	-fx-background-insets: 0, 3;
+	-fx-background-radius: 10;
+	-fx-padding: 7;
+}
+
+/* ---------- Lists, trees, panes ---------- */
+
+.tree-view, .list-view {
+	-fx-background-color: -sv-surface;
+	-fx-background-insets: 0;
+	-fx-padding: 4;
+}
+.tree-cell, .list-cell {
+	-fx-background-color: transparent;
+	-fx-background-radius: 6;
+	-fx-text-fill: -sv-ink;
+}
+.tree-cell:hover, .list-cell:hover {
+	-fx-background-color: -sv-surface-3;
+}
+.tree-cell:selected, .list-cell:selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-text-fill: -sv-ink;
+}
+.tree-cell > .tree-disclosure-node > .arrow {
+	-fx-background-color: -sv-muted;
+}
+
+.split-pane {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+}
+.split-pane > .split-pane-divider {
+	-fx-background-color: -sv-line;
+	-fx-padding: 0 1 0 0;
+}
+.scroll-pane, .scroll-pane > .viewport {
+	-fx-background-color: transparent;
+}
+.separator > .line {
+	-fx-border-color: -sv-line;
+	-fx-border-width: 1 0 0 0;
+}
+.separator:vertical > .line {
+	-fx-border-width: 0 1 0 0;
+}
+
+.scroll-bar {
+	-fx-background-color: transparent;
+	-fx-padding: 2;
+}
+.scroll-bar > .thumb {
+	-fx-background-color: -sv-line-2;
+	-fx-background-radius: 6;
+}
+.scroll-bar > .thumb:hover {
+	-fx-background-color: -sv-muted;
+}
+.scroll-bar > .increment-button, .scroll-bar > .decrement-button {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+}
+.scroll-bar > .increment-button > .increment-arrow,
+.scroll-bar > .decrement-button > .decrement-arrow {
+	-fx-shape: " ";
+	-fx-padding: 0;
+}
+.corner {
+	-fx-background-color: transparent;
+}
+
+.tooltip {
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 7;
+	-fx-text-fill: -sv-ink;
+	-fx-font-size: 12px;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 12, 0, 0, 4);
+}
+
+/* ---------- Supervision-specific classes ---------- */
+
+.sv-section-header {
+	-fx-font-family: "Sora SemiBold";
+	-fx-font-size: 14px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-category {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+	-fx-background-radius: 10;
+	-fx-border-radius: 10;
+}
+.sv-category-title {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-toolbox .sv-category {
+	-fx-background-radius: 8;
+	-fx-border-radius: 8;
+}
+.sv-toolbox .sv-category-title {
+	-fx-font-size: 10px;
+}
+.sv-toolbox .button, .sv-toolbox .toggle-button, .sv-toolbox .check-box {
+	-fx-font-size: 11.5px;
+}
+.sv-toolbox .button, .sv-toolbox .toggle-button {
+	-fx-padding: 3 9;
+}
+.sv-icon-button, .sv-toolbox .sv-icon-button {
+	-fx-padding: 5;
+	-fx-min-width: 28;
+	-fx-min-height: 28;
+}
+/* The link kinds' icons are drawn at 20 px: a narrower padding keeps their buttons the toolbox's size. */
+.sv-toolbox .sv-icon-button.sv-link-kind-toggle {
+	-fx-padding: 4;
+}
+.sv-tool-icon {
+	-fx-fill: transparent;
+	-fx-stroke: -sv-ink-2;
+	-fx-stroke-width: 1.5;
+	-fx-stroke-line-cap: round;
+	-fx-stroke-line-join: round;
+}
+.sv-icon-button:hover .sv-tool-icon, .toggle-button.sv-icon-button:selected .sv-tool-icon {
+	-fx-stroke: -sv-accent;
+}
+.sv-tool-icon.sv-tool-icon-fine {
+	-fx-stroke-width: 1.15;
+}
+.sv-collapse-strip {
+	-fx-background-color: -sv-surface;
+	-fx-padding: 6 0 0 0;
+}
+.sv-collapse-toggle {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-padding: 4 3 4 3;
+	-fx-min-width: 16;
+}
+.sv-collapse-toggle:hover {
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 5;
+}
+.sv-collapse-chevron {
+	-fx-fill: transparent;
+	-fx-stroke: -sv-muted;
+	-fx-stroke-width: 1.5;
+	-fx-stroke-line-cap: round;
+	-fx-stroke-line-join: round;
+}
+.sv-collapse-toggle:hover .sv-collapse-chevron {
+	-fx-stroke: -sv-accent;
+}
+.sv-tool-separator {
+	-fx-background-color: -sv-line-2;
+	-fx-min-width: 1;
+	-fx-max-width: 1;
+	-fx-pref-height: 22;
+	-fx-max-height: 22;
+}
+.sv-tool-icon-glyphs {
+	-fx-fill: -sv-ink-2;
+	-fx-stroke: transparent;
+}
+.sv-icon-button:hover .sv-tool-icon-glyphs, .toggle-button.sv-icon-button:selected .sv-tool-icon-glyphs {
+	-fx-fill: -sv-accent;
+}
+.sv-segmented {
+	-fx-alignment: center-left;
+}
+.sv-component-tree .tree-cell {
+	-fx-font-size: 12px;
+}
+/* A composite or a leaf in the dependency graph's tree, in the theme's ink. */
+.sv-dep-tree-glyph {
+	-fx-fill: -sv-ink-2;
+}
+/* A composite's number of descendants in the dependency graph's tree. */
+.sv-dep-tree-count {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 10.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-diagram-legend {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+	-fx-background-radius: 8;
+	-fx-border-radius: 8;
+	-fx-padding: 8 10;
+	-fx-opacity: 0.92;
+}
+.sv-diagram-legend .label {
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-breadcrumb-current {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-error-label {
+	-fx-text-fill: -sv-bad;
+}
+.sv-graph-canvas {
+	-fx-background-color: -sv-canvas;
+}
+.sv-dep-unavailable {
+	-fx-text-fill: -sv-muted;
+	-fx-font-style: italic;
+	-fx-font-size: 13px;
+}
+.sv-color-preview {
+	-fx-background-color: -sv-canvas;
+	-fx-background-radius: 10;
+}
+.sv-preview-badge-text {
+	-fx-font-size: 9px;
+	-fx-font-weight: bold;
+}
+.edge-text {
+	-fx-fill: -sv-ink-2;
+}
+
+/* ---------- Sequence diagram ---------- */
+
+.seq-actor {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-seq-actor-border;
+	-fx-border-width: 1.2;
+	-fx-border-radius: 16;
+	-fx-background-radius: 16;
+}
+/* Tinted as well as outlined: the selection shares its hue with the recorded outline. */
+.seq-actor:selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-seq-selection;
+	-fx-border-width: 2.4;
+}
+.seq-actor:recorded {
+	-fx-border-color: -sv-accent;
+	-fx-border-width: 2.4;
+}
+.seq-actor:recorded:selected {
+	-fx-border-color: -sv-seq-selection;
+}
+.seq-actor-recorded-badge {
+	-fx-background-color: -sv-accent;
+	-fx-background-radius: 6;
+	-fx-text-fill: -sv-surface;
+	-fx-font-size: 9px;
+	-fx-font-weight: bold;
+	-fx-padding: 2 6 2 6;
+}
+.seq-actor-header {
+	-fx-background-color: -sv-seq-actor-header;
+	-fx-background-radius: 16 16 0 0;
+}
+.seq-actor-name {
+	-fx-font-size: 15;
+	-fx-font-weight: 800;
+	-fx-text-fill: -sv-ink;
+}
+/* The lifeline's stereotype, as the component diagram shows it: between guillemets, medium gray. */
+.seq-actor-kind {
+	-fx-font-size: 11;
+	-fx-font-weight: normal;
+	-fx-text-fill: -sv-muted;
+}
+.seq-lifeline {
+	-fx-stroke: -sv-seq-lifeline;
+}
+.seq-message-label {
+	-fx-background-color: -sv-surface;
+	-fx-border-width: 1;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+	-fx-padding: 4 10 4 10;
+	-fx-font-size: 12;
+	-fx-font-weight: 600;
+}
+.seq-message-label.seq-call {
+	-fx-border-color: -sv-seq-call-line;
+	-fx-text-fill: -sv-seq-call-ink;
+}
+.seq-message-label.seq-return {
+	-fx-border-color: -sv-seq-return-line;
+	-fx-text-fill: -sv-seq-return-ink;
+}
+.seq-label-port {
+	-fx-text-fill: -sv-muted;
+	-fx-font-weight: normal;
+}
+.seq-label-method {
+	-fx-text-fill: -sv-ink;
+	-fx-font-weight: bold;
+}
+.seq-message-label:failed {
+	-fx-border-color: -sv-bad;
+	-fx-text-fill: -sv-bad;
+}
+.seq-message-label:failed .seq-label-method {
+	-fx-text-fill: -sv-bad;
+}
+.seq-message-label:selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent;
+	-fx-border-width: 1.5;
+}
+.seq-time {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 10.5px;
+	-fx-text-fill: -sv-muted;
+}
+.seq-time:selected {
+	-fx-text-fill: -sv-accent;
+	-fx-font-weight: bold;
+}
+.seq-call-line:failed, .seq-return-line:failed {
+	-fx-stroke: -sv-bad;
+}
+.seq-call-head {
+	-fx-fill: -sv-seq-call;
+}
+.seq-call-head:failed {
+	-fx-fill: -sv-bad;
+}
+.seq-call-head:selected {
+	-fx-fill: -sv-accent;
+}
+.seq-call-line:selected, .seq-return-line:selected {
+	-fx-stroke: -sv-accent;
+	-fx-stroke-width: 2;
+}
+.seq-call-line {
+	-fx-stroke: -sv-seq-call;
+}
+.seq-return-line {
+	-fx-stroke: -sv-seq-return;
+}
+
+/* Sequence diagram band (above) and message inspector (beside). */
+.sv-seq-band {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-padding: 10 20 10 20;
+}
+.sv-seq-band-separator {
+	-fx-background-color: -sv-line;
+	-fx-min-width: 1;
+	-fx-max-width: 1;
+	-fx-min-height: 38;
+	-fx-max-height: 38;
+}
+.sv-seq-timer {
+	-fx-font-family: "Sora SemiBold";
+	-fx-font-size: 20px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-seq-stop {
+	-fx-background-color: -sv-bad;
+	-fx-background-radius: 23;
+	-fx-border-color: transparent;
+	-fx-min-width: 40;
+	-fx-min-height: 40;
+	-fx-max-width: 40;
+	-fx-max-height: 40;
+	-fx-padding: 0;
+	-fx-effect: dropshadow(gaussian, -sv-bad-soft, 0, 1, 0, 0);
+}
+.sv-seq-stop:hover {
+	-fx-background-color: derive(-sv-bad, -12%);
+}
+/* Wins over the global .button:pressed accent flash, which would turn the stop button green. */
+.sv-seq-stop:pressed {
+	-fx-background-color: derive(-sv-bad, -25%);
+}
+.sv-seq-stop-square {
+	-fx-background-color: white;
+	-fx-background-radius: 3;
+	-fx-min-width: 13;
+	-fx-min-height: 13;
+	-fx-max-width: 13;
+	-fx-max-height: 13;
+}
+.sv-seq-statusbar {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line transparent transparent transparent;
+	-fx-padding: 5 16 5 16;
+}
+.sv-seq-status-text {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-seq-count {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-seq-failures {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-seq-failures.sv-has-failures {
+	-fx-text-fill: -sv-bad;
+}
+.sv-eyebrow {
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-chip {
+	-fx-background-color: -sv-surface-2;
+	-fx-background-radius: 8;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 8;
+	-fx-padding: 3 9 3 9;
+	-fx-spacing: 6;
+}
+.sv-chip > .label {
+	-fx-font-size: 11.5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-chip.sv-chip-bad {
+	-fx-border-color: -sv-bad;
+}
+.sv-chip.sv-chip-bad > .label {
+	-fx-text-fill: -sv-bad;
+}
+.sv-kind-toggle {
+	-fx-font-size: 11.5px;
+	-fx-font-weight: bold;
+	-fx-padding: 4 9 4 9;
+	-fx-graphic-text-gap: 6;
+}
+.sv-kind-toggle:selected {
+	-fx-background-color: -sv-surface-3;
+}
+.sv-kind-toggle:selected > .label, .sv-kind-toggle:selected {
+	-fx-text-fill: -sv-ink;
+}
+.sv-kind-toggle {
+	-fx-text-fill: -sv-muted;
+}
+.sv-kind-service { -fx-fill: -sv-kind-service; -fx-text-fill: -sv-kind-service; }
+.sv-kind-event { -fx-fill: -sv-kind-event; -fx-text-fill: -sv-kind-event; }
+.sv-kind-parameter { -fx-fill: -sv-kind-parameter; -fx-text-fill: -sv-kind-parameter; }
+.sv-kind-action { -fx-fill: -sv-kind-action; -fx-text-fill: -sv-kind-action; }
+.sv-kind-toggle:selected .sv-kind-dot {
+	-fx-opacity: 1;
+}
+.sv-kind-toggle .sv-kind-dot {
+	-fx-opacity: 0.35;
+}
+.sv-seq-inspector-pane, .sv-seq-inspector-scroll, .sv-seq-inspector-scroll > .viewport, .sv-seq-inspector {
+	-fx-background-color: -sv-surface;
+}
+.sv-seq-inspector-actions {
+	-fx-padding: 12 22 16 22;
+	-fx-border-color: -sv-line transparent transparent transparent;
+}
+.sv-seq-inspector-pane {
+	-fx-border-color: transparent transparent transparent -sv-line;
+	-fx-border-width: 0 0 0 1;
+}
+.sv-seq-title, .sv-seq-title-port {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 13.5px;
+}
+.sv-seq-title {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-seq-title-port {
+	-fx-text-fill: -sv-muted;
+}
+.sv-seq-summary {
+	-fx-background-color: -sv-canvas;
+	-fx-background-radius: 12;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 12;
+	-fx-padding: 14;
+}
+.sv-seq-summary .sv-seq-route {
+	-fx-background-color: -sv-surface;
+}
+.sv-seq-timeline-scale {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 9.5px;
+	-fx-text-fill: -sv-muted;
+	-fx-background-color: -sv-canvas;
+	-fx-background-radius: 3;
+	-fx-padding: 0 3 0 3;
+	-fx-opacity: 0.9;
+}
+.sv-seq-route {
+	-fx-background-color: -sv-surface-2;
+	-fx-background-radius: 12;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 12;
+	-fx-padding: 12;
+}
+.sv-seq-route .label {
+	-fx-font-size: 12.5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-seq-route .label.sv-kind-service { -fx-text-fill: -sv-kind-service; }
+.sv-seq-route .label.sv-kind-event { -fx-text-fill: -sv-kind-event; }
+.sv-seq-route .label.sv-kind-parameter { -fx-text-fill: -sv-kind-parameter; }
+.sv-seq-route .label.sv-kind-action { -fx-text-fill: -sv-kind-action; }
+.sv-seq-value, .sv-seq-value-small, .sv-seq-code, .sv-seq-p95 {
+	-fx-font-family: "JetBrains Mono";
+}
+.sv-seq-value {
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-seq-value-small {
+	-fx-font-size: 12px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-seq-code {
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-ink-2;
+	-fx-background-color: -sv-canvas;
+	-fx-background-radius: 10;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 10;
+	-fx-padding: 10 12 10 12;
+}
+.sv-seq-code.sv-seq-keyword {
+	-fx-text-fill: -sv-kind-parameter;
+	-fx-font-style: italic;
+}
+.sv-seq-code.sv-seq-failure {
+	-fx-text-fill: -sv-bad;
+	-fx-border-color: -sv-bad;
+}
+.sv-seq-hint {
+	-fx-font-size: 12px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-seq-p95 {
+	-fx-font-size: 10.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-seq-spark {
+	-fx-stroke: -sv-kind-service;
+	-fx-stroke-width: 1.5;
+	-fx-fill: transparent;
+}
+.sv-seq-spark-p95 {
+	-fx-stroke: -sv-muted;
+	-fx-stroke-dash-array: 3 4;
+}
+.sv-seq-timeline {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-padding: 8 20 12 20;
+}
+.sv-seq-timeline-strip {
+	-fx-background-color: -sv-canvas;
+	-fx-background-radius: 6;
+}
+.sv-seq-timeline-bar {
+	-fx-opacity: 0.85;
+}
+.sv-seq-timeline-failure {
+	-fx-fill: -sv-bad;
+}
+.sv-seq-timeline-duration {
+	-fx-stroke: -sv-ink;
+	-fx-stroke-width: 1.4;
+	-fx-opacity: 0.85;
+	-fx-fill: transparent;
+	-fx-stroke-line-join: round;
+}
+.sv-seq-timeline-density {
+	-fx-fill: -sv-accent;
+}
+.sv-seq-timeline-modes .toggle-button {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-padding: 2 10 2 10;
+	-fx-background-color: -sv-surface;
+	-fx-text-fill: -sv-muted;
+	-fx-border-color: -sv-line;
+	-fx-background-radius: 0;
+	-fx-border-radius: 0;
+}
+.sv-seq-timeline-modes .toggle-button:selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-text-fill: -sv-accent;
+}
+.sv-seq-timeline-window {
+	-fx-background-color: -sv-accent-soft;
+	-fx-opacity: 0.55;
+	-fx-border-color: -sv-accent;
+	-fx-border-width: 1.5;
+	-fx-border-radius: 6;
+	-fx-background-radius: 6;
+}
+
+/* ---------- Application shell: header ---------- */
+
+.sv-header {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-padding: 0 16 0 14;
+	-fx-spacing: 16;
+	-fx-alignment: center-left;
+	-fx-min-height: 56;
+	-fx-pref-height: 56;
+}
+.sv-logo-box {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+	-fx-background-radius: 9;
+	-fx-border-radius: 9;
+	-fx-min-width: 30;
+	-fx-min-height: 30;
+	-fx-pref-width: 30;
+	-fx-pref-height: 30;
+	-fx-max-width: 30;
+	-fx-max-height: 30;
+	-fx-alignment: center;
+}
+.sv-logo-hex {
+	-fx-fill: transparent;
+	-fx-stroke: -sv-accent;
+	-fx-stroke-width: 1.3;
+	-fx-stroke-line-join: round;
+}
+.sv-brand-name {
+	-fx-font-family: "Sora SemiBold";
+	-fx-font-size: 14.5px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-brand-sub {
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+
+/* Container selector pill: connection dot + combo box + Connect button. */
+.sv-container-selector {
+	-fx-background-color: -sv-line-2, -sv-surface-2;
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 11, 10;
+	-fx-padding: 3 4 3 12;
+	-fx-spacing: 8;
+	-fx-alignment: center-left;
+	-fx-max-height: 40;
+}
+.sv-container-selector > .combo-box-base {
+	-fx-background-color: transparent;
+	-fx-padding: 2 4;
+}
+.sv-container-selector > .combo-box > .list-cell {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 12.5px;
+}
+.sv-connection-dot {
+	-fx-fill: -sv-muted;
+}
+.sv-connection-dot.sv-connected {
+	-fx-fill: -sv-ok;
+	-fx-effect: dropshadow(gaussian, -sv-ok, 6, 0.3, 0, 0);
+}
+.sv-container-status {
+	-fx-text-fill: -sv-muted;
+}
+
+/* Record button: idle, then recording (red, with its running timer). */
+.sv-record-button {
+	-fx-background-color: -sv-line-2, -sv-surface-2;
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 10, 9;
+	-fx-padding: 6 14 6 12;
+	-fx-graphic-text-gap: 9;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-record-button:hover {
+	-fx-background-color: -sv-accent-line, -sv-accent-soft;
+	-fx-text-fill: -sv-accent;
+}
+.sv-record-button.sv-recording {
+	-fx-background-color: -sv-bad, -sv-bad-soft;
+	-fx-text-fill: -sv-bad;
+}
+/* Recording: hover and pressed deepen the soft red instead of the global gray / accent flash. */
+.sv-record-button.sv-recording:hover {
+	-fx-background-color: -sv-bad, -sv-bad-soft-hover;
+}
+.sv-record-button.sv-recording:pressed {
+	-fx-background-color: -sv-bad, -sv-bad-soft-press;
+	-fx-text-fill: -sv-bad;
+}
+.sv-flows-toggle {
+	-fx-background-color: -sv-line-2, -sv-surface-2;
+	-fx-background-insets: 0, 1;
+	-fx-background-radius: 10, 9;
+	-fx-padding: 6 14 6 10;
+	-fx-graphic-text-gap: 7;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-flows-toggle:hover {
+	-fx-background-color: -sv-accent-line, -sv-accent-soft;
+	-fx-text-fill: -sv-accent;
+}
+.sv-flows-toggle .sv-icon {
+	-fx-stroke: -sv-muted;
+}
+.sv-flows-toggle:selected {
+	-fx-background-color: -sv-accent, -sv-accent-soft;
+	-fx-text-fill: -sv-accent;
+}
+.sv-flows-toggle:selected .sv-icon {
+	-fx-stroke: -sv-accent;
+}
+.sv-record-dot {
+	-fx-fill: -sv-bad;
+}
+
+/* Light/dark switch: two toggle buttons in a rounded track. */
+.sv-theme-switch {
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 100;
+	-fx-padding: 3;
+	-fx-spacing: 2;
+	-fx-max-height: 34;
+}
+.sv-theme-switch > .toggle-button {
+	-fx-background-color: transparent;
+	-fx-background-radius: 100;
+	-fx-padding: 4 8;
+}
+.sv-theme-switch > .toggle-button:selected {
+	-fx-background-color: -sv-accent-line, -sv-accent-soft;
+	-fx-background-insets: 0, 1;
+}
+.sv-theme-switch .sv-icon {
+	-fx-stroke: -sv-muted;
+}
+.sv-theme-switch > .toggle-button:selected .sv-icon {
+	-fx-stroke: -sv-accent;
+}
+/* Each button reacts as every button does: tinted under the pointer, solid accent while pressed. */
+.sv-theme-switch > .toggle-button {
+	-fx-cursor: hand;
+}
+.sv-theme-switch > .toggle-button:hover {
+	-fx-background-color: -sv-accent-line, -sv-accent-soft;
+	-fx-background-insets: 0, 1;
+}
+.sv-theme-switch > .toggle-button:hover .sv-icon {
+	-fx-stroke: -sv-accent;
+}
+.sv-theme-switch > .toggle-button:pressed {
+	-fx-background-color: -sv-accent;
+	-fx-background-insets: 0;
+}
+.sv-theme-switch > .toggle-button:pressed .sv-icon {
+	-fx-stroke: -sv-accent-ink;
+}
+
+/* Stroke icons drawn as SVGPath, colored by their container's state. */
+.sv-icon {
+	-fx-fill: transparent;
+	-fx-stroke: -sv-ink-2;
+	-fx-stroke-width: 1.8;
+	-fx-stroke-line-cap: round;
+	-fx-stroke-line-join: round;
+}
+
+/* ---------- Application shell: rail ---------- */
+
+.sv-rail {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent -sv-line transparent transparent;
+	-fx-padding: 12 8;
+	-fx-spacing: 6;
+	-fx-alignment: top-center;
+	-fx-min-width: 86;
+	-fx-pref-width: 86;
+}
+.sv-rail-button {
+	-fx-background-color: transparent;
+	-fx-background-radius: 12;
+	-fx-border-color: transparent;
+	-fx-border-radius: 12;
+	-fx-content-display: top;
+	-fx-graphic-text-gap: 5;
+	-fx-padding: 9 2 7 2;
+	-fx-min-width: 70;
+	-fx-pref-width: 70;
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-rail-button .sv-icon {
+	-fx-stroke: -sv-muted;
+}
+.sv-rail-button:hover {
+	-fx-background-color: -sv-surface-3;
+	-fx-text-fill: -sv-ink;
+}
+.sv-rail-button:hover .sv-icon {
+	-fx-stroke: -sv-ink;
+}
+.sv-rail-button:selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+	-fx-text-fill: -sv-accent;
+}
+.sv-rail-button:selected .sv-icon {
+	-fx-stroke: -sv-accent;
+}
+
+/* ---------- Content area: per-entry panel bar (sub-tabs + picker) ---------- */
+
+.sv-panel-bar {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-padding: 6 12 0 12;
+	-fx-spacing: 4;
+	-fx-alignment: bottom-left;
+}
+.sv-subtab {
+	-fx-background-color: transparent;
+	-fx-background-radius: 8 8 0 0;
+	-fx-padding: 6 14;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-subtab:hover {
+	-fx-background-color: -sv-surface-3;
+}
+.sv-subtab:selected {
+	-fx-background-color: -sv-accent, -sv-bg;
+	-fx-background-insets: 0, 2 0 0 0;
+	-fx-text-fill: -sv-ink;
+}
+.sv-subtab-close {
+	-fx-background-color: transparent;
+	-fx-padding: 0 0 0 6;
+}
+.sv-subtab-close .sv-icon {
+	-fx-stroke: -sv-muted;
+	-fx-stroke-width: 1.5;
+}
+.sv-subtab-close:hover .sv-icon {
+	-fx-stroke: -sv-ink;
+}
+.sv-panel-picker {
+	-fx-padding: 2 8;
+	-fx-font-size: 12px;
+}
+
+/* ---------- Content area: empty state ---------- */
+
+.sv-empty-state {
+	-fx-alignment: center;
+	-fx-spacing: 8;
+}
+.sv-empty-title {
+	-fx-font-family: "Sora SemiBold";
+	-fx-font-size: 16px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-empty-text {
+	-fx-font-size: 13px;
+	-fx-text-fill: -sv-muted;
+}
+
+/* ---------- Application shell: status bar ---------- */
+
+.sv-statusbar {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line transparent transparent transparent;
+	-fx-padding: 0 14;
+	-fx-spacing: 12;
+	-fx-alignment: center-left;
+	-fx-min-height: 30;
+	-fx-pref-height: 30;
+}
+.sv-status-text {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-zoom-slider {
+	-fx-pref-width: 120;
+}
+/* Zoom out and Zoom in, either side of the zoom slider: smaller than the band's tool buttons. */
+.button.sv-zoom-step {
+	-fx-padding: 1 3 1 3;
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+}
+.button.sv-zoom-step:hover {
+	-fx-background-color: -sv-surface-3;
+}
+.button.sv-zoom-step .sv-tool-icon {
+	-fx-scale-x: 0.8;
+	-fx-scale-y: 0.8;
+}
+.sv-zoom-label {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-ink-2;
+	-fx-min-width: 42;
+	-fx-alignment: center-right;
+}
+
+/* ---------- Dependency graph ---------- */
+
+.sv-dep-root {
+	-fx-background-color: -sv-bg;
+}
+.sv-dep-canvas {
+	-fx-background-color: -sv-canvas;
+}
+.sv-dep-side {
+	-fx-background-color: -sv-surface;
+}
+.sv-dep-legend {
+	-fx-background-color: -sv-surface;
+	-fx-background-radius: 8;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 8;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 10, 0, 0, 3);
+}
+.sv-dep-heading {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-dep-legend-heading {
+	-fx-font-size: 10px;
+}
+.sv-dep-cycles, .sv-dep-cycles > .virtual-flow > .clipped-container > .sheet > .list-cell {
+	-fx-background-color: transparent;
+	-fx-padding: 4 2;
+}
+.sv-dep-card-title {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-dep-mono {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-dep-small, .sv-dep-status {
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-dep-statusbar {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line transparent transparent transparent;
+	-fx-border-width: 1 0 0 0;
+}
+.sv-dep-status-text {
+	-fx-fill: -sv-ink-2;
+	-fx-font-size: 11px;
+}
+
+/* Dependency graph component cards (ClassCell). */
+.sv-class-cell {
+	-fx-background-color: -sv-surface;
+	-fx-background-radius: 12;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 12;
+	-fx-border-width: 1;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 12, 0, 0, 4);
+}
+.sv-class-cell-selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-background-radius: 11;
+	-fx-border-color: -sv-accent;
+	-fx-border-style: solid;
+	-fx-border-width: 2.5;
+	-fx-border-radius: 11;
+}
+.sv-class-cell-focus {
+	-fx-background-color: -sv-focus-soft;
+	-fx-background-radius: 11;
+	-fx-border-color: -sv-focus;
+	-fx-border-style: solid;
+	-fx-border-width: 2.5;
+	-fx-border-radius: 11;
+}
+/* A neighbor outside the scope: a dashed border, last so that it wins over the solid ones above. */
+.sv-class-cell-neighbor {
+	-fx-border-style: segments(5, 3);
+	-fx-effect: null;
+}
+.sv-class-cell-neighbor-plain {
+	-fx-border-width: 1.5;
+}
+.sv-class-cell-name {
+	-fx-text-fill: -sv-ink;
+}
+.sv-class-cell-id {
+	-fx-text-fill: -sv-muted;
+}
+.sv-class-cell-icon {
+	-fx-fill: transparent;
+	-fx-stroke: -sv-ink-2;
+	-fx-stroke-width: 0.9;
+	-fx-stroke-line-join: round;
+}
+.sv-class-cell-divider {
+	-fx-background-color: -sv-muted;
+	-fx-opacity: 0.4;
+}
+
+/* Pressed state last, so it wins over hover and selected. */
+.button:pressed .sv-tool-icon, .toggle-button:pressed .sv-tool-icon {
+	-fx-stroke: -sv-surface;
+}
+.button:pressed .sv-tool-icon-glyphs, .toggle-button:pressed .sv-tool-icon-glyphs {
+	-fx-fill: -sv-surface;
+}
+.sv-preference-path {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-preference-path-chip {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line;
+	-fx-background-radius: 7;
+	-fx-border-radius: 7;
+	-fx-padding: 5 9;
+}
+
+/* Preferences panel: icon badge + title(+caption) category header, shared by
+   the General and Colors tabs' cards. */
+.sv-category-badge {
+	-fx-min-width: 32;
+	-fx-pref-width: 32;
+	-fx-max-width: 32;
+	-fx-min-height: 32;
+	-fx-pref-height: 32;
+	-fx-max-height: 32;
+	-fx-background-color: -sv-accent-soft;
+	-fx-background-radius: 9;
+	-fx-alignment: center;
+}
+.sv-category-badge-icon {
+	-fx-stroke: -sv-accent;
+}
+.sv-pref-card-title {
+	-fx-font-family: "Sora SemiBold";
+	-fx-font-size: 13px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-pref-card-caption {
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-settings-row-button {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line;
+	-fx-background-radius: 10;
+	-fx-border-radius: 10;
+	-fx-padding: 10 12;
+	-fx-alignment: center-left;
+	-fx-graphic-text-gap: 8;
+	-fx-text-fill: -sv-ink;
+	-fx-font-size: 13px;
+}
+.sv-settings-row-button:hover {
+	-fx-background-color: -sv-surface-3;
+	-fx-border-color: -sv-accent-line;
+}
+.sv-settings-row-button .sv-icon {
+	-fx-stroke: -sv-muted;
+}
+
+/* Component diagram side panel. */
+.sv-inspector-pane, .sv-inspector-scroll, .sv-inspector-scroll > .viewport, .sv-inspector {
+	-fx-background-color: -sv-surface;
+}
+.sv-inspector-pane {
+	-fx-border-color: transparent transparent transparent -sv-line;
+	-fx-border-width: 0 0 0 1;
+}
+.sv-inspector {
+	-fx-padding: 18 22 18 22;
+}
+.sv-inspector-actions {
+	-fx-padding: 12 22 16 22;
+	-fx-border-color: -sv-line transparent transparent transparent;
+}
+.sv-inspector-name {
+	-fx-font-size: 17px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-inspector-package, .sv-inspector-time, .sv-inspector-value, .sv-inspector-port-name {
+	-fx-font-family: "JetBrains Mono";
+}
+.sv-inspector-package {
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-inspector-kind {
+	-fx-font-size: 10.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-copy-button {
+	-fx-min-width: 24;
+	-fx-min-height: 24;
+	-fx-padding: 3;
+	-fx-background-color: transparent;
+}
+.sv-copy-button:hover {
+	-fx-background-color: -sv-surface-3;
+}
+.sv-inspector-value {
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-inspector-hint {
+	-fx-text-fill: -sv-muted;
+}
+.sv-inspector-list-name {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-inspector-spark-line {
+	-fx-stroke: -sv-kind-service;
+	-fx-stroke-width: 1.5;
+	-fx-fill: transparent;
+	-fx-stroke-line-join: round;
+}
+.sv-inspector-spark-area {
+	-fx-fill: -sv-accent-soft;
+	-fx-opacity: 0.8;
+}
+.sv-inspector-state {
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-inspector-state-current {
+	-fx-text-fill: -sv-ink;
+	-fx-font-weight: bold;
+}
+.sv-inspector-time {
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-inspector-port {
+	-fx-background-color: -sv-surface-2;
+	-fx-background-radius: 10;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 10;
+	-fx-padding: 10 12 10 12;
+}
+.sv-inspector-port-name {
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-inspector-port-detail {
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-inspector-port-marker.sv-kind-service { -fx-stroke: -sv-kind-service; }
+.sv-inspector-port-marker.sv-kind-event { -fx-stroke: -sv-kind-event; }
+.sv-inspector-port-marker.sv-kind-parameter { -fx-stroke: -sv-kind-parameter; }
+.sv-inspector-port-marker {
+	-fx-stroke-width: 1.8;
+}
+.sv-inspector-port-marker.sv-hollow {
+	-fx-fill: transparent;
+}
+.sv-primary-button {
+	-fx-background-color: -sv-accent, -sv-accent;
+	-fx-text-fill: -sv-surface;
+	-fx-font-weight: bold;
+}
+/*
+ * Explicit background here, not just the generic .button:hover/:pressed
+ * rules below it: those are plain class + pseudo-class selectors too, so
+ * at equal specificity they were winning over the one-class
+ * .sv-primary-button and replacing its teal with their own gray/teal,
+ * while this button's own (light-on-dark-accent) text-fill stayed - hence
+ * the illegible hover and the click that looked identical to resting.
+ */
+.sv-primary-button:hover {
+	-fx-background-color: -sv-accent-hover, -sv-accent-hover;
+	-fx-text-fill: -sv-surface;
+}
+.sv-primary-button:pressed {
+	-fx-background-color: -sv-press, -sv-press;
+	-fx-text-fill: -sv-press-ink;
+}
+
+/* --- Cockpit --- */
+
+.sv-cockpit-scroll, .sv-cockpit-scroll > .viewport {
+	-fx-background-color: -sv-bg;
+}
+.sv-threads-header {
+	-fx-background-color: -sv-bg;
+	-fx-padding: 16 24 12 24;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-border-width: 0 0 1 0;
+}
+.sv-cockpit {
+	-fx-padding: 20 24 24 24;
+}
+.sv-cockpit-title {
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+/* Soft badges carry a 1px outline (padding is 1px smaller to keep their size). */
+.sv-cockpit-live {
+	-fx-background-color: -sv-accent-soft;
+	-fx-background-radius: 10;
+	-fx-border-color: -sv-accent-line;
+	-fx-border-radius: 10;
+	-fx-padding: 1 9 1 7;
+}
+.sv-cockpit-live Circle {
+	-fx-fill: -sv-accent;
+}
+.sv-cockpit-live .label {
+	-fx-text-fill: -sv-accent;
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+}
+.sv-cockpit-live.sv-disconnected {
+	-fx-background-color: -sv-surface-3;
+	-fx-border-color: -sv-line-2;
+}
+.sv-cockpit-live.sv-disconnected Circle {
+	-fx-fill: -sv-muted;
+}
+.sv-cockpit-live.sv-disconnected .label {
+	-fx-text-fill: -sv-muted;
+}
+.sv-cockpit-ranges {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+	-fx-padding: 3;
+}
+.sv-cockpit-ranges .toggle-button {
+	-fx-background-color: transparent;
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 11px;
+	-fx-padding: 3 10 3 10;
+	-fx-background-radius: 6;
+}
+.sv-cockpit-ranges .toggle-button:selected {
+	-fx-background-color: -sv-accent-soft;
+	-fx-text-fill: -sv-accent;
+}
+.sv-cockpit-tile, .sv-cockpit-card {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+	-fx-padding: 14 16 14 16;
+}
+.sv-cockpit-tile-bad {
+	-fx-border-color: -sv-bad;
+}
+.sv-cockpit-tile-bad .sv-cockpit-big, .sv-cockpit-tile-bad .sv-cockpit-detail {
+	-fx-text-fill: -sv-bad;
+}
+.sv-cockpit-big {
+	-fx-font-size: 22px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-cockpit-detail, .sv-cockpit-muted, .sv-cockpit-axis {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 11.5px;
+}
+.sv-cockpit-card-title {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-cockpit-headline {
+	-fx-font-family: "JetBrains Mono";
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-cockpit-strong {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-cockpit-mono {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-cockpit-mono-muted {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-cockpit-row {
+	-fx-padding: 7 0 7 0;
+	-fx-border-color: -sv-line transparent transparent transparent;
+}
+.sv-cockpit-table-header .label {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 10.5px;
+	-fx-font-weight: bold;
+}
+.sv-cockpit-table-header {
+	-fx-padding: 0 0 6 0;
+}
+.sv-cockpit-spark {
+	-fx-fill: transparent;
+	-fx-stroke-width: 1.6;
+	-fx-stroke-line-join: round;
+}
+.sv-cockpit-spark-service { -fx-stroke: -sv-kind-service; }
+.sv-cockpit-spark-event { -fx-stroke: -sv-kind-event; }
+.sv-cockpit-grid {
+	-fx-stroke: -sv-line;
+}
+.sv-cockpit-series {
+	-fx-fill: transparent;
+	-fx-stroke-width: 1.8;
+	-fx-stroke-line-join: round;
+}
+.sv-cockpit-area {
+	-fx-opacity: 0.22;
+}
+.sv-cockpit-area-service { -fx-fill: linear-gradient(to bottom, -sv-kind-service 0%, transparent 100%); }
+.sv-cockpit-area-event { -fx-fill: linear-gradient(to bottom, -sv-kind-event 0%, transparent 100%); }
+.sv-cockpit-area-parameter { -fx-fill: linear-gradient(to bottom, -sv-kind-parameter 0%, transparent 100%); }
+.sv-kind-fill-service { -fx-fill: -sv-kind-service; }
+.sv-kind-fill-event { -fx-fill: -sv-kind-event; }
+.sv-kind-fill-parameter { -fx-fill: -sv-kind-parameter; }
+.sv-cockpit-dot {
+	-fx-stroke: -sv-surface;
+	-fx-stroke-width: 2;
+}
+.sv-cockpit-spark-area {
+	-fx-opacity: 0.3;
+}
+.sv-cockpit-spark-service-area { -fx-fill: linear-gradient(to bottom, -sv-kind-service 0%, transparent 100%); }
+.sv-cockpit-spark-event-area { -fx-fill: linear-gradient(to bottom, -sv-kind-event 0%, transparent 100%); }
+.sv-cockpit-spark-service-end { -fx-fill: -sv-kind-service; }
+.sv-cockpit-spark-event-end { -fx-fill: -sv-kind-event; }
+.sv-kind-stroke-service { -fx-stroke: -sv-kind-service; }
+.sv-kind-stroke-event { -fx-stroke: -sv-kind-event; }
+.sv-kind-stroke-parameter { -fx-stroke: -sv-kind-parameter; }
+.sv-kind-bg-service { -fx-background-color: -sv-kind-service; }
+.sv-kind-bg-event { -fx-background-color: -sv-kind-event; }
+.sv-kind-bg-parameter { -fx-background-color: -sv-kind-parameter; }
+.sv-cockpit-cursor {
+	-fx-stroke: -sv-muted;
+	-fx-stroke-dash-array: 3 3;
+}
+.sv-cockpit-readout {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+	-fx-padding: 8 10 8 10;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 12, 0, 0, 4);
+}
+.sv-cockpit-readout .label {
+	-fx-text-fill: -sv-ink-2;
+	-fx-font-size: 11.5px;
+}
+.sv-cockpit-legend-swatch {
+	-fx-min-width: 10;
+	-fx-min-height: 10;
+	-fx-max-width: 10;
+	-fx-max-height: 10;
+	-fx-background-radius: 2;
+}
+.sv-cockpit-lifecycle-bar {
+	-fx-min-height: 10;
+	-fx-pref-height: 10;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 5;
+}
+.sv-cockpit-segment {
+	-fx-background-radius: 5;
+}
+.sv-cockpit-state-dot {
+	-fx-min-width: 9;
+	-fx-min-height: 9;
+	-fx-max-width: 9;
+	-fx-max-height: 9;
+	-fx-background-radius: 5;
+}
+.sv-state-deployed { -fx-background-color: #64748b; }
+.sv-state-instantiated { -fx-background-color: #94a3b8; }
+.sv-state-initialized { -fx-background-color: #eab308; }
+.sv-state-activated { -fx-background-color: -sv-ok; }
+.sv-state-passivated { -fx-background-color: #60a5fa; }
+.sv-state-removed { -fx-background-color: -sv-line-2; }
+.sv-state-failed { -fx-background-color: -sv-bad; }
+.sv-state-text-activated { -fx-text-fill: -sv-ok; }
+.sv-state-text-passivated { -fx-text-fill: #60a5fa; }
+.sv-state-text-failed { -fx-text-fill: -sv-bad; }
+.sv-state-text-initialized { -fx-text-fill: #eab308; }
+.sv-cockpit-composite {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 12;
+}
+.sv-cockpit-composite:hover {
+	-fx-border-color: -sv-accent-line;
+}
+.sv-cockpit-composite-bad {
+	-fx-border-color: -sv-bad;
+	-fx-background-color: -sv-bad-soft;
+}
+.sv-cockpit-bar-track {
+	-fx-min-height: 4;
+	-fx-max-height: 4;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 2;
+}
+.sv-cockpit-bar-fill {
+	-fx-min-height: 4;
+	-fx-background-color: -sv-accent;
+	-fx-background-radius: 2;
+}
+.sv-cockpit-port-marker {
+	-fx-min-width: 3;
+	-fx-max-width: 3;
+	-fx-min-height: 14;
+	-fx-background-radius: 2;
+}
+.sv-cockpit-rate-bar {
+	-fx-min-height: 6;
+	-fx-max-height: 6;
+	-fx-background-radius: 3;
+}
+
+/* --- Cockpit console --- */
+
+.sv-console {
+	-fx-background-color: -sv-console-canvas;
+}
+.sv-console-top {
+	-fx-padding: 16 24 12 24;
+}
+.sv-console-scroll, .sv-console-scroll > .viewport {
+	-fx-background-color: transparent;
+}
+.sv-console-rack {
+	/* Room above for a slice lifted under the pointer. */
+	-fx-padding: 4 0 6 0;
+}
+.sv-console-strip {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-border-width: 1;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+	-fx-padding: 12 12 14 12;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 12, 0, 0, 4);
+}
+/* The state's color: a straight lit line across the slice's top. */
+.sv-console-strip-accent {
+	-fx-min-height: 4;
+	-fx-pref-height: 4;
+	-fx-max-height: 4;
+	-fx-background-radius: 2;
+	-fx-background-color: -sv-muted;
+}
+.sv-console-strip-activated .sv-console-strip-accent { -fx-background-color: -sv-ok; }
+.sv-console-strip-failed .sv-console-strip-accent { -fx-background-color: -sv-bad; }
+.sv-console-strip-passivated .sv-console-strip-accent { -fx-background-color: #60a5fa; }
+.sv-console-strip-initialized .sv-console-strip-accent,
+.sv-console-strip-instantiated .sv-console-strip-accent { -fx-background-color: #eab308; }
+.sv-console-strip-title {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-count {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 9;
+	-fx-padding: 1 7 1 7;
+}
+.sv-console-display {
+	-fx-background-color: -sv-console-readout-bg;
+	-fx-border-color: -sv-console-readout-border;
+	-fx-border-radius: 6;
+	-fx-background-radius: 6;
+	-fx-padding: 7 10 7 10;
+}
+.sv-console-display > .label {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 13px;
+	-fx-text-fill: #8591a6;
+}
+.sv-console-display > .sv-console-display-small {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 10.5px;
+	-fx-font-weight: normal;
+	-fx-text-fill: #6b778c;
+}
+/* A slice's state readout: wide lettering, as on a panel display. */
+.sv-console-strip .sv-console-display {
+	-fx-padding: 10 12 10 14;
+}
+.sv-console-strip .sv-console-display > .sv-console-display-value {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 19px;
+}
+.sv-console-strip-activated .sv-console-display > .sv-console-display-value,
+.sv-console-display-accent > .sv-console-display-value {
+	-fx-text-fill: #34d399;
+	-fx-effect: dropshadow(gaussian, rgba(52, 211, 153, 0.6), 8, 0, 0, 0);
+}
+.sv-console-display-accent > .label {
+	-fx-text-fill: #a5b4fc;
+}
+.sv-console-strip-failed .sv-console-display > .sv-console-display-value {
+	-fx-text-fill: #f87171;
+	-fx-effect: dropshadow(gaussian, rgba(248, 113, 113, 0.6), 8, 0, 0, 0);
+}
+.sv-console-strip-passivated .sv-console-display > .sv-console-display-value {
+	-fx-text-fill: #60a5fa;
+	-fx-effect: dropshadow(gaussian, rgba(96, 165, 250, 0.6), 8, 0, 0, 0);
+}
+.sv-console-strip-initialized .sv-console-display > .sv-console-display-value,
+.sv-console-strip-instantiated .sv-console-display > .sv-console-display-value {
+	-fx-text-fill: #facc15;
+}
+.sv-console-master-label {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 11.5px;
+}
+/* The console's switches: a fine 1 px edge, as on an analog panel. */
+.toggle-button.sv-switch.sv-console-switch {
+	-fx-min-width: 50;
+	-fx-pref-width: 50;
+	-fx-max-width: 50;
+	-fx-min-height: 28;
+	-fx-pref-height: 28;
+	-fx-max-height: 28;
+	-fx-background-color: -sv-console-switch-edge, -sv-console-switch-off, -sv-console-switch-knob;
+	-fx-background-insets: 0, 1, 4 26 4 4;
+	-fx-background-radius: 14, 13, 10;
+}
+.toggle-button.sv-switch.sv-console-switch:selected {
+	-fx-background-color: -sv-console-switch-edge-on, -sv-console-switch-on, -sv-console-switch-knob-on;
+	-fx-background-insets: 0, 1, 4 4 4 26;
+}
+.toggle-button.sv-switch.sv-switch-small.sv-console-switch {
+	-fx-min-width: 38;
+	-fx-pref-width: 38;
+	-fx-max-width: 38;
+	-fx-min-height: 22;
+	-fx-pref-height: 22;
+	-fx-max-height: 22;
+	-fx-background-insets: 0, 1, 4 20 4 4;
+	-fx-background-radius: 11, 10, 7;
+}
+.toggle-button.sv-switch.sv-switch-small.sv-console-switch:selected {
+	-fx-background-insets: 0, 1, 4 4 4 20;
+}
+.toggle-button.sv-switch.sv-console-switch:disabled {
+	-fx-opacity: 0.45;
+}
+.toggle-button.sv-switch {
+	-fx-min-width: 34;
+	-fx-pref-width: 34;
+	-fx-max-width: 34;
+	-fx-min-height: 20;
+	-fx-pref-height: 20;
+	-fx-max-height: 20;
+	-fx-padding: 0;
+	-fx-background-color: -sv-line-2, #ffffff;
+	-fx-background-insets: 0, 2 16 2 2;
+	-fx-background-radius: 10, 8;
+	-fx-border-color: transparent;
+	-fx-effect: null;
+}
+/* A setting switched on: the accent, as for every control; green tells a healthy state. */
+.toggle-button.sv-switch:selected {
+	-fx-background-color: -sv-accent, #ffffff;
+	-fx-background-insets: 0, 2 2 2 16;
+}
+.toggle-button.sv-switch.sv-switch-small {
+	-fx-min-width: 28;
+	-fx-pref-width: 28;
+	-fx-max-width: 28;
+	-fx-min-height: 16;
+	-fx-pref-height: 16;
+	-fx-max-height: 16;
+	-fx-background-insets: 0, 2 14 2 2;
+	-fx-background-radius: 8, 6;
+}
+.toggle-button.sv-switch.sv-switch-small:selected {
+	-fx-background-insets: 0, 2 2 2 14;
+}
+.sv-console-vu {
+	-fx-min-height: 28;
+	-fx-pref-height: 28;
+}
+.sv-console-vu-bar {
+	-fx-min-width: 7;
+	-fx-pref-width: 7;
+	-fx-max-width: 7;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 2;
+}
+.sv-console-vu-bar.sv-console-vu-lit {
+	-fx-background-color: -sv-ok;
+}
+.sv-console-vu-bar.sv-console-vu-hot.sv-console-vu-lit {
+	-fx-background-color: #eab308;
+}
+.sv-console-channels {
+	-fx-border-color: -sv-line transparent transparent transparent;
+	-fx-padding: 10 0 0 0;
+}
+.sv-console-led {
+	-fx-min-width: 8;
+	-fx-min-height: 8;
+	-fx-max-width: 8;
+	-fx-max-height: 8;
+	-fx-background-radius: 4;
+	-fx-background-color: #475569;
+}
+.sv-console-led-activated { -fx-background-color: #34d399; -fx-effect: dropshadow(gaussian, rgba(52, 211, 153, 0.7), 6, 0, 0, 0); }
+.sv-console-led-failed { -fx-background-color: #f87171; -fx-effect: dropshadow(gaussian, rgba(248, 113, 113, 0.7), 6, 0, 0, 0); }
+.sv-console-led-passivated { -fx-background-color: #60a5fa; }
+.sv-console-led-initialized, .sv-console-led-instantiated { -fx-background-color: #eab308; }
+.sv-console-led-deployed { -fx-background-color: #64748b; }
+.sv-console-channel-name {
+	-fx-font-size: 12px;
+	-fx-text-fill: -sv-ink-2;
+}
+.menu-button.sv-console-more {
+	-fx-background-color: transparent;
+	-fx-padding: 0 4 0 4;
+	-fx-text-fill: -sv-muted;
+}
+.menu-button.sv-console-more > .arrow-button {
+	-fx-padding: 0;
+}
+.menu-button.sv-console-more > .arrow-button > .arrow {
+	-fx-padding: 0;
+	-fx-shape: null;
+}
+.button.sv-console-pad {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 11px;
+	-fx-padding: 6 16 6 16;
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 6;
+	-fx-background-radius: 6;
+	-fx-text-fill: -sv-ink-2;
+}
+.button.sv-console-cmd {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 9.5px;
+	-fx-padding: 3 6 3 6;
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 4;
+	-fx-background-radius: 4;
+	-fx-text-fill: -sv-ink-2;
+}
+.button.sv-console-cmd-danger {
+	-fx-text-fill: -sv-bad;
+}
+.sv-console-container {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line transparent transparent transparent;
+}
+.sv-console-hazard {
+	-fx-min-height: 8;
+	-fx-pref-height: 8;
+	-fx-background-color: linear-gradient(from 0px 0px to 16px 16px, repeat, #eab308 0%, #eab308 50%, #1a1d24 50%, #1a1d24 100%);
+	-fx-opacity: 0.85;
+}
+.sv-console-container-body {
+	-fx-padding: 4 8 4 8;
+}
+.sv-console-container-column {
+	-fx-padding: 14 18 14 18;
+}
+.sv-console-container-separator {
+	-fx-min-width: 1;
+	-fx-pref-width: 1;
+	-fx-max-width: 1;
+	-fx-background-color: -sv-line;
+	-fx-background-insets: 14 0 14 0;
+}
+.sv-console-eyebrow {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 10px;
+	-fx-text-fill: -sv-muted;
+}
+/* The safety: armed, its column is outlined in red and the time left runs out in red. Its
+   width holds both states, so that arming moves nothing. Its outline sits 6 px inside, plus
+   its 1 px border: its padding is 7 px less, so that its content lines up with the other
+   columns'. */
+.sv-console-safety {
+	-fx-padding: 7 18 7 18;
+	-fx-min-width: 340;
+	-fx-pref-width: 340;
+	-fx-border-color: transparent;
+	-fx-border-radius: 9;
+	-fx-background-radius: 9;
+	-fx-border-insets: 6 0 6 0;
+	-fx-background-insets: 6 0 6 0;
+}
+.sv-console-safety.sv-console-armed {
+	-fx-border-color: #7f2a2a;
+	-fx-background-color: rgba(220, 38, 38, 0.06);
+}
+/* Arm: striped, as a guarded switch; its label stands on a plain patch. Disarm: plain. */
+.toggle-button.sv-console-arm {
+	-fx-min-width: 116;
+	-fx-pref-width: 116;
+	-fx-min-height: 38;
+	-fx-pref-height: 38;
+	-fx-padding: 0;
+	-fx-cursor: hand;
+	-fx-background-color: linear-gradient(from 0px 0px to 14px 14px, repeat, #9b1c1c 0%, #9b1c1c 50%, #2a1215 50%, #2a1215 100%);
+	-fx-border-color: #dc2626;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+}
+.sv-console-arm-label {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 11.5px;
+	-fx-text-fill: #e1e6ef;
+	-fx-padding: 2 8 2 8;
+	-fx-background-color: rgba(17, 23, 34, 0.85);
+	-fx-background-radius: 4;
+}
+.toggle-button.sv-console-arm:hover {
+	-fx-border-color: #f87171;
+}
+.toggle-button.sv-console-arm:selected {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line-2;
+}
+.toggle-button.sv-console-arm:selected .sv-console-arm-label {
+	-fx-background-color: transparent;
+	-fx-text-fill: -sv-ink;
+}
+.toggle-button.sv-console-arm:selected:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+}
+.toggle-button.sv-console-arm:selected:hover .sv-console-arm-label {
+	-fx-text-fill: -sv-accent;
+}
+.toggle-button.sv-console-arm:selected:pressed {
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent;
+}
+.toggle-button.sv-console-arm:selected:pressed .sv-console-arm-label {
+	-fx-text-fill: -sv-accent-ink;
+}
+.sv-console-arm-state {
+	-fx-font-size: 12.5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-arm-state.sv-console-armed {
+	-fx-text-fill: #f87171;
+}
+.sv-console-arm-text {
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-console-countdown {
+	-fx-min-height: 4;
+	-fx-pref-height: 4;
+	-fx-max-height: 4;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 2;
+}
+.sv-console-countdown-fill {
+	-fx-background-color: #dc2626;
+	-fx-background-radius: 2;
+}
+/* Until armed, a dashed note stands where the commands appear. */
+.sv-console-commands-hidden {
+	-fx-min-height: 40;
+	-fx-padding: 0 14 0 14;
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+	-fx-border-color: -sv-line-2;
+	-fx-border-style: segments(4, 4);
+	-fx-border-radius: 8;
+}
+.sv-console-command-gap {
+	-fx-min-width: 1;
+	-fx-pref-width: 1;
+	-fx-max-width: 1;
+	-fx-background-color: -sv-line;
+	-fx-background-insets: 6 0 6 0;
+}
+.sv-console-log-area {
+	-fx-padding: 14 26 16 26;
+}
+.button.sv-console-big {
+	-fx-font-family: "JetBrains Mono SemiBold";
+	-fx-font-weight: normal;
+	-fx-font-size: 11.5px;
+	-fx-padding: 9 16 9 16;
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+	-fx-text-fill: -sv-ink;
+}
+.button.sv-console-big.sv-console-danger {
+	-fx-text-fill: -sv-bad;
+	-fx-border-color: -sv-bad;
+}
+
+/* Console controls react like the buttons of the other panels: indigo tint on
+   hover, solid indigo while pressed; destructive ones deepen their red. They
+   are defined here, once, so both themes share them (the theme files only
+   set the resting colors). */
+.button.sv-console-pad, .button.sv-console-cmd, .button.sv-console-big, .toggle-button.sv-console-switch,
+.menu-button.sv-console-more {
+	-fx-cursor: hand;
+}
+.button.sv-console-pad:hover, .button.sv-console-cmd:hover, .button.sv-console-big:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+	-fx-text-fill: -sv-accent;
+}
+.button.sv-console-cmd-danger:hover, .button.sv-console-big.sv-console-danger:hover {
+	-fx-background-color: -sv-bad-soft-hover;
+	-fx-border-color: -sv-bad;
+	-fx-text-fill: -sv-bad;
+}
+.button.sv-console-pad:pressed, .button.sv-console-cmd:pressed, .button.sv-console-big:pressed {
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent;
+	-fx-text-fill: -sv-accent-ink;
+}
+.button.sv-console-cmd-danger:pressed, .button.sv-console-big.sv-console-danger:pressed {
+	-fx-background-color: -sv-bad-soft-press;
+	-fx-border-color: -sv-bad;
+	-fx-text-fill: -sv-bad;
+}
+.toggle-button.sv-switch.sv-console-switch:hover {
+	-fx-background-color: -sv-accent, -sv-console-switch-off, -sv-console-switch-knob;
+}
+.toggle-button.sv-switch.sv-console-switch:selected:hover {
+	-fx-background-color: -sv-accent, -sv-console-switch-on, -sv-console-switch-knob-on;
+}
+.toggle-button.sv-switch.sv-console-switch:pressed {
+	-fx-background-color: -sv-accent, -sv-console-switch-off-press, -sv-console-switch-knob;
+}
+.toggle-button.sv-switch.sv-console-switch:selected:pressed {
+	-fx-background-color: -sv-accent, -sv-console-switch-on-press, -sv-console-switch-knob-on;
+}
+.menu-button.sv-console-more:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-background-radius: 11;
+	-fx-text-fill: -sv-accent;
+}
+.menu-button.sv-console-more:pressed, .menu-button.sv-console-more:showing {
+	-fx-background-color: -sv-accent;
+	-fx-background-radius: 11;
+	-fx-text-fill: -sv-accent-ink;
+}
+.sv-console-log .label {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+}
+.sv-console-log-time {
+	-fx-text-fill: -sv-ink-2;
+	-fx-font-weight: bold;
+}
+.sv-console-log-text {
+	-fx-text-fill: -sv-muted;
+}
+.sv-console-log-bad {
+	-fx-text-fill: -sv-bad;
+}
+.sv-console-dialog-port {
+	-fx-text-fill: -sv-muted;
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+}
+.sv-console-dialog .button.sv-console-dialog-warn {
+	-fx-background-color: #eab308;
+	-fx-text-fill: #ffffff;
+}
+.sv-console-dialog .button.sv-console-dialog-danger {
+	-fx-background-color: #dc2626;
+	-fx-text-fill: #ffffff;
+}
+
+/* Console levels: the breadcrumb, and the slices and channels that can be
+   entered. A slice holding composites stands on a lighter, indigo-tinted
+   ground with a stack of cards behind it; under the pointer it lifts and
+   glows indigo. */
+.sv-console-crumbs {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 5 12 5 12;
+}
+.button.sv-console-crumb {
+	-fx-background-color: transparent;
+	-fx-padding: 0;
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-accent;
+	-fx-underline: true;
+	-fx-cursor: hand;
+}
+.button.sv-console-crumb:hover {
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-crumb-current {
+	-fx-font-size: 13px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-crumb-separator {
+	-fx-font-size: 13px;
+	-fx-text-fill: -sv-muted;
+}
+.button.sv-console-up {
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+	-fx-padding: 4 10 4 10;
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+	-fx-text-fill: -sv-ink-2;
+	-fx-cursor: hand;
+}
+.button.sv-console-up:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+	-fx-text-fill: -sv-accent;
+}
+.sv-console-strip.sv-console-navigable {
+	-fx-background-color: linear-gradient(to bottom, #171a30 0%, #14172a 100%);
+	-fx-cursor: hand;
+}
+.sv-console-strip.sv-console-navigable:hover {
+	-fx-border-color: -sv-accent -sv-accent -sv-accent -sv-accent;
+	-fx-effect: dropshadow(gaussian, rgba(129, 140, 248, 0.45), 16, 0.25, 0, 0);
+	-fx-translate-y: -3;
+}
+.sv-console-strip-card {
+	-fx-background-color: #182430;
+	-fx-border-color: #3a4d66;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+}
+.sv-console-strip-card-2 {
+	-fx-background-color: #151e2a;
+}
+.sv-console-enter {
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+	-fx-text-fill: #a5b4fc;
+	-fx-background-color: #1b1d45;
+	-fx-border-color: #3a3f94;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 0 8 0 8;
+}
+.sv-console-navigable:hover .sv-console-enter {
+	-fx-text-fill: -sv-accent-ink;
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent;
+}
+.sv-console-composite {
+	-fx-padding: 7 8 7 8;
+	-fx-background-color: #111628;
+	-fx-border-color: #2a3050;
+	-fx-border-radius: 9;
+	-fx-background-radius: 9;
+	-fx-cursor: hand;
+}
+.sv-console-composite:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent;
+}
+.sv-console-composite-icon {
+	-fx-fill: transparent;
+	-fx-stroke: -sv-accent;
+	-fx-stroke-width: 1.8;
+}
+.sv-console-composite-name {
+	-fx-font-size: 12.5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-console-composite-count {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 10px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-console-dot {
+	-fx-min-width: 6;
+	-fx-min-height: 6;
+	-fx-max-width: 6;
+	-fx-max-height: 6;
+	-fx-background-radius: 3;
+	-fx-effect: null;
+}
+.button.sv-console-go {
+	-fx-min-width: 22;
+	-fx-min-height: 22;
+	-fx-pref-width: 22;
+	-fx-pref-height: 22;
+	-fx-padding: 0;
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 6;
+	-fx-background-radius: 6;
+	-fx-text-fill: -sv-accent;
+	-fx-cursor: hand;
+}
+.sv-console-composite:hover .button.sv-console-go {
+	-fx-background-color: -sv-accent;
+	-fx-border-color: -sv-accent;
+	-fx-text-fill: -sv-accent-ink;
+}
+
+/* --- Thread Supervisor --- */
+
+/* The canvases' colors: each swatch's background is read by the panel. */
+.sv-threads-swatch-runs { -fx-background-color: -sv-ok; }
+.sv-threads-swatch-waits { -fx-background-color: -sv-threads-waits; }
+.sv-threads-swatch-long { -fx-background-color: -sv-threads-long; }
+.sv-threads-swatch-blocked { -fx-background-color: -sv-bad; }
+.sv-threads-swatch-idle { -fx-background-color: -sv-line-2; }
+.sv-threads-swatch-untracked { -fx-background-color: -sv-line; }
+.sv-threads-swatch-lane { -fx-background-color: -sv-surface-3; }
+.sv-threads-swatch-grid { -fx-background-color: -sv-line; }
+.sv-threads-swatch-axis { -fx-background-color: -sv-muted; }
+.sv-threads-swatch-cursor { -fx-background-color: -sv-ink-2; }
+.sv-threads-swatch-events { -fx-background-color: -sv-kind-event; }
+.sv-threads-swatch-general { -fx-background-color: -sv-kind-service; }
+.sv-threads-swatch-dedicated { -fx-background-color: -sv-kind-parameter; }
+.sv-threads-swatch-pill { -fx-background-color: -sv-threads-pill; }
+.sv-threads-swatch-pill-ink { -fx-background-color: -sv-threads-pill-ink; }
+.sv-threads-swatch-pill-edge { -fx-background-color: -sv-threads-pill-edge; }
+.sv-threads-swatch-readout { -fx-background-color: -sv-surface; }
+.sv-threads-swatch-readout-border { -fx-background-color: -sv-line-2; }
+.sv-threads-swatch-ink { -fx-background-color: -sv-ink; }
+.sv-threads-swatch-load { -fx-background-color: -sv-accent; }
+.sv-threads-swatch-load-unknown { -fx-background-color: -sv-muted; }
+.sv-threads-load-unknown { -fx-text-fill: -sv-muted; }
+
+.sv-threads-bg-runs { -fx-background-color: -sv-ok; }
+.sv-threads-bg-waits { -fx-background-color: -sv-threads-waits; }
+.sv-threads-bg-blocked { -fx-background-color: -sv-bad; }
+.sv-threads-bg-idle { -fx-background-color: -sv-line-2; }
+.sv-threads-bg-untracked { -fx-background-color: linear-gradient(from 0px 0px to 6px 6px, repeat, -sv-line-2 0%, -sv-line-2 50%, -sv-surface-3 50%, -sv-surface-3 100%); }
+.sv-threads-series-events { -fx-background-color: -sv-kind-event; }
+.sv-threads-series-general { -fx-background-color: -sv-kind-service; }
+.sv-threads-series-dedicated { -fx-background-color: -sv-kind-parameter; }
+
+.sv-threads-switch-label {
+	-fx-text-fill: -sv-ink-2;
+	-fx-font-size: 12px;
+}
+.button.sv-threads-button {
+	-fx-font-size: 12px;
+	-fx-padding: 5 12 5 12;
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+	-fx-text-fill: -sv-ink-2;
+}
+.button.sv-threads-button:hover {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+	-fx-text-fill: -sv-accent;
+}
+.sv-threads-deadlock {
+	-fx-background-color: -sv-bad-soft;
+	-fx-border-color: -sv-bad;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 10 14 10 14;
+}
+.sv-threads-deadlock-text {
+	-fx-text-fill: -sv-bad;
+	-fx-font-weight: bold;
+}
+.sv-threads-hint {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 11.5px;
+	-fx-font-style: italic;
+}
+.sv-threads-tile-warn {
+	-fx-border-color: -sv-threads-waits;
+}
+/* Each pool, and the calling threads, in a compartment of its own. */
+.sv-threads-compartment {
+	-fx-background-color: -sv-compartment;
+	-fx-border-color: -sv-compartment-line;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 10 12 12 0;
+}
+.sv-threads-compartment .sv-threads-lane {
+	-fx-padding: 2 4 2 13;
+}
+.sv-threads-compartment.sv-threads-compartment-padded {
+	-fx-padding: 4 12 4 12;
+}
+.sv-threads-pool-header {
+	-fx-padding: 0 0 8 0;
+	-fx-border-color: transparent transparent -sv-compartment-line transparent;
+}
+.sv-threads-verdict-bar {
+	-fx-min-width: 3;
+	-fx-pref-width: 3;
+	-fx-max-width: 3;
+	-fx-min-height: 28;
+	-fx-pref-height: 28;
+	-fx-max-height: 28;
+	-fx-background-radius: 0 2 2 0;
+	-fx-background-color: -sv-muted;
+}
+.sv-threads-verdict-bar-fluid { -fx-background-color: -sv-ok; }
+.sv-threads-verdict-bar-under_strain { -fx-background-color: -sv-threads-waits; }
+.sv-threads-verdict-bar-saturated { -fx-background-color: -sv-bad; }
+.sv-threads-kind-label {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 9.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-stat {
+	-fx-border-color: transparent transparent transparent -sv-compartment-line;
+	-fx-padding: 0 8 0 12;
+}
+.sv-threads-stat-label {
+	-fx-font-size: 10.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-stat-value, .sv-threads-stat-chip .sv-threads-chip-text {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 12.5px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-chip.sv-threads-stat-chip,
+.sv-threads-chip.sv-threads-stat-chip.sv-threads-chip-tunable,
+.sv-threads-chip.sv-threads-stat-chip.sv-threads-chip-changed {
+	-fx-border-color: transparent;
+	-fx-background-color: transparent;
+	-fx-padding: 0 0 2 0;
+}
+.sv-threads-chip.sv-threads-stat-chip.sv-threads-chip-tunable:hover .sv-threads-chip-text {
+	-fx-text-fill: -sv-accent;
+}
+.sv-threads-stat-chip.sv-threads-chip-changed .sv-threads-chip-text {
+	-fx-text-fill: -sv-changed;
+}
+.sv-threads-group-detail {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-lane-dot {
+	-fx-min-width: 7;
+	-fx-pref-width: 7;
+	-fx-max-width: 7;
+	-fx-min-height: 7;
+	-fx-pref-height: 7;
+	-fx-max-height: 7;
+	-fx-background-radius: 4;
+}
+
+/* Pool health: a callout for the verdict, a compartment for the pools, one for the events. */
+.sv-threads-callout {
+	-fx-background-radius: 8;
+	-fx-padding: 10 12 10 0;
+	-fx-min-height: 54;
+	-fx-background-color: -sv-ok-soft;
+}
+.sv-threads-callout-under_strain { -fx-background-color: -sv-waits-soft; }
+.sv-threads-callout-saturated { -fx-background-color: -sv-bad-soft; }
+.sv-threads-callout-bar {
+	-fx-min-width: 3;
+	-fx-pref-width: 3;
+	-fx-max-width: 3;
+	-fx-background-radius: 0 2 2 0;
+	-fx-background-color: -sv-ok;
+}
+.sv-threads-callout-under_strain .sv-threads-callout-bar { -fx-background-color: -sv-threads-waits; }
+.sv-threads-callout-saturated .sv-threads-callout-bar { -fx-background-color: -sv-bad; }
+.sv-threads-callout-cause {
+	-fx-font-size: 12px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-threads-health-row {
+	-fx-padding: 10 0 10 0;
+	-fx-border-color: transparent transparent -sv-compartment-line transparent;
+}
+.sv-threads-health-row.sv-threads-health-row-last {
+	-fx-border-color: transparent;
+}
+.sv-threads-meter {
+	-fx-background-color: -sv-line;
+	-fx-background-radius: 3;
+}
+.sv-threads-meter-fill {
+	-fx-background-radius: 3;
+	-fx-background-color: -sv-ok;
+}
+.sv-threads-meter-fill-under_strain { -fx-background-color: -sv-threads-waits; }
+.sv-threads-meter-fill-saturated { -fx-background-color: -sv-bad; }
+.sv-threads-event {
+	-fx-padding: 7 0 7 0;
+	-fx-border-color: -sv-compartment-line transparent transparent transparent;
+}
+.sv-threads-event-dot {
+	-fx-min-width: 7;
+	-fx-pref-width: 7;
+	-fx-max-width: 7;
+	-fx-min-height: 7;
+	-fx-pref-height: 7;
+	-fx-max-height: 7;
+	-fx-background-radius: 4;
+	-fx-translate-y: 5;
+	-fx-background-color: -sv-muted;
+}
+.sv-threads-event-dot-warning { -fx-background-color: -sv-threads-waits; }
+.sv-threads-event-dot-error { -fx-background-color: -sv-bad; }
+.sv-threads-event-subject {
+	-fx-font-size: 12.5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-event-text {
+	-fx-font-size: 12px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-threads-pool-title {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+	-fx-font-size: 13px;
+}
+.sv-threads-kind-badge {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 10px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-accent;
+	-fx-background-color: -sv-accent-soft;
+	-fx-background-radius: 6;
+	-fx-border-color: -sv-accent-line;
+	-fx-border-radius: 6;
+	-fx-padding: 1 7 1 7;
+}
+.sv-threads-chip {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-ink-2;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 9;
+	-fx-background-radius: 9;
+	-fx-padding: 2 9 2 9;
+}
+.sv-threads-chip-text {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-threads-chip-tunable {
+	-fx-cursor: hand;
+	-fx-padding: 2 7 2 9;
+}
+.sv-threads-chip-tunable:hover {
+	-fx-border-color: -sv-accent;
+	-fx-background-color: -sv-accent-soft;
+}
+.sv-threads-chip-icon-line {
+	-fx-stroke: -sv-muted;
+	-fx-stroke-width: 1.3;
+	-fx-stroke-line-cap: round;
+}
+.sv-threads-chip-icon-knob {
+	-fx-fill: -sv-surface;
+	-fx-stroke: -sv-muted;
+	-fx-stroke-width: 1.3;
+}
+.sv-threads-chip-tunable:hover .sv-threads-chip-icon-line {
+	-fx-stroke: -sv-accent;
+}
+.sv-threads-chip-changed .sv-threads-chip-icon-line {
+	-fx-stroke: -sv-changed;
+}
+.sv-threads-chip-tunable:hover .sv-threads-chip-icon-knob {
+	-fx-stroke: -sv-accent;
+	-fx-fill: -sv-accent-soft;
+}
+.sv-threads-chip-changed .sv-threads-chip-icon-knob {
+	-fx-stroke: -sv-changed;
+}
+.sv-threads-chip-changed {
+	-fx-border-color: -sv-changed;
+	-fx-border-width: 1.5;
+}
+.sv-threads-chip-changed .sv-threads-chip-text {
+	-fx-text-fill: -sv-changed;
+}
+.sv-threads-chip-fill {
+	-fx-background-color: -sv-ok;
+}
+.sv-threads-chip-fill-half {
+	-fx-background-color: -sv-threads-waits;
+}
+.sv-threads-chip-fill-full {
+	-fx-background-color: -sv-bad;
+}
+.sv-threads-chip-full {
+	-fx-border-color: -sv-bad;
+}
+.sv-threads-chip-dot {
+	-fx-background-color: -sv-changed;
+	-fx-background-radius: 3;
+	-fx-min-width: 6;
+	-fx-pref-width: 6;
+	-fx-max-width: 6;
+	-fx-min-height: 6;
+	-fx-pref-height: 6;
+	-fx-max-height: 6;
+}
+.sv-threads-tune {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+	-fx-padding: 16 18 16 18;
+	-fx-effect: dropshadow(gaussian, -sv-shadow, 24, 0.1, 0, 8);
+}
+.sv-threads-tune-name {
+	-fx-font-size: 13px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-tune-muted {
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-tune-reset {
+	-fx-font-size: 11.5px;
+	-fx-padding: 0;
+}
+.sv-threads-tune-stepper {
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 8;
+	-fx-background-radius: 8;
+}
+.sv-threads-tune-step {
+	-fx-min-width: 32;
+	-fx-pref-width: 32;
+	-fx-min-height: 30;
+	-fx-pref-height: 30;
+	-fx-padding: 0;
+	-fx-font-size: 13px;
+	-fx-text-fill: -sv-ink;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 0;
+	-fx-border-width: 0;
+}
+.sv-threads-tune-step:hover {
+	-fx-background-color: -sv-accent-soft;
+}
+.sv-threads-tune-value {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 13.5px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-tune-changed {
+	-fx-text-fill: -sv-changed;
+	-fx-font-weight: bold;
+}
+.sv-threads-tune-footer {
+	-fx-border-color: -sv-line transparent transparent transparent;
+	-fx-padding: 10 0 0 0;
+	-fx-line-spacing: 2;
+}
+/* One thread's dot: its color the kind of state, its blinking (code) how long it lasts. */
+.sv-threads-dot {
+	-fx-min-width: 10;
+	-fx-pref-width: 10;
+	-fx-max-width: 10;
+	-fx-min-height: 10;
+	-fx-pref-height: 10;
+	-fx-max-height: 10;
+	-fx-background-radius: 5;
+	-fx-background-color: -sv-line-2;
+}
+.sv-threads-dot-ok { -fx-background-color: -sv-ok; }
+.sv-threads-dot-waits { -fx-background-color: -sv-threads-waits; }
+.sv-threads-dot-long { -fx-background-color: -sv-threads-long; }
+.sv-threads-dot-bad { -fx-background-color: -sv-bad; }
+.sv-threads-contention {
+	-fx-font-size: 11.5px;
+	-fx-font-weight: bold;
+	-fx-border-radius: 10;
+	-fx-background-radius: 10;
+	-fx-padding: 3 10 3 10;
+	-fx-min-width: 80;
+	-fx-alignment: center;
+}
+.sv-threads-health-verdict {
+	-fx-font-size: 13.5px;
+	-fx-font-weight: bold;
+	/* Reserve two lines' worth of height at all times: the verdict sentence
+	   goes from one line to two depending on its content (pool name length,
+	   whether a count of other pressed pools is appended), and without a
+	   floor here the whole Pool health card - and the lanes below it -
+	   jumps by a line every time it crosses that boundary. */
+	-fx-min-height: 36;
+}
+.sv-threads-health-detail {
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-health-occupancy {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-fold {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-padding: 0;
+	-fx-cursor: hand;
+}
+.sv-threads-fold:hover {
+	-fx-text-fill: -sv-accent;
+}
+/* The recent events' fold: a plain line, its dot centered on the text, no frame on hover or focus. */
+.button.sv-threads-fold, .button.sv-threads-fold:hover, .button.sv-threads-fold:focused,
+.button.sv-threads-fold:pressed {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-background-insets: 0;
+	-fx-effect: null;
+}
+.sv-threads-fold .sv-threads-event-dot {
+	-fx-translate-y: 0;
+}
+.sv-threads-fold:hover .sv-eyebrow {
+	-fx-text-fill: -sv-accent;
+}
+.sv-threads-headline-fluid {
+	-fx-text-fill: -sv-ok-ink;
+}
+.sv-threads-headline-under_strain {
+	-fx-text-fill: -sv-waits-ink;
+	-fx-font-weight: bold;
+}
+.sv-threads-headline-saturated {
+	-fx-text-fill: -sv-bad;
+	-fx-font-weight: bold;
+}
+.sv-threads-contention-fluid {
+	-fx-text-fill: -sv-ok-ink;
+	-fx-background-color: -sv-ok-soft;
+}
+.sv-threads-contention-under_strain {
+	-fx-text-fill: -sv-waits-ink;
+	-fx-background-color: -sv-waits-soft;
+}
+.sv-threads-contention-saturated {
+	-fx-text-fill: -sv-bad;
+	-fx-background-color: -sv-bad-soft;
+}
+/* A pool's verdict stands out with a 1 px edge of its state's color. */
+.sv-threads-contention-fluid {
+	-fx-border-color: -sv-ok;
+}
+.sv-threads-contention-under_strain {
+	-fx-border-color: -sv-threads-waits;
+}
+.sv-threads-contention-saturated {
+	-fx-border-color: -sv-bad;
+}
+.sv-threads-lane {
+	-fx-padding: 2 4 2 4;
+	-fx-background-radius: 6;
+	-fx-cursor: hand;
+}
+.sv-threads-lane:hover {
+	-fx-background-color: -sv-surface-2;
+}
+.sv-threads-lane-selected, .sv-threads-lane-selected:hover {
+	-fx-background-color: -sv-accent-soft;
+}
+.sv-threads-lane-name {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 12px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-lane-sub {
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-threads-inspector-scroll, .sv-threads-inspector-scroll > .viewport {
+	-fx-background-color: -sv-surface;
+}
+.sv-threads-inspector-scroll {
+	-fx-border-color: transparent transparent transparent -sv-line;
+}
+.sv-threads-inspector-section {
+	-fx-padding: 16 18 16 18;
+	-fx-border-color: transparent transparent -sv-line transparent;
+}
+.sv-threads-inspector-name {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-state-badge {
+	-fx-font-size: 11.5px;
+	-fx-font-weight: bold;
+	-fx-background-radius: 10;
+	-fx-border-color: -sv-line-2;
+	-fx-border-radius: 10;
+	-fx-padding: 1 9 1 9;
+	-fx-text-fill: -sv-muted;
+	-fx-background-color: -sv-surface-3;
+}
+.sv-threads-state-runs { -fx-text-fill: -sv-ok; }
+.sv-threads-state-waits { -fx-text-fill: -sv-threads-waits; }
+.sv-threads-state-blocked { -fx-text-fill: -sv-bad; -fx-background-color: -sv-bad-soft; -fx-border-color: -sv-bad; }
+.sv-threads-call {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 12px;
+	-fx-text-fill: -sv-ink;
+}
+.sv-threads-call-dot, .sv-threads-call-current {
+	-fx-min-width: 8;
+	-fx-min-height: 8;
+	-fx-max-width: 8;
+	-fx-max-height: 8;
+	-fx-background-radius: 4;
+	-fx-background-color: -sv-line-2;
+}
+.sv-threads-call-current {
+	-fx-background-color: -sv-accent;
+}
+.sv-threads-frame {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 10.5px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-cockpit-tile-link {
+	-fx-cursor: hand;
+}
+.sv-cockpit-tile-link:hover {
+	-fx-border-color: -sv-accent-line;
+}
+.hyperlink.sv-cockpit-threads-link {
+	-fx-padding: 0;
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-accent;
+	-fx-border-color: transparent;
+}
+
+/* --- Exclusions --- */
+
+.sv-excl-scroll, .sv-excl-scroll > .viewport {
+	-fx-background-color: -sv-bg;
+}
+.sv-excl {
+	-fx-padding: 22 24 28 24;
+}
+.sv-excl-title {
+	-fx-font-size: 18px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-excl-muted {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 12px;
+}
+.sv-excl-card {
+	-fx-background-color: -sv-surface;
+	-fx-border-color: -sv-line;
+	-fx-border-radius: 12;
+	-fx-background-radius: 12;
+}
+.sv-excl-card-head {
+	-fx-padding: 12 16 12 16;
+	-fx-border-color: transparent transparent -sv-line transparent;
+}
+.sv-excl-card-title {
+	-fx-font-size: 14px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-excl-count {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+	-fx-background-color: -sv-surface-3;
+	-fx-background-radius: 10;
+	-fx-padding: 2 8 2 8;
+}
+.sv-excl-filter {
+	-fx-pref-width: 220;
+}
+.sv-excl-header {
+	-fx-background-color: -sv-surface-2;
+	-fx-padding: 8 16 8 16;
+	-fx-border-color: transparent transparent -sv-line transparent;
+}
+.sv-excl-column {
+	-fx-font-size: 10.5px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-muted;
+}
+.sv-excl-row {
+	-fx-padding: 8 16 8 16;
+	-fx-border-color: transparent transparent -sv-line transparent;
+	-fx-alignment: center-left;
+}
+.sv-excl-row:hover {
+	-fx-background-color: -sv-surface-2;
+}
+.sv-excl-name {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-excl-package {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-excl-badge {
+	-fx-font-size: 10.5px;
+	-fx-font-weight: bold;
+	-fx-background-radius: 10;
+	-fx-border-radius: 10;
+	-fx-padding: 1 7 1 7;
+}
+.sv-excl-badge-added {
+	-fx-background-color: -sv-accent-soft;
+	-fx-border-color: -sv-accent-line;
+	-fx-text-fill: -sv-accent;
+}
+.sv-excl-badge-builtin {
+	-fx-background-color: -sv-surface-3;
+	-fx-border-color: -sv-line-2;
+	-fx-text-fill: -sv-muted;
+}
+.button.sv-excl-action {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-padding: 4;
+	-fx-background-radius: 7;
+	-fx-border-radius: 7;
+}
+.button.sv-excl-action:hover {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line;
+}
+.button.sv-excl-action:hover .sv-icon {
+	-fx-stroke: -sv-bad;
+}
+.sv-excl-add {
+	-fx-background-color: -sv-surface-2;
+	-fx-padding: 12 16 12 16;
+	-fx-background-radius: 0 0 12 12;
+}
+.sv-excl-add-field {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 12px;
+}
+.sv-excl-rule {
+	-fx-padding: 14 16 14 16;
+}
+.sv-excl-rule-title {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-excl-empty {
+	-fx-padding: 32 16 32 16;
+}
+.sv-excl-empty .sv-icon {
+	-fx-stroke: -sv-muted;
+}
+.sv-excl-empty-title {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink-2;
+}
+/* Stereotypes panel: built from the Exclusions classes above, plus these. */
+.sv-stereo-counter {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11px;
+	-fx-text-fill: -sv-muted;
+}
+.sv-stereo-try {
+	-fx-padding: 14 16 14 16;
+}
+.sv-stereo-builtins {
+	-fx-padding: 8 16 8 16;
+	-fx-border-color: transparent transparent -sv-line transparent;
+}
+.sv-stereo-pill {
+	-fx-font-weight: 600;
+	-fx-font-size: 14px;
+	-fx-text-fill: -sv-muted;
+	-fx-background-color: -sv-surface-3;
+	-fx-border-color: -sv-line-2;
+	-fx-background-radius: 15;
+	-fx-border-radius: 15;
+	-fx-padding: 4 12 4 12;
+}
+.sv-console-scroll > .scroll-bar:horizontal {
+	-fx-min-height: 12;
+	-fx-pref-height: 12;
+}
+.sv-console-scroll > .scroll-bar:horizontal > .thumb {
+	-fx-background-color: -sv-muted;
+	-fx-background-insets: 2 0 2 0;
+}
+
+/* --- Views library dialogs --- */
+
+.sv-dialog {
+	-fx-background-color: -sv-surface;
+}
+.sv-dialog-head {
+	-fx-padding: 14 20 14 20;
+	-fx-border-color: transparent transparent -sv-line transparent;
+}
+.sv-dialog-title {
+	-fx-font-size: 15px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-dialog-foot {
+	-fx-padding: 12 20 12 20;
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-line transparent transparent transparent;
+}
+.sv-dialog-tools {
+	-fx-border-color: transparent transparent -sv-line transparent;
+}
+.sv-dialog-muted, .sv-dialog-path {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 12px;
+}
+.sv-dialog-path {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+}
+.sv-field-label {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 11px;
+	-fx-font-weight: bold;
+}
+.sv-fact-key {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 12px;
+}
+.sv-fact-value {
+	-fx-text-fill: -sv-ink-2;
+	-fx-font-size: 12px;
+}
+.sv-dialog-warning {
+	-fx-background-color: rgba(234, 179, 8, 0.14);
+	-fx-border-color: rgba(234, 179, 8, 0.45);
+	-fx-background-radius: 8;
+	-fx-border-radius: 8;
+	-fx-padding: 8 10 8 10;
+	-fx-text-fill: #ca8a04;
+	-fx-font-size: 12px;
+}
+.sv-thumb {
+	-fx-background-color: -sv-canvas;
+	-fx-border-color: -sv-line;
+	-fx-background-radius: 8;
+	-fx-border-radius: 8;
+}
+/* Segmented group: on the panel's own ground, framed by a line. The segment chosen stands out
+   in the accent - outlined and tinted - a segment under the pointer is tinted, a pressed one
+   solid. */
+.sv-segmented {
+	-fx-background-color: transparent;
+	-fx-border-color: -sv-line-2;
+	-fx-background-radius: 8;
+	-fx-border-radius: 8;
+	-fx-padding: 2;
+}
+.sv-segmented > .toggle-button {
+	-fx-background-color: transparent;
+	-fx-border-color: transparent;
+	-fx-background-radius: 6;
+	-fx-padding: 4 10 4 10;
+	-fx-cursor: hand;
+}
+.sv-segmented > .toggle-button:hover {
+	-fx-background-color: -sv-accent-soft;
+}
+.sv-segmented > .toggle-button:selected {
+	-fx-background-color: -sv-accent, -sv-accent-soft;
+	-fx-background-insets: 0, 1.5;
+	-fx-background-radius: 6, 5;
+	-fx-text-fill: -sv-accent;
+	-fx-font-weight: bold;
+}
+.sv-segmented > .toggle-button:pressed {
+	-fx-background-color: -sv-accent;
+	-fx-background-insets: 0;
+}
+.sv-segmented > .toggle-button:pressed .sv-tool-icon {
+	-fx-stroke: -sv-accent-ink;
+}
+.sv-library-list, .sv-library-list > .viewport {
+	-fx-background-color: -sv-surface;
+	-fx-background-insets: 0;
+	-fx-padding: 0;
+}
+.sv-library-detail {
+	-fx-border-color: transparent transparent transparent -sv-line;
+}
+.sv-view-row {
+	-fx-padding: 8 10 8 10;
+	-fx-background-radius: 10;
+	-fx-border-radius: 10;
+	-fx-border-color: transparent;
+	-fx-cursor: hand;
+}
+.sv-view-row:hover {
+	-fx-background-color: -sv-surface-2;
+}
+.sv-view-row.sv-selected {
+	-fx-background-color: -sv-surface-2;
+	-fx-border-color: -sv-accent;
+}
+.sv-view-row.sv-other {
+	-fx-opacity: 0.55;
+}
+.sv-view-name {
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-view-description {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 12px;
+	-fx-max-width: 420;
+}
+.sv-view-date {
+	-fx-text-fill: -sv-muted;
+	-fx-font-size: 11px;
+}
+.sv-crumb {
+	-fx-font-family: "JetBrains Mono";
+	-fx-font-size: 11.5px;
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-chip.sv-chip-warn {
+	-fx-border-color: rgba(234, 179, 8, 0.6);
+}
+.sv-chip.sv-chip-warn > .label {
+	-fx-text-fill: #ca8a04;
+}
+.sv-detail-name {
+	-fx-font-size: 16px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
+.sv-detail-description {
+	-fx-text-fill: -sv-ink-2;
+}
+.sv-empty-title {
+	-fx-font-size: 14px;
+	-fx-text-fill: -sv-ink-2;
+}
+.button.sv-danger-button {
+	-fx-text-fill: -sv-bad;
+	-fx-border-color: -sv-bad;
+	-fx-background-color: transparent;
+}
+.sv-dialog-pane {
+	-fx-background-color: -sv-surface;
+}
+.sv-dialog-pane > .content.label {
+	-fx-text-fill: -sv-ink;
+}
+.sv-subtab-rename {
+	-fx-padding: 0 4 0 4;
+	-fx-background-insets: 0;
+	-fx-font-weight: bold;
+	-fx-pref-height: 18;
+	-fx-max-height: 18;
+}
+
+/* --- About box --- */
+
+.sv-about-name {
+	-fx-font-family: "Sora";
+	-fx-font-size: 20px;
+	-fx-font-weight: bold;
+	-fx-text-fill: -sv-ink;
+}
