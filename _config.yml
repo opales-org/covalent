@@ -1,7 +1,7 @@
 title: Covalent
 description: A lightweight Java component model and runtime container.
-url: https://opales.org
-baseurl: /covalent
+url: https://covalent.opales.org
+baseurl: ""
 theme: jekyll-theme-minimal
 show_downloads: false
 
