@@ -189,8 +189,8 @@ starting from an even smaller first component.
 The components of the [example above](#getting-started) are connected through
 ports rather than through each other directly:
 
-![Diagram: Application uses OrderServices on Orders, Orders produces OrderEvents for Kitchen, and Kitchen subscribes to Orders with a filter](doc/images/diagrams/ports-light.svg#gh-light-mode-only)
-![Diagram: Application uses OrderServices on Orders, Orders produces OrderEvents for Kitchen, and Kitchen subscribes to Orders with a filter](doc/images/diagrams/ports-dark.svg#gh-dark-mode-only)
+![Diagram: Application uses OrderServices on Orders, Orders produces OrderEvents for Kitchen, and Kitchen subscribes to Orders with a filter](doc/architecture/core/ports-light.svg#gh-light-mode-only)
+![Diagram: Application uses OrderServices on Orders, Orders produces OrderEvents for Kitchen, and Kitchen subscribes to Orders with a filter](doc/architecture/core/ports-dark.svg#gh-dark-mode-only)
 
 `Application` only knows the `OrderServices` interface, never the `Orders`
 component's implementation; `Orders` only knows that some interfaces exist to
