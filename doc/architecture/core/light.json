@@ -13,6 +13,12 @@
     "labelBackground": "#eeeeff",
     "transitionLabelColor": "#1a1a2e",
     "stateLabelColor": "#1a1a2e",
-    "textColor": "#1a1a2e"
-  }
+    "textColor": "#1a1a2e",
+    "fontFamily": "Arial, Helvetica, sans-serif"
+  },
+  "htmlLabels": false,
+  "flowchart": {
+    "htmlLabels": false
+  },
+  "state": {}
 }

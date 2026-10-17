@@ -16,6 +16,12 @@
     "stateLabelColor": "#d6dcea",
     "textColor": "#d6dcea",
     "labelTextColor": "#d6dcea",
-    "transitionColor": "#8a94b8"
-  }
+    "transitionColor": "#8a94b8",
+    "fontFamily": "Arial, Helvetica, sans-serif"
+  },
+  "htmlLabels": false,
+  "flowchart": {
+    "htmlLabels": false
+  },
+  "state": {}
 }
